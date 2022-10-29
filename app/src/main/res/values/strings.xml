@@ -1,3 +1,5 @@
 <resources>
     <string name="app_name">MickMick</string>
+    <string name="splash_sub_title">map pick! me pick!</string>
+    <string name="splash_title">미크미크</string>
 </resources>

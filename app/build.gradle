@@ -32,8 +32,8 @@ android {
     kotlinOptions {
         jvmTarget = '1.8'
     }
-    viewBinding {
-        enable = true
+    buildFeatures {
+        viewBinding = true
     }
 }
 
@@ -53,9 +53,6 @@ dependencies {
 
     // viewpager 2
     implementation "androidx.viewpager2:viewpager2:1.0.0"
-
-    // dots indicator
-    implementation 'com.tbuonomo.andrui:viewpagerdotsindicator:4.1.2'
 
     // RecyclerView
     implementation "androidx.recyclerview:recyclerview:1.2.1"
