@@ -60,6 +60,9 @@ dependencies {
     // RecyclerView
     implementation "androidx.recyclerview:recyclerview:1.2.1"
 
+    // Splash
+    implementation 'androidx.core:core-splashscreen:1.0.0'
+
 
     /* firebase */
     // database
