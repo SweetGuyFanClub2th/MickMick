@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "115758920137",
+    "project_id": "mickmick-e0a49",
+    "storage_bucket": "mickmick-e0a49.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:115758920137:android:a5d9565aea8a85d4def818",
+        "android_client_info": {
+          "package_name": "com.sweetguyfanclub2th.mickmick"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "115758920137-m7h1ek2gb1e5f79clllttf8pvn8e429k.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDwkLPWFbvsJSxzmbQe41EVOpFKLN76wN4"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "115758920137-m7h1ek2gb1e5f79clllttf8pvn8e429k.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
