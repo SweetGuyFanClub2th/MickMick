@@ -16,7 +16,7 @@
         <activity
             android:name=".ui.login.LoginActivity"
             android:exported="true"
-            android:theme="@style/Theme.MickMick.Splash">
+            android:theme="@style/Theme.MickMick.SplashScreen">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
