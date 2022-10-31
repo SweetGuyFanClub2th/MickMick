@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item
+        android:title="@string/register_bottom_consent_title"
+        android:enabled="true"
+        android:id="@+id/menu_consent"
+        android:icon="@drawable/ic_baseline_check_box_24" />
+    <item
+        android:title="@string/register_bottom_input_title"
+        android:enabled="true"
+        android:id="@+id/menu_input"
+        android:icon="@drawable/ic_baseline_assignment_ind_24" />
+</menu>

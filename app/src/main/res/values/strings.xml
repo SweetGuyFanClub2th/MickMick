@@ -2,4 +2,6 @@
     <string name="app_name">MickMick</string>
     <string name="splash_sub_title">map pick! me pick!</string>
     <string name="splash_title">미크미크</string>
+    <string name="register_bottom_consent_title">개인정보 동의</string>
+    <string name="register_bottom_input_title">회원가입</string>
 </resources>
