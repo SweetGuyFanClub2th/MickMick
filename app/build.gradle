@@ -54,7 +54,7 @@ dependencies {
     implementation "androidx.viewpager2:viewpager2:1.0.0"
 
     // dots indicator
-    implementation "com.tbuonomo:dotsindicator:4.3"
+    implementation("com.tbuonomo:dotsindicator:4.3")
 
     // RecyclerView
     implementation "androidx.recyclerview:recyclerview:1.2.1"

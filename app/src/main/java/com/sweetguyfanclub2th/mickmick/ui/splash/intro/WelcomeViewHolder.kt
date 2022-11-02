@@ -5,6 +5,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.sweetguyfanclub2th.mickmick.R
+import com.sweetguyfanclub2th.mickmick.ui.splash.intro.PageItem
 
 class MyIntroPagerRecyclerAdapter(private var pageList: ArrayList<PageItem>):RecyclerView.Adapter<MyIntroPagerRecyclerAdapter.WelcomeViewHolder>(){
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): WelcomeViewHolder {

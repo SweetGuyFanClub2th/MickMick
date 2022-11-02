@@ -11,8 +11,8 @@ import android.os.Looper
 import android.util.Log
 import com.sweetguyfanclub2th.mickmick.R
 import com.sweetguyfanclub2th.mickmick.ui.login.LoginActivity
+import com.sweetguyfanclub2th.mickmick.ui.splash.intro.WelcomeActivity
 
-@SuppressLint("CustomSplashScreen")
 class SplashActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)

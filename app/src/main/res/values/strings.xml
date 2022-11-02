@@ -16,6 +16,8 @@
     <string name="register_repw_text">비밀번호를 다시 입력하세요</string>
     <string name="register_repw_check">비밀번호가 일치하지 않습니다</string>
     <string name="register_btn_complete">완료</string>
+    <string name="welcome_nextbtn">next_mark</string>
+    <string name="welcome_previousbtn">previous_mark</string>
 
 
 </resources>

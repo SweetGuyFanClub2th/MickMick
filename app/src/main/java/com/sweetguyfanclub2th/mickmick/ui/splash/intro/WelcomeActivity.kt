@@ -1,4 +1,4 @@
-package com.sweetguyfanclub2th.mickmick.ui.splash
+package com.sweetguyfanclub2th.mickmick.ui.splash.intro
 
 import android.annotation.SuppressLint
 import android.os.Build
@@ -9,8 +9,8 @@ import android.view.WindowManager
 import androidx.appcompat.app.AppCompatActivity
 import androidx.viewpager2.widget.ViewPager2
 import com.sweetguyfanclub2th.mickmick.R
-import com.sweetguyfanclub2th.mickmick.databinding.ActivityMainBinding
 import com.sweetguyfanclub2th.mickmick.databinding.ActivityWelcomeBinding
+import com.sweetguyfanclub2th.mickmick.ui.splash.MyIntroPagerRecyclerAdapter
 
 class WelcomeActivity : AppCompatActivity() {
 
@@ -22,7 +22,6 @@ class WelcomeActivity : AppCompatActivity() {
     private lateinit var myIntroPagerRecyclerAdapter: MyIntroPagerRecyclerAdapter
     private lateinit var binding: ActivityWelcomeBinding
 
-    @SuppressLint("ObsoleteSdkInt")
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityWelcomeBinding.inflate(layoutInflater)
@@ -30,13 +29,12 @@ class WelcomeActivity : AppCompatActivity() {
 
 
         binding.previousBtn.setOnClickListener {
-            Log.d(TAG, "MainActivity - 이전 버튼 클릭")
-
+            Log.d(TAG, "WelcomeActivity - 이전 버튼 클릭")
             binding.myIntroViewPager.currentItem = binding.myIntroViewPager.currentItem - 1
         }
 
         binding.nextBtn.setOnClickListener {
-            Log.d(TAG, "MainActivity - 다음 버튼 클릭")
+            Log.d(TAG, "WelcomeActivity - 다음 버튼 클릭")
             binding.myIntroViewPager.currentItem = binding.myIntroViewPager.currentItem + 1
         }
 
@@ -47,33 +45,10 @@ class WelcomeActivity : AppCompatActivity() {
 
         myIntroPagerRecyclerAdapter = MyIntroPagerRecyclerAdapter(pageItemList)
 
-        if (Build.VERSION.SDK_INT < 16) {
-            window.setFlags(
-                WindowManager.LayoutParams.FLAG_FULLSCREEN,
-                WindowManager.LayoutParams.FLAG_FULLSCREEN)
-        }
-
-        // Hide the status bar.
-        window.decorView.systemUiVisibility = View.SYSTEM_UI_FLAG_FULLSCREEN
-        // Remember that you should never show the action bar if the
-        // status bar is hidden, so hide that too if necessary.
-
-        actionBar?.hide()
-
         // 뷰페이저에 설정
         binding.myIntroViewPager.apply {
-
             adapter = myIntroPagerRecyclerAdapter
             orientation = ViewPager2.ORIENTATION_HORIZONTAL
-
-//            this.registerOnPageChangeCallback(object : ViewPager2.OnPageChangeCallback() {
-//
-//                override fun onPageSelected(position: Int) {
-//                    super.onPageSelected(position)
-////                    supportActionBar?.setBackgroundDrawable(ColorDrawable(resources.getColor(R.color.colorBlue)))
-//                }
-//
-//            })
 
             binding.dotsIndicator.setViewPager2(this)
         }
