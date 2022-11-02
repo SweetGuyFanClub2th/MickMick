@@ -1,6 +1,7 @@
 package com.sweetguyfanclub2th.mickmick.ui.splash.intro
 
 import android.annotation.SuppressLint
+import android.content.Intent
 import android.os.Build
 import android.os.Bundle
 import android.util.Log
@@ -10,6 +11,7 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.viewpager2.widget.ViewPager2
 import com.sweetguyfanclub2th.mickmick.R
 import com.sweetguyfanclub2th.mickmick.databinding.ActivityWelcomeBinding
+import com.sweetguyfanclub2th.mickmick.ui.login.LoginActivity
 import com.sweetguyfanclub2th.mickmick.ui.splash.MyIntroPagerRecyclerAdapter
 
 class WelcomeActivity : AppCompatActivity() {
@@ -35,7 +37,10 @@ class WelcomeActivity : AppCompatActivity() {
 
         binding.nextBtn.setOnClickListener {
             Log.d(TAG, "WelcomeActivity - 다음 버튼 클릭")
-            binding.myIntroViewPager.currentItem = binding.myIntroViewPager.currentItem + 1
+            when(binding.myIntroViewPager.currentItem){
+                3 -> moveLoginPage()
+                else -> binding.myIntroViewPager.currentItem = binding.myIntroViewPager.currentItem + 1
+            }
         }
 
         pageItemList.add(PageItem(R.color.green, R.drawable.ic_baseline_check_box_24, "화면1"))
@@ -55,4 +60,10 @@ class WelcomeActivity : AppCompatActivity() {
 
     }
 
+    private fun moveLoginPage(){
+        Intent(this, LoginActivity::class.java).apply {
+            startActivity(this)
+            finish()
+        }
+    }
 }
