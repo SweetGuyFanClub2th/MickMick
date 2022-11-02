@@ -19,9 +19,8 @@ class WelcomeActivity : AppCompatActivity() {
     }
 
     private var pageItemList = ArrayList<PageItem>()
-    private lateinit var myIntroPagerRecyclerAdapter: WelcomeViewHolder
+    private lateinit var myIntroPagerRecyclerAdapter: MyIntroPagerRecyclerAdapter
     private lateinit var binding: ActivityWelcomeBinding
-
 
     @SuppressLint("ObsoleteSdkInt")
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -41,10 +40,10 @@ class WelcomeActivity : AppCompatActivity() {
             binding.myIntroViewPager.currentItem = binding.myIntroViewPager.currentItem + 1
         }
 
-        pageItemList.add(PageItem(R.color.MICKMICK, R.drawable.ic_baseline_emoji_emotions_24, "화면1"))
-        pageItemList.add(PageItem(R.color.MICKMICK, R.drawable.ic_baseline_emoji_people_24, "화면2"))
-        pageItemList.add(PageItem(R.color.MICKMICK, R.drawable.ic_baseline_escalator_warning_24, "화면3"))
-        pageItemList.add(PageItem(R.color.MICKMICK, R.drawable.ic_baseline_directions_bike_24, "화면4"))
+        pageItemList.add(PageItem(R.color.green, R.drawable.ic_baseline_check_box_24, "화면1"))
+        pageItemList.add(PageItem(R.color.green, R.drawable.ic_baseline_check_box_24, "화면2"))
+        pageItemList.add(PageItem(R.color.green, R.drawable.ic_baseline_check_box_24, "화면3"))
+        pageItemList.add(PageItem(R.color.green, R.drawable.ic_baseline_check_box_24, "화면4"))
 
         myIntroPagerRecyclerAdapter = MyIntroPagerRecyclerAdapter(pageItemList)
 
