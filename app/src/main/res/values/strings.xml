@@ -19,6 +19,8 @@
     <string name="welcome_nextbtn">next_mark</string>
     <string name="welcome_previousbtn">previous_mark</string>
     <string name="login_to_mickmick">미크미크에 로그인하기</string>
+    <string name="login_hint_password">비밀번호를 입력하세요</string>
+    <string name="login_hint_email">이메일을 입력하세요</string>
 
 
 </resources>

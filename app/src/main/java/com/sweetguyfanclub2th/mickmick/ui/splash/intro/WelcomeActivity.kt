@@ -24,13 +24,11 @@ class WelcomeActivity : AppCompatActivity() {
     private var pageItemList = ArrayList<PageItem>()
     private lateinit var myIntroPagerRecyclerAdapter: MyIntroPagerRecyclerAdapter
     private lateinit var binding: ActivityWelcomeBinding
-    private var welcomeBtn = binding.welcomeButtonToNextActivity
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityWelcomeBinding.inflate(layoutInflater)
         setContentView(binding.root)
-
 
         binding.previousBtn.setOnClickListener {
             Log.d(TAG, "WelcomeActivity - 이전 버튼 클릭")
@@ -67,14 +65,9 @@ class WelcomeActivity : AppCompatActivity() {
     }
 
     private fun moveLoginPage(){
-        if (welcomeBtn.visibility == View.INVISIBLE) {
-            welcomeBtn.visibility = View.VISIBLE
-        }
-        else {
-            welcomeBtn.visibility = View.INVISIBLE
-        }
-        binding.myIntroViewPager.currentItem = binding.myIntroViewPager.currentItem + 1
-        welcomeBtn.setOnClickListener {
+        checkNotThird()
+        binding.welcomeButtonToNextActivity.visibility = View.VISIBLE
+        binding.welcomeButtonToNextActivity.setOnClickListener {
             Intent(this, LoginActivity::class.java).apply {
                 startActivity(this)
                 finish()

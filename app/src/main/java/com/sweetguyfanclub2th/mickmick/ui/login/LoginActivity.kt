@@ -1,5 +1,6 @@
 package com.sweetguyfanclub2th.mickmick.ui.login
 
+import android.content.Intent
 import android.os.Bundle
 import android.os.PersistableBundle
 import androidx.appcompat.app.AppCompatActivity
@@ -14,5 +15,12 @@ class LoginActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         binding = ActivityLoginBinding.inflate(layoutInflater)
         setContentView(binding.root)
+
+//        binding.registerBtn.setOnClickListener {
+//            Intent(this, RegisterActivity::class.java).apply {
+//                startActivity(this)
+//            }
+//            finish()
+//        }
     }
 }
