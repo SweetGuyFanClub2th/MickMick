@@ -46,6 +46,7 @@
 
     <ImageView
         android:id="@+id/next_btn"
+        android:visibility="visible"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:src="@drawable/ic_baseline_chevron_right_24"
@@ -56,5 +57,21 @@
         android:contentDescription="@string/welcome_nextbtn"
         android:layout_marginEnd="10dp"
         android:layout_marginTop="10dp"/>
+
+    <Button
+        android:id="@+id/welcome_button_to_next_activity"
+        android:layout_width="match_parent"
+        android:layout_height="60dp"
+        android:textSize="16sp"
+        android:text="@string/login_to_mickmick"
+        app:layout_constraintBottom_toTopOf="@+id/dots_indicator"
+        android:layout_marginBottom="30dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_marginStart="28dp"
+        android:layout_marginEnd="28dp"
+        android:visibility="invisible"
+    />
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>

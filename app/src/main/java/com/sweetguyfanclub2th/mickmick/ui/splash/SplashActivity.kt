@@ -28,7 +28,8 @@ class SplashActivity : AppCompatActivity() {
                 false ->
                     moveWelcomeAndEditSharedPref(sharedPreferences)
                 else ->
-                    moveLoginPage()
+                    moveWelcomeAndEditSharedPref(sharedPreferences)
+                    // use moveWelcomeAndEditSharedPref instead of moveLoginPage() in development
             }
         }, 3000)
     }

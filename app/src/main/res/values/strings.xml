@@ -18,6 +18,7 @@
     <string name="register_btn_complete">완료</string>
     <string name="welcome_nextbtn">next_mark</string>
     <string name="welcome_previousbtn">previous_mark</string>
+    <string name="login_to_mickmick">미크미크에 로그인하기</string>
 
 
 </resources>

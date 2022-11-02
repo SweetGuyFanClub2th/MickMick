@@ -13,6 +13,7 @@ import com.sweetguyfanclub2th.mickmick.R
 import com.sweetguyfanclub2th.mickmick.databinding.ActivityWelcomeBinding
 import com.sweetguyfanclub2th.mickmick.ui.login.LoginActivity
 import com.sweetguyfanclub2th.mickmick.ui.splash.MyIntroPagerRecyclerAdapter
+import kotlin.concurrent.thread
 
 class WelcomeActivity : AppCompatActivity() {
 
@@ -23,6 +24,7 @@ class WelcomeActivity : AppCompatActivity() {
     private var pageItemList = ArrayList<PageItem>()
     private lateinit var myIntroPagerRecyclerAdapter: MyIntroPagerRecyclerAdapter
     private lateinit var binding: ActivityWelcomeBinding
+    private var welcomeBtn = binding.welcomeButtonToNextActivity
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -38,15 +40,15 @@ class WelcomeActivity : AppCompatActivity() {
         binding.nextBtn.setOnClickListener {
             Log.d(TAG, "WelcomeActivity - 다음 버튼 클릭")
             when(binding.myIntroViewPager.currentItem){
-                3 -> moveLoginPage()
-                else -> binding.myIntroViewPager.currentItem = binding.myIntroViewPager.currentItem + 1
+                2 -> moveLoginPage()
+                else -> checkNotThird()
             }
         }
 
-        pageItemList.add(PageItem(R.color.green, R.drawable.ic_baseline_check_box_24, "화면1"))
-        pageItemList.add(PageItem(R.color.green, R.drawable.ic_baseline_check_box_24, "화면2"))
-        pageItemList.add(PageItem(R.color.green, R.drawable.ic_baseline_check_box_24, "화면3"))
-        pageItemList.add(PageItem(R.color.green, R.drawable.ic_baseline_check_box_24, "화면4"))
+        pageItemList.add(PageItem(R.color.white, R.drawable.ic_baseline_check_box_24, "화면1"))
+        pageItemList.add(PageItem(R.color.white, R.drawable.ic_baseline_check_box_24, "화면2"))
+        pageItemList.add(PageItem(R.color.white, R.drawable.ic_baseline_check_box_24, "화면3"))
+        pageItemList.add(PageItem(R.color.white, R.drawable.ic_baseline_check_box_24, "화면4"))
 
         myIntroPagerRecyclerAdapter = MyIntroPagerRecyclerAdapter(pageItemList)
 
@@ -60,10 +62,23 @@ class WelcomeActivity : AppCompatActivity() {
 
     }
 
+    private fun checkNotThird() {
+        binding.myIntroViewPager.currentItem = binding.myIntroViewPager.currentItem + 1
+    }
+
     private fun moveLoginPage(){
-        Intent(this, LoginActivity::class.java).apply {
-            startActivity(this)
-            finish()
+        if (welcomeBtn.visibility == View.INVISIBLE) {
+            welcomeBtn.visibility = View.VISIBLE
+        }
+        else {
+            welcomeBtn.visibility = View.INVISIBLE
+        }
+        binding.myIntroViewPager.currentItem = binding.myIntroViewPager.currentItem + 1
+        welcomeBtn.setOnClickListener {
+            Intent(this, LoginActivity::class.java).apply {
+                startActivity(this)
+                finish()
+            }
         }
     }
 }
