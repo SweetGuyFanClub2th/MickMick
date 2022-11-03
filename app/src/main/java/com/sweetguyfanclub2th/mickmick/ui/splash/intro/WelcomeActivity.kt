@@ -1,19 +1,15 @@
 package com.sweetguyfanclub2th.mickmick.ui.splash.intro
 
-import android.annotation.SuppressLint
 import android.content.Intent
-import android.os.Build
 import android.os.Bundle
 import android.util.Log
 import android.view.View
-import android.view.WindowManager
 import androidx.appcompat.app.AppCompatActivity
 import androidx.viewpager2.widget.ViewPager2
 import com.sweetguyfanclub2th.mickmick.R
 import com.sweetguyfanclub2th.mickmick.databinding.ActivityWelcomeBinding
 import com.sweetguyfanclub2th.mickmick.ui.login.LoginActivity
 import com.sweetguyfanclub2th.mickmick.ui.splash.MyIntroPagerRecyclerAdapter
-import kotlin.concurrent.thread
 
 class WelcomeActivity : AppCompatActivity() {
 
@@ -32,14 +28,14 @@ class WelcomeActivity : AppCompatActivity() {
 
         binding.previousBtn.setOnClickListener {
             Log.d(TAG, "WelcomeActivity - 이전 버튼 클릭")
-            binding.myIntroViewPager.currentItem = binding.myIntroViewPager.currentItem - 1
+            checkNotThirdAndMinusItem()
         }
 
         binding.nextBtn.setOnClickListener {
             Log.d(TAG, "WelcomeActivity - 다음 버튼 클릭")
             when(binding.myIntroViewPager.currentItem){
                 2 -> moveLoginPage()
-                else -> checkNotThird()
+                else -> checkNotThirdAndPlusItem()
             }
         }
 
@@ -60,13 +56,21 @@ class WelcomeActivity : AppCompatActivity() {
 
     }
 
-    private fun checkNotThird() {
+    private fun checkNotThirdAndMinusItem(){
+        binding.nextBtn.visibility = View.VISIBLE
+        binding.welcomeButtonToNextActivity.visibility = View.INVISIBLE
+        binding.myIntroViewPager.currentItem = binding.myIntroViewPager.currentItem - 1
+    }
+
+    private fun checkNotThirdAndPlusItem() {
+        binding.welcomeButtonToNextActivity.visibility = View.INVISIBLE
         binding.myIntroViewPager.currentItem = binding.myIntroViewPager.currentItem + 1
     }
 
     private fun moveLoginPage(){
-        checkNotThird()
+        checkNotThirdAndPlusItem()
         binding.welcomeButtonToNextActivity.visibility = View.VISIBLE
+        binding.nextBtn.visibility = View.INVISIBLE
         binding.welcomeButtonToNextActivity.setOnClickListener {
             Intent(this, LoginActivity::class.java).apply {
                 startActivity(this)
