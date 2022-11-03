@@ -1,5 +1,6 @@
 package com.sweetguyfanclub2th.mickmick.ui.login
 
+import android.annotation.SuppressLint
 import android.content.ContentValues
 import android.content.Intent
 import android.os.Bundle
@@ -12,12 +13,15 @@ import com.google.firebase.auth.FirebaseUser
 import com.google.firebase.firestore.FirebaseFirestore
 import com.sweetguyfanclub2th.mickmick.databinding.ActivityRegisterBinding
 import com.sweetguyfanclub2th.mickmick.ui.main.MainActivity
+import java.text.SimpleDateFormat
+import java.util.*
 import java.util.regex.Pattern
 
 class RegisterActivity : AppCompatActivity() {
     private lateinit var binding: ActivityRegisterBinding
     private var auth: FirebaseAuth? = null
     private lateinit var db: FirebaseFirestore
+    private var moveMainStack : Int = 0
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -89,6 +93,7 @@ class RegisterActivity : AppCompatActivity() {
         }
     }
 
+    @SuppressLint("SimpleDateFormat")
     private fun createUser() {
         val email = binding.registeremail.text.toString()
         val pw = binding.registerpasswd.text.toString()
@@ -98,29 +103,55 @@ class RegisterActivity : AppCompatActivity() {
         )
             ?.addOnCompleteListener(this) { task ->
                 if (task.isSuccessful) {
-                    // Users Database
-
-                    val userDataList = hashMapOf(
-                        "user" to email,
-                        "friends" to "",
-                        "todoId" to "",
+                    // 01. 투두 데이터 셋
+                    val timestamp = SimpleDateFormat("yyyyMMddHHmmss").format(Date())
+                    val todoDataSet = hashMapOf(
+                        "id" to timestamp,
+                        "title" to "MickMick에 가입했어요!",
+                        "place" to "미크미크",
+                        "host" to email,
                     )
 
-                    db.collection("users")
-                        .document(email)
-                        .set(userDataList)
+                    // 이메일로 컬렉션을 구분
+                    db.collection(email)
+                        .document("todo") // 투두 문서 생성
+                        .set(todoDataSet) // 투두 데이터 셋 생성
                         .addOnSuccessListener { documentReference ->
-                            Log.d(ContentValues.TAG, "유저 정보 업로드 및 회원가입에 성공하였습니다.")
-                            moveMainPage(task.result?.user)
+                            moveMainStack += 1
+                            Log.d(ContentValues.TAG, "TODO 업로드에 성공하였습니다. ( stack : $moveMainStack )")
                         }
                         .addOnFailureListener { e ->
                             Toast.makeText(this, "유저 정보 업로드에 실패했습니다.", Toast.LENGTH_SHORT).show()
+                        }
+
+
+                    // 02. 유저정보 데이터셋
+                    val userDataSet = hashMapOf(
+                        "nickname" to email,
+                        "friends" to arrayListOf(null),
+                        "todoId" to arrayListOf(timestamp),
+                    )
+
+                    db.collection(email)
+                        .document("userinfo")
+                        .set(userDataSet)
+                        .addOnSuccessListener { documentReference ->
+                            moveMainStack += 1
+                            Log.d(ContentValues.TAG, "USERINFO 업로드에 성공하였습니다. ( stack : $moveMainStack )")
+                        }
+                        .addOnFailureListener { e ->
+                            Log.d(ContentValues.TAG, "유저 정보 업로드에 실패하였습니다.")
                         }
 
                 } else if (task.exception?.message.isNullOrEmpty()) {
                     Toast.makeText(this, task.exception?.message, Toast.LENGTH_SHORT).show()
                 } else {
                     signIn()
+                }
+
+                when(moveMainStack){
+                    2 -> moveMainPage(task.result?.user)
+                    else -> Toast.makeText(this, "유저 정보 업로드에 실패했습니다.", Toast.LENGTH_SHORT).show()
                 }
             }
     }
