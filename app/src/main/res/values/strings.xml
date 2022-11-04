@@ -23,6 +23,9 @@
     <string name="login_hint_email">이메일을 입력하세요</string>
     <string name="login_complete_btn">로그인</string>
     <string name="login_go_register_btn">미크미크 회원가입하기</string>
+    <string name="register_nickname">닉네임을 입력해주세요</string>
+    <string name="register_nickname_checktxt">닉네임 중복 체크를 해주세요!</string>
+    <string name="register_nickname_check">중복체크</string>
 
 
 </resources>
