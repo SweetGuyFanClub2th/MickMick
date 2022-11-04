@@ -11,6 +11,9 @@ import androidx.appcompat.app.AppCompatActivity
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.FirebaseUser
 import com.google.firebase.firestore.FirebaseFirestore
+import com.sweetguyfanclub2th.mickmick.data.Nickname
+import com.sweetguyfanclub2th.mickmick.data.Todo
+import com.sweetguyfanclub2th.mickmick.data.UserInfo
 import com.sweetguyfanclub2th.mickmick.databinding.ActivityRegisterBinding
 import com.sweetguyfanclub2th.mickmick.ui.main.MainActivity
 import java.text.SimpleDateFormat
@@ -32,11 +35,20 @@ class RegisterActivity : AppCompatActivity() {
         auth = FirebaseAuth.getInstance()
         db = FirebaseFirestore.getInstance()
 
+        val email = binding.registerEmail.text.toString()
+        val pw = binding.registerPasswd.text.toString()
+        val repeatPw = binding.registerPasswd.text.toString()
+        val nickname = binding.nickname.text.toString()
+
         binding.registercomplete.setOnClickListener {
             textInvisibleSet()
 
-            if (checkEmail() && checkPasswd() && checkRepeatPasswd()) {
-                createUser()
+            if (checkEmail(email)
+                && checkPasswd(pw)
+                && checkRepeatPasswd(pw, repeatPw)
+                && checkNickName(nickname)
+            ) {
+                createUser(email, pw, nickname)
             } else {
                 Toast.makeText(this, "각 형식을 확인해주세요", Toast.LENGTH_SHORT).show()
             }
@@ -49,8 +61,7 @@ class RegisterActivity : AppCompatActivity() {
         binding.repeatPasswdCheckText.visibility = View.INVISIBLE
     }
 
-    private fun checkEmail(): Boolean {
-        val email = binding.registeremail.text.toString()
+    private fun checkEmail(email : String): Boolean {
         val emailFormatCheck =
             "^[_A-Za-z0-9-]+(\\.[_A-Za-z0-9-]+)*@[A-Za-z0-9]+(\\.[A-Za-z0-9]+)*(\\.[A-Za-z]{2,})$"
         val p = Pattern.matches(emailFormatCheck, email)
@@ -64,8 +75,7 @@ class RegisterActivity : AppCompatActivity() {
         }
     }
 
-    private fun checkPasswd(): Boolean {
-        val passwd = binding.registerpasswd.text.toString()
+    private fun checkPasswd(passwd : String): Boolean {
         val passwdFormatCheck =
             "^(?=.*[A-Za-z])(?=.*[0-9])(?=.*[\$@\$!%*#?&])[A-Za-z[0-9]\$@\$!%*#?&]{8,20}\$"
         val p = Pattern.matches(passwdFormatCheck, passwd)
@@ -79,9 +89,7 @@ class RegisterActivity : AppCompatActivity() {
         }
     }
 
-    private fun checkRepeatPasswd(): Boolean {
-        val passwd = binding.registerpasswd.text.toString()
-        val repeatPasswd = binding.registerRepeatPasswd.text.toString()
+    private fun checkRepeatPasswd(passwd : String, repeatPasswd : String): Boolean {
         val p = passwd == repeatPasswd
 
         when (p) {
@@ -93,10 +101,13 @@ class RegisterActivity : AppCompatActivity() {
         }
     }
 
+    private fun checkNickName(nickname : String) : Boolean {
+
+    }
+
     @SuppressLint("SimpleDateFormat")
-    private fun createUser() {
-        val email = binding.registeremail.text.toString()
-        val pw = binding.registerpasswd.text.toString()
+    private fun createUser(email : String, pw : String, nickname : String) {
+        moveMainStack = 0
 
         auth?.createUserWithEmailAndPassword(
             email, pw
@@ -104,13 +115,14 @@ class RegisterActivity : AppCompatActivity() {
             ?.addOnCompleteListener(this) { task ->
                 if (task.isSuccessful) {
                     // 01. 투두 데이터 셋
+                    // 투두 데이터 셋 구성 - 순서대로 timestamp / title / place(address) / participant
                     val timestamp = SimpleDateFormat("yyyyMMddHHmmss").format(Date())
-                    val todoDataSet = hashMapOf(
-                        "id" to timestamp,
-                        "title" to "MickMick에 가입했어요!",
-                        "place" to "미크미크",
-                        "host" to email,
-                    )
+                    val todoDataSet = Todo(listOf(
+                        timestamp,
+                        "미크미크에 가입했어요",
+                        "$nickname 님의 핸드폰에서 생성되었습니다",
+                        "미크미크, $nickname"
+                    ))
 
                     // 이메일로 컬렉션을 구분
                     db.collection(email)
@@ -126,10 +138,10 @@ class RegisterActivity : AppCompatActivity() {
 
 
                     // 02. 유저정보 데이터셋
-                    val userDataSet = hashMapOf(
-                        "nickname" to email,
-                        "friends" to arrayListOf(null),
-                        "todoId" to arrayListOf(timestamp),
+                    val userDataSet = UserInfo(
+                        nickname,
+                        null,
+                        arrayListOf(timestamp),
                     )
 
                     db.collection(email)
@@ -143,10 +155,21 @@ class RegisterActivity : AppCompatActivity() {
                             Log.d(ContentValues.TAG, "유저 정보 업로드에 실패하였습니다.")
                         }
 
+//                    db.collection("nickname")
+//                        .document("names")
+//                        .set(Nickname(nickname))
+//                        .addOnSuccessListener { documentReference ->
+//                            moveMainStack += 1
+//                            Log.d(ContentValues.TAG, "NICKNAME 업로드에 성공하였습니다. ( stack : $moveMainStack )")
+//                        }
+//                        .addOnFailureListener { e ->
+//                            Log.d(ContentValues.TAG, "유저 정보 업로드에 실패하였습니다.")
+//                        }
+
                 } else if (task.exception?.message.isNullOrEmpty()) {
                     Toast.makeText(this, task.exception?.message, Toast.LENGTH_SHORT).show()
                 } else {
-                    signIn()
+                    signIn(email, pw)
                 }
 
                 when(moveMainStack){
@@ -156,11 +179,8 @@ class RegisterActivity : AppCompatActivity() {
             }
     }
 
-    private fun signIn() {
-        auth?.signInWithEmailAndPassword(
-            binding.registeremail.text.toString(),
-            binding.registerpasswd.text.toString()
-        )
+    private fun signIn(email : String, pw : String) {
+        auth?.signInWithEmailAndPassword(email, pw)
             ?.addOnCompleteListener { task ->
                 if (task.isSuccessful) {
                     Log.d(ContentValues.TAG, "이메일/비밀번호 로그인에 성공하였습니다.")
