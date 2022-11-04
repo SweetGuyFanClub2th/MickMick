@@ -36,7 +36,7 @@
         android:id="@+id/welcome_button_to_next_activity"
         android:layout_width="match_parent"
         android:layout_height="60dp"
-        android:textSize="16sp"
+        android:textSize="18sp"
         android:text="@string/login_to_mickmick"
         app:layout_constraintBottom_toTopOf="@+id/dots_indicator"
         android:layout_marginBottom="30dp"
@@ -44,8 +44,10 @@
         app:layout_constraintEnd_toEndOf="parent"
         android:layout_marginStart="28dp"
         android:layout_marginEnd="28dp"
-        android:visibility="invisible"
-    />
+        android:background="@drawable/border_basic"
+        android:backgroundTint="@color/green"
+        android:textColor="@color/white"
+        />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>
