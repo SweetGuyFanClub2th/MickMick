@@ -35,12 +35,12 @@ class RegisterActivity : AppCompatActivity() {
         auth = FirebaseAuth.getInstance()
         db = FirebaseFirestore.getInstance()
 
-        val email = binding.registerEmail.text.toString()
-        val pw = binding.registerPasswd.text.toString()
-        val repeatPw = binding.registerPasswd.text.toString()
-        val nickname = binding.nickname.text.toString()
-
         binding.registercomplete.setOnClickListener {
+            val email = binding.registerEmail.text.toString()
+            val pw = binding.registerPasswd.text.toString()
+            val repeatPw = binding.registerPasswd.text.toString()
+            val nickname = binding.nickname.text.toString()
+
             textInvisibleSet()
 
             if (checkEmail(email)
