@@ -16,7 +16,7 @@ class ViewPagerPage4 : Fragment() {
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
+    ): View {
         _binding = FragmentViewPagerPage4Binding.inflate(inflater, container, false)
         val view = binding.root
         return view
