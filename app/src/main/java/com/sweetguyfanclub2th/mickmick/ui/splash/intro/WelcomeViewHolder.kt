@@ -1,28 +1,29 @@
 package com.sweetguyfanclub2th.mickmick.ui.splash
 
-import android.view.LayoutInflater
-import android.view.View
-import android.view.ViewGroup
-import androidx.recyclerview.widget.RecyclerView
-import com.sweetguyfanclub2th.mickmick.R
-import com.sweetguyfanclub2th.mickmick.ui.splash.intro.PageItem
+import androidx.fragment.app.Fragment
+import androidx.fragment.app.FragmentActivity
+import androidx.viewpager2.adapter.FragmentStateAdapter
 
-class MyIntroPagerRecyclerAdapter(private var pageList: ArrayList<PageItem>):RecyclerView.Adapter<MyIntroPagerRecyclerAdapter.WelcomeViewHolder>(){
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): WelcomeViewHolder {
-        return WelcomeViewHolder(LayoutInflater.from(parent.context).inflate(R.layout.activity_welcome, parent, false))
-    }
+class WelcomeAdapter(fragmentActivity: FragmentActivity): FragmentStateAdapter(fragmentActivity) {
+    var fragments: ArrayList<Fragment> = ArrayList()
 
     override fun getItemCount(): Int {
-        return pageList.size
+        return fragments.size
     }
 
-    override fun onBindViewHolder(holder: WelcomeViewHolder, position: Int) {
-        holder.bindWithView(pageList[position])
+    override fun createFragment(position: Int): Fragment {
+        return fragments[position]
     }
 
-    inner class WelcomeViewHolder(itemView: View): RecyclerView.ViewHolder(itemView) {
-        fun bindWithView(pageItem: PageItem) {
-            itemView.setBackgroundColor(pageItem.color)
-        }
+    fun addFragment(fragment: Fragment) {
+        fragments.add(fragment)
+        notifyItemInserted(fragments.size - 1)
+        //TODO: notifyItemInserted!!
+    }
+
+    fun removeFragement() {
+        fragments.removeLast()
+        notifyItemRemoved(fragments.size)
+        //TODO: notifyItemRemoved!!
     }
 }

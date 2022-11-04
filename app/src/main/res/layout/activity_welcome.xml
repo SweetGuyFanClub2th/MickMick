@@ -32,32 +32,6 @@
         android:layout_marginBottom="40dp"
     />
 
-    <ImageView
-        android:id="@+id/previous_btn"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:src="@drawable/ic_baseline_chevron_left_24"
-        android:textStyle="bold"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        android:contentDescription="@string/welcome_previousbtn"
-        android:layout_marginTop="10dp"
-        android:layout_marginStart="10dp"/>
-
-    <ImageView
-        android:id="@+id/next_btn"
-        android:visibility="visible"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:src="@drawable/ic_baseline_chevron_right_24"
-        android:textStyle="bold"
-        tools:ignore="next_mark"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        android:contentDescription="@string/welcome_nextbtn"
-        android:layout_marginEnd="10dp"
-        android:layout_marginTop="10dp"/>
-
     <Button
         android:id="@+id/welcome_button_to_next_activity"
         android:layout_width="match_parent"
