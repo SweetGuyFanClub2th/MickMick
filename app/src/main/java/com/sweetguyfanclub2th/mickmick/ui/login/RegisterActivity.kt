@@ -112,6 +112,8 @@ class RegisterActivity : AppCompatActivity() {
                 false
             }
         }
+
+        // TODO : 닉네임 중복체크 (Firebase -> 닉네임 컬렉션 -> 네임즈 문서 -> arraylist 싹다 돌려서 확인)
     }
 
     @SuppressLint("SimpleDateFormat")
@@ -126,12 +128,11 @@ class RegisterActivity : AppCompatActivity() {
                     // 01. 투두 데이터 셋
                     // 투두 데이터 셋 구성 - 순서대로 timestamp / title / place(address) / participant
                     val timestamp = SimpleDateFormat("yyyyMMddHHmmss").format(Date())
-                    val todoDataSet = Todo(listOf(
-                        timestamp,
-                        "미크미크에 가입했어요",
-                        "$nickname 님의 핸드폰에서 생성되었습니다",
-                        "미크미크, $nickname"
-                    ))
+                    val todoDataSet = listOf(
+                            timestamp to listOf("미크미크에 가입했어요",
+                                "$nickname 님의 핸드폰에서 생성되었습니다",
+                                "미크미크, $nickname"),
+                    )
 
                     // 이메일로 컬렉션을 구분
                     db.collection(email)
@@ -142,7 +143,8 @@ class RegisterActivity : AppCompatActivity() {
                             Log.d(ContentValues.TAG, "TODO 업로드에 성공하였습니다. ( stack : $moveMainStack )")
                         }
                         .addOnFailureListener { e ->
-                            Toast.makeText(this, "유저 정보 업로드에 실패했습니다.", Toast.LENGTH_SHORT).show()
+                            Toast.makeText(this, "TODO 정보 업로드에 실패했습니다.", Toast.LENGTH_SHORT).show()
+                            Log.d(ContentValues.TAG, "TODO 정보 업로드에 실패하였습니다.")
                         }
 
 
@@ -151,6 +153,8 @@ class RegisterActivity : AppCompatActivity() {
                         nickname,
                         null,
                         arrayListOf(timestamp),
+                        "default",
+                        null
                     )
 
                     db.collection(email)
@@ -161,31 +165,33 @@ class RegisterActivity : AppCompatActivity() {
                             Log.d(ContentValues.TAG, "USERINFO 업로드에 성공하였습니다. ( stack : $moveMainStack )")
                         }
                         .addOnFailureListener { e ->
-                            Log.d(ContentValues.TAG, "유저 정보 업로드에 실패하였습니다.")
+                            Log.d(ContentValues.TAG, "USERINFO 정보 업로드에 실패하였습니다.")
                         }
 
-//                    db.collection("nickname")
-//                        .document("names")
-//                        .set(Nickname(nickname))
-//                        .addOnSuccessListener { documentReference ->
-//                            moveMainStack += 1
-//                            Log.d(ContentValues.TAG, "NICKNAME 업로드에 성공하였습니다. ( stack : $moveMainStack )")
-//                        }
-//                        .addOnFailureListener { e ->
-//                            Log.d(ContentValues.TAG, "유저 정보 업로드에 실패하였습니다.")
-//                        }
+
+                    // 03. 닉네임 데이터셋
+                    val nicknameDataSet = Nickname(arrayListOf(nickname))
+
+                    db.collection("nickname")
+                        .document("names")
+                        .set(nicknameDataSet)
+                        .addOnSuccessListener { documentReference ->
+                            moveMainStack += 1
+                            Log.d(ContentValues.TAG, "NICKNAME 업로드에 성공하였습니다. ( stack : $moveMainStack )")
+                        }
+                        .addOnFailureListener { e ->
+                            Log.d(ContentValues.TAG, "NICKNAME 정보 업로드에 실패하였습니다.")
+                        }
 
                 } else if (task.exception?.message.isNullOrEmpty()) {
                     Toast.makeText(this, task.exception?.message, Toast.LENGTH_SHORT).show()
-                } else {
-                    signIn(email, pw)
-                }
-
-                when(moveMainStack){
-                    2 -> moveMainPage(task.result?.user)
-                    else -> Toast.makeText(this, "유저 정보 업로드에 실패했습니다.", Toast.LENGTH_SHORT).show()
                 }
             }
+
+        when(moveMainStack){
+            3 -> moveMainPage(auth?.currentUser)
+            else -> Toast.makeText(this, "유저 정보 업로드에 실패했습니다.", Toast.LENGTH_SHORT).show()
+        }
     }
 
     private fun signIn(email : String, pw : String) {
