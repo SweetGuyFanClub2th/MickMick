@@ -101,8 +101,17 @@ class RegisterActivity : AppCompatActivity() {
         }
     }
 
-    private fun checkNickName(nickname : String) : Boolean {
+    private fun checkNickName(nickname : String): Boolean {
+        val nicknameFormatCheck = "^[a-zA-Z0-9ㄱ-ㅎ가-힣]{2,10}\$"
+        val p = Pattern.matches(nicknameFormatCheck, nickname)
 
+        return when (p) {
+            true -> true
+            false -> {
+                binding.nicknameCheckText.visibility = View.VISIBLE
+                false
+            }
+        }
     }
 
     @SuppressLint("SimpleDateFormat")
