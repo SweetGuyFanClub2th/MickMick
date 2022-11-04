@@ -50,10 +50,16 @@ class WelcomeActivity : AppCompatActivity() {
 
     private fun initViewPager() {
         viewPager2Adatper = WelcomeAdapter(this)
-        viewPager2Adatper.addFragment(ViewPagerPage1())
-        viewPager2Adatper.addFragment(ViewPagerPage2())
-        viewPager2Adatper.addFragment(ViewPagerPage3())
-        viewPager2Adatper.addFragment(ViewPagerPage4())
+        val useFragment = listOf(
+            ViewPagerPage1(),
+            ViewPagerPage2(),
+            ViewPagerPage3(),
+            ViewPagerPage4()
+        )
+
+        useFragment.forEach {
+            viewPager2Adatper.addFragment(it)
+        }
 
         binding.myIntroViewPager.registerOnPageChangeCallback(object : ViewPager2.OnPageChangeCallback() {
             override fun onPageSelected(position: Int) {
