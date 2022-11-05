@@ -9,6 +9,10 @@ android {
     namespace 'com.sweetguyfanclub2th.mickmick'
     compileSdk 33
 
+    Properties properties = new Properties()
+    properties.load(project.rootProject.file('local.properties').newDataInputStream())
+    def kakaoMapKey = properties.getProperty('kakao_map_key')
+
     defaultConfig {
         applicationId "com.sweetguyfanclub2th.mickmick"
         minSdk 21
@@ -17,6 +21,7 @@ android {
         versionName "1.0"
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+        manifestPlaceholders = [kakaoMapKey:kakaoMapKey]
     }
 
     buildTypes {
