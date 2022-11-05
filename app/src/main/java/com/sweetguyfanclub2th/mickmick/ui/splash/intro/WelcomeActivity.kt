@@ -52,8 +52,8 @@ class WelcomeActivity : AppCompatActivity() {
         val useFragment = listOf(
             ViewPagerPage1(),
             ViewPagerPage2(),
-            ViewPagerPage3(),
-            ViewPagerPage4()
+//            ViewPagerPage3(),
+//            ViewPagerPage4()
         )
 
         useFragment.forEach {
@@ -65,7 +65,7 @@ class WelcomeActivity : AppCompatActivity() {
                 super.onPageSelected(position)
                 Log.d(TAG, "position: $position")
                 when (position) {
-                    3 -> {
+                    useFragment.size - 1 -> {
                         moveLoginPage()
                     }
                     else -> {
