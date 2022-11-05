@@ -1,5 +1,6 @@
 package com.sweetguyfanclub2th.mickmick.ui.main
 
+import android.annotation.SuppressLint
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import com.sweetguyfanclub2th.mickmick.R
