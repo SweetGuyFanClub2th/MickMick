@@ -2,10 +2,8 @@
     <string name="app_name">MickMick</string>
     <string name="splash_sub_title">map pick! me pick!</string>
     <string name="splash_title">미크미크</string>
-    <string name="register_bottom_consent_title">개인정보 동의</string>
-    <string name="register_bottom_input_title">회원가입</string>
 
-    <!-- 회원가입 : InfoInput -->
+    <!-- 회원가입 & 로그인 -->
     <string name="register_text">회원가입</string>
     <string name="register_sub_text1">회원가입을 하실</string>
     <string name="register_sub_text2">정보를 확인해주세요</string>
@@ -23,13 +21,14 @@
     <string name="login_hint_email">이메일을 입력하세요</string>
     <string name="login_complete_btn">로그인</string>
     <string name="login_go_register_btn">미크미크 회원가입하기</string>
-
-    <!-- TODO: Remove or change this placeholder text -->
-    <string name="hello_blank_fragment">Hello blank fragment</string>
-
     <string name="register_nickname">닉네임을 입력해주세요</string>
     <string name="register_nickname_checktxt">닉네임 중복 체크를 해주세요!</string>
     <string name="register_nickname_check">중복체크</string>
 
+    <!-- main_bottom_menu -->
+    <string name="main_nav_todo">TODO</string>
+    <string name="main_nav_settings">SETTINGS</string>
+    <string name="main_nav_main">MAIN</string>
+    <string name="main_nav_map">MAP</string>
 
 </resources>
