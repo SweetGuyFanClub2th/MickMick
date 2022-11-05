@@ -36,10 +36,10 @@ class LoginActivity : AppCompatActivity() {
         }
     }
 
-//    override fun onStart(){
-//        super.onStart()
-//        moveMainPage(auth?.currentUser)
-//    }
+    override fun onStart(){
+        super.onStart()
+        moveMainPage(auth?.currentUser)
+    }
 
     private fun loginCompleteCheck(emailText: Editable, passwdText: Editable): Boolean {
         val emailLength = emailText.length

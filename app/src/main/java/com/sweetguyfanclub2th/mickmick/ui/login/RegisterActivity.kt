@@ -24,7 +24,6 @@ class RegisterActivity : AppCompatActivity() {
     private lateinit var binding: ActivityRegisterBinding
     private var auth: FirebaseAuth? = null
     private lateinit var db: FirebaseFirestore
-    private var moveMainStack : Int = 0
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -36,17 +35,16 @@ class RegisterActivity : AppCompatActivity() {
         db = FirebaseFirestore.getInstance()
 
         binding.registercomplete.setOnClickListener {
+            textInvisibleSet()
             val email = binding.registerEmail.text.toString()
             val pw = binding.registerPasswd.text.toString()
-            val repeatPw = binding.registerPasswd.text.toString()
+            val repeatPw = binding.registerRepeatPasswd.text.toString()
             val nickname = binding.nickname.text.toString()
-
-            textInvisibleSet()
 
             if (checkEmail(email)
                 && checkPasswd(pw)
                 && checkRepeatPasswd(pw, repeatPw)
-                && checkNickName(nickname)
+//                && checkNickName(nickname)
             ) {
                 createUser(email, pw, nickname)
             } else {
@@ -55,13 +53,13 @@ class RegisterActivity : AppCompatActivity() {
         }
     }
 
-    private fun textInvisibleSet(){
+    private fun textInvisibleSet() {
         binding.emailCheckText.visibility = View.INVISIBLE
         binding.passwdCheckText.visibility = View.INVISIBLE
         binding.repeatPasswdCheckText.visibility = View.INVISIBLE
     }
 
-    private fun checkEmail(email : String): Boolean {
+    private fun checkEmail(email: String): Boolean {
         val emailFormatCheck =
             "^[_A-Za-z0-9-]+(\\.[_A-Za-z0-9-]+)*@[A-Za-z0-9]+(\\.[A-Za-z0-9]+)*(\\.[A-Za-z]{2,})$"
         val p = Pattern.matches(emailFormatCheck, email)
@@ -75,7 +73,7 @@ class RegisterActivity : AppCompatActivity() {
         }
     }
 
-    private fun checkPasswd(passwd : String): Boolean {
+    private fun checkPasswd(passwd: String): Boolean {
         val passwdFormatCheck =
             "^(?=.*[A-Za-z])(?=.*[0-9])(?=.*[\$@\$!%*#?&])[A-Za-z[0-9]\$@\$!%*#?&]{8,20}\$"
         val p = Pattern.matches(passwdFormatCheck, passwd)
@@ -89,7 +87,7 @@ class RegisterActivity : AppCompatActivity() {
         }
     }
 
-    private fun checkRepeatPasswd(passwd : String, repeatPasswd : String): Boolean {
+    private fun checkRepeatPasswd(passwd: String, repeatPasswd: String): Boolean {
         val p = passwd == repeatPasswd
 
         when (p) {
@@ -101,110 +99,129 @@ class RegisterActivity : AppCompatActivity() {
         }
     }
 
-    private fun checkNickName(nickname : String): Boolean {
-        val nicknameFormatCheck = "^[a-zA-Z0-9ㄱ-ㅎ가-힣]{2,10}\$"
-        val p = Pattern.matches(nicknameFormatCheck, nickname)
-
-        return when (p) {
-            true -> true
-            false -> {
-                binding.nicknameCheckText.visibility = View.VISIBLE
-                false
-            }
-        }
-
-        // TODO : 닉네임 중복체크 (Firebase -> 닉네임 컬렉션 -> 네임즈 문서 -> arraylist 싹다 돌려서 확인)
-    }
+//    private fun checkNickName(nickname : String): Boolean {
+//        val nicknameFormatCheck = "^[a-zA-Z0-9ㄱ-ㅎ가-힣]{2,10}\$"
+//        val p = Pattern.matches(nicknameFormatCheck, nickname)
+//
+//        return when (p) {
+//            true -> true
+//            false -> {
+//                binding.nicknameCheckText.visibility = View.VISIBLE
+//                false
+//            }
+//        }
+//
+//        // TODO : 닉네임 중복체크 (Firebase -> 닉네임 컬렉션 -> 네임즈 문서 -> arraylist 싹다 돌려서 확인)
+//    }
 
     @SuppressLint("SimpleDateFormat")
-    private fun createUser(email : String, pw : String, nickname : String) {
-        moveMainStack = 0
-
+    private fun createUser(email: String, pw: String, nickname: String) {
         auth?.createUserWithEmailAndPassword(
             email, pw
         )
             ?.addOnCompleteListener(this) { task ->
                 if (task.isSuccessful) {
-                    // 01. 투두 데이터 셋
-                    // 투두 데이터 셋 구성 - 순서대로 timestamp / title / place(address) / participant
                     val timestamp = SimpleDateFormat("yyyyMMddHHmmss").format(Date())
-                    val todoDataSet = listOf(
-                            timestamp to listOf("미크미크에 가입했어요",
-                                "$nickname 님의 핸드폰에서 생성되었습니다",
-                                "미크미크, $nickname"),
-                    )
-
-                    // 이메일로 컬렉션을 구분
-                    db.collection(email)
-                        .document("todo") // 투두 문서 생성
-                        .set(todoDataSet) // 투두 데이터 셋 생성
-                        .addOnSuccessListener { documentReference ->
-                            moveMainStack += 1
-                            Log.d(ContentValues.TAG, "TODO 업로드에 성공하였습니다. ( stack : $moveMainStack )")
-                        }
-                        .addOnFailureListener { e ->
-                            Toast.makeText(this, "TODO 정보 업로드에 실패했습니다.", Toast.LENGTH_SHORT).show()
-                            Log.d(ContentValues.TAG, "TODO 정보 업로드에 실패하였습니다.")
-                        }
-
+                    // 01. 투두 데이터 셋
+                    // 투두 데이터 셋 구성 - 순서대로 timestamp : title / place(address) / participant
+                    todoDataSetUpload(timestamp, nickname, email)
 
                     // 02. 유저정보 데이터셋
-                    val userDataSet = UserInfo(
-                        nickname,
-                        null,
-                        arrayListOf(timestamp),
-                        "default",
-                        null
-                    )
-
-                    db.collection(email)
-                        .document("userinfo")
-                        .set(userDataSet)
-                        .addOnSuccessListener { documentReference ->
-                            moveMainStack += 1
-                            Log.d(ContentValues.TAG, "USERINFO 업로드에 성공하였습니다. ( stack : $moveMainStack )")
-                        }
-                        .addOnFailureListener { e ->
-                            Log.d(ContentValues.TAG, "USERINFO 정보 업로드에 실패하였습니다.")
-                        }
-
+                    userInfoDataSetUpload(nickname, timestamp, email)
 
                     // 03. 닉네임 데이터셋
-                    val nicknameDataSet = Nickname(arrayListOf(nickname))
+                    nicknameDataSetUpload(nickname)
 
-                    db.collection("nickname")
-                        .document("names")
-                        .set(nicknameDataSet)
-                        .addOnSuccessListener { documentReference ->
-                            moveMainStack += 1
-                            Log.d(ContentValues.TAG, "NICKNAME 업로드에 성공하였습니다. ( stack : $moveMainStack )")
-                        }
-                        .addOnFailureListener { e ->
-                            Log.d(ContentValues.TAG, "NICKNAME 정보 업로드에 실패하였습니다.")
-                        }
-
-                } else if (task.exception?.message.isNullOrEmpty()) {
-                    Toast.makeText(this, task.exception?.message, Toast.LENGTH_SHORT).show()
+                    moveMainPage(auth?.currentUser)
+                } else {
+                    Toast.makeText(
+                        this,
+                        "오류가 발생했습니다 ${task.exception?.message}",
+                        Toast.LENGTH_SHORT
+                    ).show()
                 }
             }
+    }
 
-        when(moveMainStack){
-            3 -> moveMainPage(auth?.currentUser)
-            else -> Toast.makeText(this, "유저 정보 업로드에 실패했습니다.", Toast.LENGTH_SHORT).show()
+    private var isSuccessed = false
+    private fun todoDataSetUpload(timestamp: String, nickname: String, email: String): Boolean {
+        isSuccessed = false
+
+        val todoDataSet = Todo(
+            mutableMapOf(timestamp to
+            listOf(
+                "미크미크에 가입했어요",
+                "$nickname 님의 핸드폰에서 생성되었습니다",
+                "미크, $nickname"))
+        )
+
+        // 이메일로 컬렉션을 구분
+        db.collection(email)
+            .document("todo") // 투두 문서 생성
+            .set(todoDataSet) // 투두 데이터 셋 생성
+            .addOnSuccessListener {
+                Log.d(ContentValues.TAG, "TODO 업로드에 성공하였습니다.")
+                isSuccessed = true
+            }
+            .addOnFailureListener {
+                Log.d(ContentValues.TAG, "TODO 정보 업로드에 실패하였습니다.")
+                isSuccessed = false
+            }
+
+        return when (isSuccessed) {
+            true -> true
+            else -> false
         }
     }
 
-    private fun signIn(email : String, pw : String) {
-        auth?.signInWithEmailAndPassword(email, pw)
-            ?.addOnCompleteListener { task ->
-                if (task.isSuccessful) {
-                    Log.d(ContentValues.TAG, "이메일/비밀번호 로그인에 성공하였습니다.")
-                    moveMainPage(task.result?.user)
-                } else {
-                    Log.d(ContentValues.TAG, "이메일/비밀번호 로그인에 실패하였습니다.")
-                    Toast.makeText(this, task.exception?.message, Toast.LENGTH_SHORT).show()
-                }
+    private fun userInfoDataSetUpload(nickname: String, timestamp: String, email: String): Boolean {
+        isSuccessed = false
+        val userDataSet = UserInfo(
+            nickname,
+            null,
+            arrayListOf(timestamp),
+            "default",
+            null
+        )
+
+        db.collection(email)
+            .document("userinfo")
+            .set(userDataSet)
+            .addOnSuccessListener {
+                Log.d(ContentValues.TAG, "USERINFO 업로드에 성공하였습니다.")
+                isSuccessed = true
             }
+            .addOnFailureListener {
+                Log.d(ContentValues.TAG, "USERINFO 정보 업로드에 실패하였습니다.")
+                isSuccessed = false
+            }
+
+        return when (isSuccessed) {
+            true -> true
+            else -> false
+        }
+    }
+
+    private fun nicknameDataSetUpload(nickname: String): Boolean {
+        isSuccessed = false
+        val nicknameDataSet = Nickname(arrayListOf(nickname))
+
+        db.collection("nickname")
+            .document("names")
+            .set(nicknameDataSet)
+            .addOnSuccessListener {
+                Log.d(ContentValues.TAG, "NICKNAME 업로드에 성공하였습니다.")
+                isSuccessed = true
+            }
+            .addOnFailureListener {
+                Log.d(ContentValues.TAG, "NICKNAME 정보 업로드에 실패하였습니다.")
+                isSuccessed = false
+            }
+
+        return when (isSuccessed) {
+            true -> true
+            else -> false
+        }
     }
 
     private fun moveMainPage(user: FirebaseUser?) {
