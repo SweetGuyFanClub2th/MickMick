@@ -8,7 +8,6 @@ import android.text.Editable
 import android.util.Log
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
-import androidx.core.splashscreen.SplashScreen.Companion.installSplashScreen
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.FirebaseUser
 import com.sweetguyfanclub2th.mickmick.databinding.ActivityLoginBinding
@@ -37,10 +36,10 @@ class LoginActivity : AppCompatActivity() {
         }
     }
 
-    override fun onStart(){
-        super.onStart()
-        moveMainPage(auth?.currentUser)
-    }
+//    override fun onStart(){
+//        super.onStart()
+//        moveMainPage(auth?.currentUser)
+//    }
 
     private fun loginCompleteCheck(emailText: Editable, passwdText: Editable): Boolean {
         val emailLength = emailText.length
