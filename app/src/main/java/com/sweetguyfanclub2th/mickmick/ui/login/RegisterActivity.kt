@@ -16,14 +16,22 @@ import com.sweetguyfanclub2th.mickmick.data.Todo
 import com.sweetguyfanclub2th.mickmick.data.UserInfo
 import com.sweetguyfanclub2th.mickmick.databinding.ActivityRegisterBinding
 import com.sweetguyfanclub2th.mickmick.ui.main.MainActivity
+import com.sweetguyfanclub2th.mickmick.ui.splash.intro.WelcomeActivity.Companion.TAG
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers.IO
+import kotlinx.coroutines.Dispatchers.Main
+import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
 import java.text.SimpleDateFormat
 import java.util.*
 import java.util.regex.Pattern
+import kotlin.concurrent.thread
 
 class RegisterActivity : AppCompatActivity() {
     private lateinit var binding: ActivityRegisterBinding
     private var auth: FirebaseAuth? = null
     private lateinit var db: FirebaseFirestore
+    private lateinit var itemToString: List<String>
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -33,6 +41,23 @@ class RegisterActivity : AppCompatActivity() {
 
         auth = FirebaseAuth.getInstance()
         db = FirebaseFirestore.getInstance()
+
+        db.collection("nickname").get()
+            .addOnSuccessListener { result ->
+                for (document in result) {
+                    itemToString = document["nickname"].toString()
+                        .replace("[", "")
+                        .replace("]", "")
+                        .split(",")
+                }
+            }
+            .addOnFailureListener { exception ->
+                Log.w("RegisterActivity", "Error getting documents: $exception")
+            }
+
+        binding.nicknameCheck.setOnClickListener {
+            checkNickName(binding.nickname.text.toString())
+        }
 
         binding.registercomplete.setOnClickListener {
             textInvisibleSet()
@@ -44,7 +69,7 @@ class RegisterActivity : AppCompatActivity() {
             if (checkEmail(email)
                 && checkPasswd(pw)
                 && checkRepeatPasswd(pw, repeatPw)
-//                && checkNickName(nickname)
+                && !checkNickName(nickname)
             ) {
                 createUser(email, pw, nickname)
             } else {
@@ -96,20 +121,29 @@ class RegisterActivity : AppCompatActivity() {
         }
     }
 
-//    private fun checkNickName(nickname : String): Boolean {
-//        val nicknameFormatCheck = "^[a-zA-Z0-9ㄱ-ㅎ가-힣]{2,10}\$"
-//        val p = Pattern.matches(nicknameFormatCheck, nickname)
-//
-//        return when (p) {
-//            true -> true
-//            false -> {
-//                binding.nicknameCheckText.visibility = View.VISIBLE
-//                false
-//            }
-//        }
-//
-//        // TODO : 닉네임 중복체크 (Firebase -> 닉네임 컬렉션 -> 네임즈 문서 -> arraylist 싹다 돌려서 확인)
-//    }
+    private fun checkNickName(nickname : String): Boolean {
+        val nicknameFormatCheck = "^[a-zA-Z0-9ㄱ-ㅎ가-힣]{2,20}\$"
+        var isNicknameExist: Boolean = false
+
+        for (element in itemToString) {
+            if (element == nickname) {
+                isNicknameExist = true
+            }
+        }
+
+        return when (Pattern.matches(nicknameFormatCheck, nickname) && isNicknameExist) {
+            true -> {
+                binding.nicknameCheckText.text = "이미 사용중인 닉네임입니다."
+                binding.nicknameCheckText.visibility = View.VISIBLE
+                true
+            }
+            false -> {
+                binding.nicknameCheckText.text = "사용할 수 있는 닉네임입니다."
+                binding.nicknameCheckText.visibility = View.VISIBLE
+                false
+            }
+        }
+    }
 
     @SuppressLint("SimpleDateFormat")
     private fun createUser(email: String, pw: String, nickname: String) {
