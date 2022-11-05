@@ -10,6 +10,7 @@ import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.FirebaseUser
+import com.google.firebase.firestore.FieldValue
 import com.google.firebase.firestore.FirebaseFirestore
 import com.sweetguyfanclub2th.mickmick.data.Nickname
 import com.sweetguyfanclub2th.mickmick.data.Todo
@@ -216,11 +217,10 @@ class RegisterActivity : AppCompatActivity() {
     }
 
     private fun nicknameDataSetUpload(nickname: String){
-        val nicknameDataSet = Nickname(arrayListOf(nickname))
+        val nicknameRef = db.collection("nickname").document("names")
 
-        db.collection("nickname")
-            .document("names")
-            .set(nicknameDataSet)
+        nicknameRef
+            .update("nickname", FieldValue.arrayUnion(nickname))
             .addOnSuccessListener {
                 Log.d(ContentValues.TAG, "NICKNAME 업로드에 성공하였습니다.")
             }
