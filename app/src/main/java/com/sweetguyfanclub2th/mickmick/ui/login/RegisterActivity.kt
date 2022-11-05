@@ -62,9 +62,8 @@ class RegisterActivity : AppCompatActivity() {
     private fun checkEmail(email: String): Boolean {
         val emailFormatCheck =
             "^[_A-Za-z0-9-]+(\\.[_A-Za-z0-9-]+)*@[A-Za-z0-9]+(\\.[A-Za-z0-9]+)*(\\.[A-Za-z]{2,})$"
-        val p = Pattern.matches(emailFormatCheck, email)
 
-        return when (p) {
+        return when (Pattern.matches(emailFormatCheck, email)) {
             true -> true
             false -> {
                 binding.emailCheckText.visibility = View.VISIBLE
@@ -76,9 +75,8 @@ class RegisterActivity : AppCompatActivity() {
     private fun checkPasswd(passwd: String): Boolean {
         val passwdFormatCheck =
             "^(?=.*[A-Za-z])(?=.*[0-9])(?=.*[\$@\$!%*#?&])[A-Za-z[0-9]\$@\$!%*#?&]{8,20}\$"
-        val p = Pattern.matches(passwdFormatCheck, passwd)
 
-        return when (p) {
+        return when (Pattern.matches(passwdFormatCheck, passwd)) {
             true -> true
             false -> {
                 binding.passwdCheckText.visibility = View.VISIBLE
@@ -88,13 +86,12 @@ class RegisterActivity : AppCompatActivity() {
     }
 
     private fun checkRepeatPasswd(passwd: String, repeatPasswd: String): Boolean {
-        val p = passwd == repeatPasswd
 
-        when (p) {
-            true -> return true
+        return when (passwd == repeatPasswd) {
+            true -> true
             false -> {
                 binding.repeatPasswdCheckText.visibility = View.VISIBLE
-                return false
+                false
             }
         }
     }
@@ -143,10 +140,7 @@ class RegisterActivity : AppCompatActivity() {
             }
     }
 
-    private var isSuccessed = false
-    private fun todoDataSetUpload(timestamp: String, nickname: String, email: String): Boolean {
-        isSuccessed = false
-
+    private fun todoDataSetUpload(timestamp: String, nickname: String, email: String){
         val todoDataSet = Todo(
             mutableMapOf(timestamp to
             listOf(
@@ -161,21 +155,13 @@ class RegisterActivity : AppCompatActivity() {
             .set(todoDataSet) // 투두 데이터 셋 생성
             .addOnSuccessListener {
                 Log.d(ContentValues.TAG, "TODO 업로드에 성공하였습니다.")
-                isSuccessed = true
             }
             .addOnFailureListener {
                 Log.d(ContentValues.TAG, "TODO 정보 업로드에 실패하였습니다.")
-                isSuccessed = false
             }
-
-        return when (isSuccessed) {
-            true -> true
-            else -> false
-        }
     }
 
-    private fun userInfoDataSetUpload(nickname: String, timestamp: String, email: String): Boolean {
-        isSuccessed = false
+    private fun userInfoDataSetUpload(nickname: String, timestamp: String, email: String) {
         val userDataSet = UserInfo(
             nickname,
             null,
@@ -189,21 +175,13 @@ class RegisterActivity : AppCompatActivity() {
             .set(userDataSet)
             .addOnSuccessListener {
                 Log.d(ContentValues.TAG, "USERINFO 업로드에 성공하였습니다.")
-                isSuccessed = true
             }
             .addOnFailureListener {
                 Log.d(ContentValues.TAG, "USERINFO 정보 업로드에 실패하였습니다.")
-                isSuccessed = false
             }
-
-        return when (isSuccessed) {
-            true -> true
-            else -> false
-        }
     }
 
-    private fun nicknameDataSetUpload(nickname: String): Boolean {
-        isSuccessed = false
+    private fun nicknameDataSetUpload(nickname: String){
         val nicknameDataSet = Nickname(arrayListOf(nickname))
 
         db.collection("nickname")
@@ -211,17 +189,10 @@ class RegisterActivity : AppCompatActivity() {
             .set(nicknameDataSet)
             .addOnSuccessListener {
                 Log.d(ContentValues.TAG, "NICKNAME 업로드에 성공하였습니다.")
-                isSuccessed = true
             }
             .addOnFailureListener {
                 Log.d(ContentValues.TAG, "NICKNAME 정보 업로드에 실패하였습니다.")
-                isSuccessed = false
             }
-
-        return when (isSuccessed) {
-            true -> true
-            else -> false
-        }
     }
 
     private fun moveMainPage(user: FirebaseUser?) {
