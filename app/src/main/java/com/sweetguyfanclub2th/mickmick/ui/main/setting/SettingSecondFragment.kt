@@ -7,7 +7,7 @@ import android.view.View
 import android.view.ViewGroup
 import com.sweetguyfanclub2th.mickmick.databinding.FragmentSettingFirstBinding
 
-class settingSecondFragment : Fragment() {
+class SettingSecondFragment : Fragment() {
 
     private var _binding: FragmentSettingFirstBinding? = null
     private val binding get() = _binding!!
