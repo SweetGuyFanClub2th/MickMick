@@ -4,6 +4,8 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_marginStart="18dp"
+    android:layout_marginEnd="18dp"
     tools:context=".ui.main.home.HomeFragment">
 
     <TextView
@@ -19,67 +21,65 @@
         app:layout_constraintStart_toStartOf="parent"
         />
 
-    <ImageView
+    <TextView
         android:id="@+id/main_profileImage"
         android:layout_width="match_parent"
         android:layout_height="146dp"
         android:layout_marginTop="21dp"
         app:layout_constraintTop_toBottomOf="@+id/main_titleText"
         app:layout_constraintStart_toStartOf="parent"
-        android:src="@drawable/profile_banner"
+        android:background="@drawable/btn_signature"
         android:scaleType="centerCrop"
         tools:ignore="ContentDescription" />
 
-    <ImageView
-        android:id="@+id/main_profileImage2"
-        android:layout_width="54dp"
-        android:layout_height="54dp"
-        android:src="@drawable/profile_logo"
-        android:background="@drawable/radius_image"
-        android:layout_marginTop="46dp"
-        app:layout_constraintStart_toStartOf="parent"
-        android:layout_marginStart="100dp"
-        app:layout_constraintTop_toTopOf="@+id/main_profileImage" />
-
-    <TextView
-        android:id="@+id/main_profileName"
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/constraint"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="억울한 라람"
-        app:layout_constraintTop_toTopOf="@+id/main_profileImage"
-        app:layout_constraintStart_toEndOf="@+id/main_profileImage2"
-        android:layout_marginTop="46dp"
-        android:layout_marginStart="10dp"
-        android:textSize="14dp"
-        android:fontFamily="@font/pretendard_medium"
-        android:textColor="@color/white" />
+        app:layout_constraintTop_toTopOf="@id/main_profileImage"
+        app:layout_constraintBottom_toBottomOf="@id/main_profileImage"
+        app:layout_constraintStart_toStartOf="@id/main_profileImage"
+        app:layout_constraintEnd_toEndOf="@id/main_profileImage">
+
+        <ImageView
+            android:id="@+id/main_profileImage2"
+            android:layout_width="54dp"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            android:layout_height="54dp"
+            android:src="@drawable/profile_logo"
+            tools:ignore="ContentDescription" />
+
+        <TextView
+            android:id="@+id/main_profileName"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="억울한 라람"
+            app:layout_constraintStart_toEndOf="@+id/main_profileImage2"
+            android:layout_marginTop="46dp"
+            android:layout_marginStart="10dp"
+            android:textSize="14dp"
+            android:fontFamily="@font/pretendard_medium"
+            android:textColor="@color/white"
+            tools:ignore="MissingConstraints" />
+
+        <TextView
+            android:id="@+id/main_profileName2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/pretendard_semibold"
+            android:text="이하람"
+            android:textColor="@color/white"
+            android:textSize="28sp"
+            android:layout_marginStart="10dp"
+            app:layout_constraintStart_toEndOf="@+id/main_profileImage2"
+            app:layout_constraintTop_toBottomOf="@id/main_profileName" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
 
     <TextView
-        android:id="@+id/main_profileName2"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="이하람"
-        app:layout_constraintTop_toTopOf="@+id/main_profileImage"
-        app:layout_constraintStart_toEndOf="@+id/main_profileImage2"
-        android:layout_marginStart="10dp"
-        android:layout_marginTop="64dp"
-        android:textSize="28sp"
-        android:fontFamily="@font/pretendard_semibold"
-        android:textColor="@color/white" />
-
-    <Button
-        android:layout_width="30dp"
-        android:layout_height="30dp"
-        app:layout_constraintEnd_toEndOf="@+id/main_profileImage"
-        app:layout_constraintBottom_toBottomOf="@+id/main_profileImage"
-        android:layout_margin="0dp"
-        android:padding="0dp"
-        android:text="+"
-        android:textColor="@color/white"
-        android:background="@drawable/btn_signature"
-        />
-
-    <TextView
+        android:id="@+id/main_profileText"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="친구 3,450명  >"
@@ -90,5 +90,50 @@
         app:layout_constraintEnd_toEndOf="parent"
         android:textColor="@color/black"
         android:textSize="16sp" />
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/constraint2"
+        android:layout_width="200dp"
+        android:layout_height="wrap_content"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_marginTop="26dp"
+        app:layout_constraintTop_toBottomOf="@+id/main_profileText">
+
+        <Button
+            android:id="@+id/btn_myInfo"
+            android:layout_width="90dp"
+            android:layout_height="36dp"
+            android:text="내 정보"
+            android:fontFamily="@font/pretendard_medium"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            android:textColor="@color/white"
+            android:background="@drawable/btn_roundbtn2"
+        />
+
+        <Button
+            android:id="@+id/btn_account"
+            android:layout_width="90dp"
+            android:layout_height="36dp"
+            android:text="계정 연동"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            android:fontFamily="@font/pretendard_medium"
+            android:textColor="@color/white"
+            android:background="@drawable/btn_roundbtn2"
+            />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <androidx.viewpager2.widget.ViewPager2
+        android:id="@+id/my_intro_view_pager"
+        android:layout_width="match_parent"
+        app:layout_constraintTop_toBottomOf="@+id/constraint2"
+        android:layout_marginTop="26dp"
+        android:layout_height="270dp"
+        android:layout_centerInParent="true"
+        android:background="@color/graygreen"
+    />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
