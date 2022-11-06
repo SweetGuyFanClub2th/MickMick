@@ -17,14 +17,45 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.MickMick"
         tools:targetApi="31">
-        <activity android:name=".ui.splash.intro.WelcomeActivity" android:exported="false"> </activity>
-        <activity android:name=".ui.login.LoginActivity" android:exported="false"> </activity>
-        <activity android:name=".ui.login.RegisterActivity" android:exported="false"> </activity>
-        <activity android:name=".ui.main.MainActivity" android:exported="false"> </activity>
-
-        <activity android:name=".ui.splash.SplashActivity" android:exported="true">
+        <activity
+            android:name=".changePasswordActivity"
+            android:exported="false">
+            <meta-data
+                android:name="android.app.lib_name"
+                android:value="" />
+        </activity>
+        <activity
+            android:name=".changeIconActivity"
+            android:exported="false">
+            <meta-data
+                android:name="android.app.lib_name"
+                android:value="" />
+        </activity>
+        <activity
+            android:name=".renameActivity"
+            android:exported="false">
+            <meta-data
+                android:name="android.app.lib_name"
+                android:value="" />
+        </activity>
+        <activity
+            android:name=".ui.splash.intro.WelcomeActivity"
+            android:exported="false" />
+        <activity
+            android:name=".ui.login.LoginActivity"
+            android:exported="false" />
+        <activity
+            android:name=".ui.login.RegisterActivity"
+            android:exported="false" />
+        <activity
+            android:name=".ui.main.MainActivity"
+            android:exported="false" />
+        <activity
+            android:name=".ui.splash.SplashActivity"
+            android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
+
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
 
@@ -33,7 +64,9 @@
                 android:value="" />
         </activity>
 
-        <meta-data android:name="com.kakao.sdk.AppKey" android:value="${kakaoMapKey}"/>
+        <meta-data
+            android:name="com.kakao.sdk.AppKey"
+            android:value="${kakaoMapKey}" />
     </application>
 
 </manifest>
