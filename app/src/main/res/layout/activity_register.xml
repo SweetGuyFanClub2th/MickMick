@@ -4,40 +4,30 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:layout_marginStart="27sp"
+    android:layout_marginEnd="27sp"
     android:background="@color/whitegreen"
     tools:ignore="MissingDefaultResource">
 
-    <TextView
+    <ImageView
+        android:id="@+id/setting_item_image"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/register_text"
+        android:src="@drawable/register_icon"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        android:layout_marginTop="100dp"
-        android:layout_marginStart="35dp"
-        android:textSize="30sp"
-        android:textStyle="bold" />
+        android:layout_marginTop="50dp" />
 
     <TextView
         android:id="@+id/te"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/register_sub_text1"
-        app:layout_constraintTop_toTopOf="parent"
+        android:text="회원 정보 입력하기"
+        app:layout_constraintTop_toBottomOf="@+id/setting_item_image"
         app:layout_constraintStart_toStartOf="parent"
-        android:layout_marginTop="190dp"
-        android:layout_marginStart="35dp"
-        android:textSize="18sp" />
-
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/register_sub_text2"
-        app:layout_constraintTop_toBottomOf="@+id/te"
-        app:layout_constraintStart_toStartOf="parent"
-        android:layout_marginTop="5dp"
-        android:layout_marginStart="35dp"
-        android:textStyle="bold"
+        android:layout_marginTop="44dp"
+        android:textColor="@color/green"
+        android:fontFamily="@font/pretendard_medium"
         android:textSize="18sp" />
 
     <EditText
@@ -46,14 +36,13 @@
         android:layout_height="wrap_content"
         android:hint="@string/register_email_hint"
         android:padding="13dp"
-        android:layout_marginStart="38dp"
-        android:layout_marginEnd="38dp"
-        android:paddingStart="20dp"
-        android:background="@drawable/border_basic"
-        app:layout_constraintTop_toTopOf="parent"
+        android:textColorHint="@color/graygreen"
+        android:background="@drawable/btborder"
+        android:textColor="@color/green"
+        app:layout_constraintTop_toBottomOf="@+id/te"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        android:layout_marginTop="286dp"
+        android:layout_marginTop="30dp"
         android:textSize="16sp" />
 
     <TextView
@@ -65,65 +54,7 @@
         android:visibility="invisible"
         app:layout_constraintTop_toBottomOf="@+id/register_email"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        android:layout_marginTop="5dp" />
-
-    <EditText
-        android:id="@+id/register_passwd"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:hint="@string/register_pw_text"
-        android:padding="13dp"
-        android:layout_marginStart="38dp"
-        android:layout_marginEnd="38dp"
-        android:paddingStart="20dp"
-        android:background="@drawable/border_basic"
-        android:inputType="textPassword"
-        app:layout_constraintTop_toBottomOf="@+id/register_email"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        android:layout_marginTop="45dp"
-        android:textSize="16sp" />
-
-    <TextView
-        android:id="@+id/passwd_check_text"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/register_pw_check"
-        android:textColor="#CC3838"
-        android:visibility="invisible"
-        app:layout_constraintTop_toBottomOf="@+id/register_passwd"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        android:layout_marginTop="5dp" />
-
-    <EditText
-        android:id="@+id/register_repeat_passwd"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:hint="@string/register_repw_text"
-        android:padding="13dp"
-        android:layout_marginStart="38dp"
-        android:layout_marginEnd="38dp"
-        android:paddingStart="20dp"
-        android:background="@drawable/border_basic"
-        android:inputType="textPassword"
-        app:layout_constraintTop_toBottomOf="@+id/register_passwd"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        android:layout_marginTop="44dp"
-        android:textSize="16sp" />
-
-    <TextView
-        android:id="@+id/repeat_passwd_check_text"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/register_repw_check"
-        android:textColor="#CC3838"
-        android:visibility="invisible"
-        app:layout_constraintTop_toBottomOf="@+id/register_repeat_passwd"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_marginStart="15dp"
         android:layout_marginTop="5dp" />
 
     <EditText
@@ -132,14 +63,14 @@
         android:layout_height="wrap_content"
         android:hint="@string/register_nickname"
         android:padding="13dp"
-        android:layout_marginStart="38dp"
         android:paddingStart="20dp"
-        android:background="@drawable/border_basic"
-        app:layout_constraintTop_toBottomOf="@+id/register_repeat_passwd"
+        android:textColorHint="@color/graygreen"
+        android:background="@drawable/btborder"
+        android:textColor="@color/green"
+        app:layout_constraintTop_toBottomOf="@+id/email_check_text"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
         android:layout_marginEnd="130dp"
-        android:layout_marginTop="44dp"
+        android:layout_marginTop="10dp"
         android:textSize="16sp" />
 
     <Button
@@ -148,8 +79,8 @@
         android:layout_height="wrap_content"
         android:text="@string/register_nickname_check"
         android:background="@drawable/border_basic"
-        app:layout_constraintStart_toEndOf="@id/nickname"
         app:layout_constraintTop_toTopOf="@id/nickname"
+        app:layout_constraintEnd_toEndOf="parent"
         android:layout_marginStart="10dp"
         android:textColor="@color/black"
         android:backgroundTint="@color/white"
@@ -164,8 +95,79 @@
         android:visibility="invisible"
         app:layout_constraintTop_toBottomOf="@+id/nickname"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_marginStart="15dp"
         android:layout_marginTop="5dp" />
+
+    <TextView
+        android:id="@+id/te2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="비밀번호 설정하기"
+        app:layout_constraintTop_toBottomOf="@+id/nickname_check_text"
+        app:layout_constraintStart_toStartOf="parent"
+        android:layout_marginTop="44dp"
+        android:textColor="@color/green"
+        android:fontFamily="@font/pretendard_medium"
+        android:textSize="18sp" />
+
+    <EditText
+        android:id="@+id/register_passwd"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="@string/register_pw_text"
+        android:padding="13dp"
+        android:textColorHint="@color/graygreen"
+        android:background="@drawable/btborder"
+        android:textColor="@color/green"
+        android:paddingStart="20dp"
+        android:inputType="textPassword"
+        app:layout_constraintTop_toBottomOf="@+id/te2"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_marginTop="30dp"
+        android:textSize="16sp" />
+
+    <TextView
+        android:id="@+id/passwd_check_text"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/register_pw_check"
+        android:textColor="#CC3838"
+        android:visibility="invisible"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/register_passwd"
+        android:layout_marginStart="15dp"
+        android:layout_marginTop="5dp" />
+
+    <EditText
+        android:id="@+id/register_repeat_passwd"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="@string/register_repw_text"
+        android:padding="13dp"
+        android:paddingStart="20dp"
+        android:textColorHint="@color/graygreen"
+        android:background="@drawable/btborder"
+        android:textColor="@color/green"
+        android:inputType="textPassword"
+        app:layout_constraintTop_toBottomOf="@+id/passwd_check_text"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_marginTop="10dp"
+        android:textSize="16sp" />
+
+    <TextView
+        android:id="@+id/repeat_passwd_check_text"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/register_repw_check"
+        android:textColor="#CC3838"
+        android:visibility="invisible"
+        app:layout_constraintTop_toBottomOf="@+id/register_repeat_passwd"
+        app:layout_constraintStart_toStartOf="parent"
+        android:layout_marginStart="15dp"
+        android:layout_marginTop="5dp" />
+
 
     <Button
         android:id="@+id/registercomplete"
