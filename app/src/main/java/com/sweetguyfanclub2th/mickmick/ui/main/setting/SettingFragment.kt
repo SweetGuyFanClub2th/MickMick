@@ -20,18 +20,18 @@ class SettingFragment : Fragment() {
     ): View? {
         _binding = FragmentSettingBinding.inflate(inflater, container, false)
 
-        binding.list1.setOnClickListener {
-            val intent = Intent(MainActivity(), renameActivity::class.java)
-            startActivity(intent)
-        }
-        binding.list2.setOnClickListener {
-            val intent = Intent(MainActivity(), changeIconAcvitity::class.java)
-            startActivity(intent)
-        }
-        binding.list3.setOnClickListener {
-            val intent = Intent(MainActivity(), changePasswordAcvitity::class.java)
-            startActivity(intent)
-        }
+//        binding.list1.setOnClickListener {
+//            val intent = Intent(MainActivity(), renameActivity::class.java)
+//            startActivity(intent)
+//        }
+//        binding.list2.setOnClickListener {
+//            val intent = Intent(MainActivity(), changeIconAcvitity::class.java)
+//            startActivity(intent)
+//        }
+//        binding.list3.setOnClickListener {
+//            val intent = Intent(MainActivity(), changePasswordAcvitity::class.java)
+//            startActivity(intent)
+//        }
 
         return binding.root
     }
