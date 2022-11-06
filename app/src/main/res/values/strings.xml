@@ -27,7 +27,7 @@
 
     <!-- main_bottom_menu -->
     <string name="main_nav_todo">TODO</string>
-    <string name="main_nav_settings">SETTINGS</string>
+    <string name="main_nav_settings">SETTING</string>
     <string name="main_nav_main">MAIN</string>
     <string name="main_nav_friend">FRIEND</string>
     <!-- TODO: Remove or change this placeholder text -->
