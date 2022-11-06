@@ -29,6 +29,7 @@
     <string name="main_nav_todo">TODO</string>
     <string name="main_nav_settings">SETTINGS</string>
     <string name="main_nav_main">MAIN</string>
-    <string name="main_nav_map">MAP</string>
+    <string name="main_nav_friend">FRIEND</string>
+
 
 </resources>

@@ -7,10 +7,10 @@
         android:icon="@drawable/ic_baseline_home_24" />
 
     <item
-        android:title="@string/main_nav_map"
+        android:title="@string/main_nav_friend"
         android:enabled="true"
-        android:id="@+id/menu_map"
-        android:icon="@drawable/ic_baseline_map_24" />
+        android:id="@+id/menu_friends"
+        android:icon="@drawable/ic_baseline_people_24" />
 
     <item
         android:title="@string/main_nav_todo"
