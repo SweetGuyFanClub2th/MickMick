@@ -4,7 +4,7 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import com.sweetguyfanclub2th.mickmick.databinding.ActivityRenameBinding
 
-class renameActivity : AppCompatActivity() {
+class RenameActivity : AppCompatActivity() {
     private lateinit var binding: ActivityRenameBinding
 
     override fun onCreate(savedInstanceState: Bundle?) {

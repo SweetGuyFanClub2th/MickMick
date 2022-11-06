@@ -2,14 +2,14 @@ package com.sweetguyfanclub2th.mickmick.ui.main.setting
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import com.sweetguyfanclub2th.mickmick.databinding.ActivityChangeIconBinding
+import com.sweetguyfanclub2th.mickmick.databinding.ActivityChangePasswordBinding
 
-class changeIconAcvitity : AppCompatActivity() {
-    private lateinit var binding: ActivityChangeIconBinding
+class ChangePasswordActivity : AppCompatActivity() {
+    private lateinit var binding: ActivityChangePasswordBinding
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        binding = ActivityChangeIconBinding.inflate(layoutInflater)
+        binding = ActivityChangePasswordBinding.inflate(layoutInflater)
         setContentView(binding.root)
     }
 }
