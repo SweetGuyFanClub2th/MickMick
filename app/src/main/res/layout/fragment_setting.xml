@@ -24,7 +24,7 @@
     <TextView
         android:id="@+id/main_profileImage"
         android:layout_width="match_parent"
-        android:layout_height="146dp"
+        android:layout_height="180dp"
         android:layout_marginTop="21dp"
         app:layout_constraintTop_toBottomOf="@+id/main_titleText"
         app:layout_constraintStart_toStartOf="parent"
@@ -126,14 +126,166 @@
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 
-    <androidx.viewpager2.widget.ViewPager2
-        android:id="@+id/my_intro_view_pager"
-        android:layout_width="match_parent"
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/constraint3"
         app:layout_constraintTop_toBottomOf="@+id/constraint2"
-        android:layout_marginTop="26dp"
-        android:layout_height="270dp"
-        android:layout_centerInParent="true"
-        android:background="@color/graygreen"
-    />
+        android:layout_width="match_parent"
+        android:layout_marginTop="36dp"
+        android:layout_height="wrap_content">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            android:id="@+id/list1"
+            android:layout_marginTop="10dp"
+            >
+
+            <ImageView
+                android:id="@+id/setting_item_image"
+                android:layout_width="25dp"
+                android:layout_height="25dp"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                android:src="@drawable/setting_item_alphabet"
+                tools:ignore="ContentDescription" />
+
+            <TextView
+                android:id="@+id/setting_item_text"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:layout_constraintStart_toEndOf="@+id/setting_item_image"
+                android:textColor="@color/black"
+                android:textSize="16sp"
+                android:layout_marginStart="10dp"
+                app:layout_constraintTop_toTopOf="parent"
+                android:fontFamily="@font/pretendard_medium"
+                android:text="이름 바꾸기" />
+
+            <TextView
+                android:id="@+id/setting_item_text2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="@color/gray"
+                android:textSize="12sp"
+                android:layout_marginTop="5dp"
+                android:text="억울한 라람, 이하람"
+                app:layout_constraintTop_toBottomOf="@+id/setting_item_text"
+                app:layout_constraintStart_toStartOf="@+id/setting_item_text"
+                tools:ignore="HardcodedText" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:background="@color/gray"
+                app:layout_constraintTop_toBottomOf="@+id/setting_item_text2"
+                android:layout_marginTop="14dp" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:layout_constraintTop_toBottomOf="@id/list1"
+            app:layout_constraintStart_toStartOf="@+id/list1"
+            android:layout_marginTop="10dp"
+            android:id="@+id/list2"
+            >
+
+            <ImageView
+                android:id="@+id/setting_item_image_2"
+                android:layout_width="25dp"
+                android:layout_height="25dp"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                android:src="@drawable/setting_item_happy"
+                tools:ignore="ContentDescription" />
+
+            <TextView
+                android:id="@+id/setting_item_text_2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:layout_constraintStart_toEndOf="@+id/setting_item_image_2"
+                android:textColor="@color/black"
+                android:textSize="16sp"
+                android:layout_marginStart="10dp"
+                app:layout_constraintTop_toTopOf="parent"
+                android:fontFamily="@font/pretendard_medium"
+                android:text="아이콘 변경하기" />
+
+            <TextView
+                android:id="@+id/setting_item_text2_2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="@color/gray"
+                android:textSize="12sp"
+                android:layout_marginTop="5dp"
+                android:text="자신만의 개성을 나타낸 아이콘을 표현보세요."
+                app:layout_constraintTop_toBottomOf="@+id/setting_item_text_2"
+                app:layout_constraintStart_toStartOf="@+id/setting_item_text_2"
+                tools:ignore="HardcodedText" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:background="@color/gray"
+                app:layout_constraintTop_toBottomOf="@+id/setting_item_text2_2"
+                android:layout_marginTop="15dp" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:layout_constraintTop_toBottomOf="@id/list2"
+            app:layout_constraintStart_toStartOf="@+id/list2"
+            android:layout_marginTop="10dp"
+            android:id="@+id/list3"
+            >
+
+            <ImageView
+                android:id="@+id/setting_item_image_3"
+                android:layout_width="25dp"
+                android:layout_height="25dp"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                android:src="@drawable/setting_item_lock"
+                tools:ignore="ContentDescription" />
+
+            <TextView
+                android:id="@+id/setting_item_text_3"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:layout_constraintStart_toEndOf="@+id/setting_item_image_3"
+                android:textColor="@color/black"
+                android:textSize="16sp"
+                android:layout_marginStart="10dp"
+                app:layout_constraintTop_toTopOf="parent"
+                android:fontFamily="@font/pretendard_medium"
+                android:text="비밀번호 변경하기" />
+
+            <TextView
+                android:id="@+id/setting_item_text2_3"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="@color/gray"
+                android:textSize="12sp"
+                android:layout_marginTop="5dp"
+                android:text="비밀번호를 주기적으로 바꿔주는 것이 좋아요."
+                app:layout_constraintTop_toBottomOf="@+id/setting_item_text_3"
+                app:layout_constraintStart_toStartOf="@+id/setting_item_text_3"
+                tools:ignore="HardcodedText" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:background="@color/gray"
+                app:layout_constraintTop_toBottomOf="@+id/setting_item_text2_3"
+                android:layout_marginTop="15dp" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

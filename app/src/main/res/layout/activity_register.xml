@@ -9,6 +9,7 @@
     android:background="@color/whitegreen"
     tools:ignore="MissingDefaultResource">
 
+
     <ImageView
         android:id="@+id/setting_item_image"
         android:layout_width="wrap_content"
