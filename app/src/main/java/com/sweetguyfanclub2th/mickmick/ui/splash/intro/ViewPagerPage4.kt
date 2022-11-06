@@ -25,6 +25,7 @@ class ViewPagerPage4 : Fragment() {
     override fun onDestroyView() {
         super.onDestroyView()
         _binding = null
+
     }
 
 }
