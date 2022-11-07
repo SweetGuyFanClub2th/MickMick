@@ -9,7 +9,6 @@ import com.sweetguyfanclub2th.mickmick.databinding.FragmentMapBinding
 import net.daum.mf.map.api.MapView
 import net.daum.mf.map.api.MapPoint
 
-
 class MapFragment : Fragment() {
     private var _binding: FragmentMapBinding? = null
     private val binding get() = _binding!!

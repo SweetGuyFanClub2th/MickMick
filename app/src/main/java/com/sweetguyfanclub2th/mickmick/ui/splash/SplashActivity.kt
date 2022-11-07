@@ -39,6 +39,7 @@ class SplashActivity : AppCompatActivity() {
         editBoolean.putBoolean("welcomeViewWatched", true)
         editBoolean.apply()
         startActivity(Intent(this@SplashActivity, WelcomeActivity::class.java))
+        finish()
     }
 
     private fun moveLoginPage(){

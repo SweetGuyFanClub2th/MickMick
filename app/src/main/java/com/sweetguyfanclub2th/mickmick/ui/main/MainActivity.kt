@@ -64,12 +64,16 @@ class MainActivity : AppCompatActivity() {
         }
     }
 
+    private var backPressedTime : Long = 0
     override fun onBackPressed() {
-        if(System.currentTimeMillis() - mBackWait >=2000 ) {
-            mBackWait = System.currentTimeMillis()
-            Toast.makeText(this, "뒤로가기 버튼을 한 번 더 누르면 종료됩니다", Toast.LENGTH_SHORT).show()
-        } else {
+        Log.d("TAG", "뒤로가기")
+
+        if (System.currentTimeMillis() - backPressedTime < 2000) {
             finish()
+            return
         }
+
+        Toast.makeText(this, "'뒤로' 버튼을 한번 더 누르시면 앱이 종료됩니다.", Toast.LENGTH_SHORT).show()
+        backPressedTime = System.currentTimeMillis()
     }
 }
