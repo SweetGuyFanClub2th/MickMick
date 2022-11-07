@@ -7,6 +7,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.viewpager2.widget.ViewPager2
 import com.google.android.material.tabs.TabLayoutMediator
+import com.sweetguyfanclub2th.mickmick.databinding.ActivityLoginBinding
 import com.sweetguyfanclub2th.mickmick.databinding.FragmentTodoBinding
 import com.sweetguyfanclub2th.mickmick.ui.main.todo.menu.MapFragment
 import com.sweetguyfanclub2th.mickmick.ui.main.todo.menu.ScheduleFragment
@@ -27,7 +28,8 @@ class TodoFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         _binding = FragmentTodoBinding.inflate(inflater, container, false)
-        return binding.root
+        val view = binding.root
+        return view
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
