@@ -15,7 +15,6 @@ class FriendFragment : Fragment() {
     private val binding get() = _binding!!
 
     val db = FirebaseFirestore.getInstance()    // Firestore 인스턴스 선언
-    val itemList = arrayListOf<ListLayout>()    // 리스트 아이템 배열
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
