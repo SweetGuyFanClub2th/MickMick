@@ -7,6 +7,8 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.viewpager2.widget.ViewPager2
 import com.google.android.material.tabs.TabLayoutMediator
+import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.firestore.FirebaseFirestore
 import com.sweetguyfanclub2th.mickmick.databinding.ActivityLoginBinding
 import com.sweetguyfanclub2th.mickmick.databinding.FragmentTodoBinding
 import com.sweetguyfanclub2th.mickmick.ui.main.todo.menu.MapFragment
@@ -16,6 +18,9 @@ import com.sweetguyfanclub2th.mickmick.ui.main.todo.menu.ScheduleFragment
 class TodoFragment : Fragment() {
     private var _binding: FragmentTodoBinding? = null
     private val binding get() = _binding!!
+
+    private var auth: FirebaseAuth? = null
+    private lateinit var db: FirebaseFirestore
 
     private val tabTitleArray = arrayOf("Schedule", "Map")
 
@@ -29,7 +34,7 @@ class TodoFragment : Fragment() {
     ): View? {
         _binding = FragmentTodoBinding.inflate(inflater, container, false)
 
-
+        //
 
         val view = binding.root
         return view
