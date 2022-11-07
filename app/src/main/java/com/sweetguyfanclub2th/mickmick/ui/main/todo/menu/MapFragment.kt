@@ -5,13 +5,9 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.viewpager2.widget.ViewPager2
-import com.google.android.material.tabs.TabLayoutMediator
-import com.sweetguyfanclub2th.mickmick.R
 import com.sweetguyfanclub2th.mickmick.databinding.FragmentMapBinding
-import com.sweetguyfanclub2th.mickmick.databinding.FragmentTodoBinding
-import com.sweetguyfanclub2th.mickmick.ui.main.todo.TodoViewPagerAdapter
 import net.daum.mf.map.api.MapView
+import net.daum.mf.map.api.MapPoint
 
 
 class MapFragment : Fragment() {
