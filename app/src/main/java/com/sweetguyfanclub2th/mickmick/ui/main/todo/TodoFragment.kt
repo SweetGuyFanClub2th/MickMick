@@ -28,6 +28,9 @@ class TodoFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         _binding = FragmentTodoBinding.inflate(inflater, container, false)
+
+
+
         val view = binding.root
         return view
     }
