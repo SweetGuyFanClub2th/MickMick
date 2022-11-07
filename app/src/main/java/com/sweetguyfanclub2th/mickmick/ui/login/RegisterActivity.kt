@@ -42,19 +42,19 @@ class RegisterActivity : AppCompatActivity() {
 
         auth = FirebaseAuth.getInstance()
         db = FirebaseFirestore.getInstance()
-
-        db.collection("nickname").get()
-            .addOnSuccessListener { result ->
-                for (document in result) {
-                    itemToString = document["nickname"].toString()
-                        .replace("[", "")
-                        .replace("]", "")
-                        .split(",")
-                }
-            }
-            .addOnFailureListener { exception ->
-                Log.w("RegisterActivity", "Error getting documents: $exception")
-            }
+//
+//        db.collection("nickname").get()
+//            .addOnSuccessListener { result ->
+//                for (document in result) {
+//                    itemToString = document["nickname"].toString()
+//                        .replace("[", "")
+//                        .replace("]", "")
+//                        .split(",")
+//                }
+//            }
+//            .addOnFailureListener { exception ->
+//                Log.w("RegisterActivity", "Error getting documents: $exception")
+//            }
 
         binding.nicknameCheck.setOnClickListener {
             checkNickName(binding.nickname.text.toString())
@@ -70,7 +70,7 @@ class RegisterActivity : AppCompatActivity() {
             if (checkEmail(email)
                 && checkPasswd(pw)
                 && checkRepeatPasswd(pw, repeatPw)
-                && !checkNickName(nickname)
+//                && !checkNickName(nickname)
             ) {
                 createUser(email, pw, nickname)
             } else {
@@ -146,7 +146,6 @@ class RegisterActivity : AppCompatActivity() {
         }
     }
 
-    @SuppressLint("SimpleDateFormat")
     private fun createUser(email: String, pw: String, nickname: String) {
         auth?.createUserWithEmailAndPassword(
             email, pw
@@ -162,7 +161,7 @@ class RegisterActivity : AppCompatActivity() {
                     userInfoDataSetUpload(nickname, timestamp, email)
 
                     // 03. 닉네임 데이터셋
-                    nicknameDataSetUpload(nickname)
+                    nicknameDataSetUpload(nickname, email)
 
                     moveMainPage(auth?.currentUser)
                 } else {
@@ -200,6 +199,7 @@ class RegisterActivity : AppCompatActivity() {
         val userDataSet = UserInfo(
             nickname,
             null,
+            null,
             arrayListOf(timestamp),
             "default",
             null
@@ -216,11 +216,11 @@ class RegisterActivity : AppCompatActivity() {
             }
     }
 
-    private fun nicknameDataSetUpload(nickname: String){
+    private fun nicknameDataSetUpload(nickname: String, email : String){
         val nicknameRef = db.collection("nickname").document("names")
 
         nicknameRef
-            .update("nickname", FieldValue.arrayUnion(nickname))
+            .update("nickname", FieldValue.arrayUnion(mutableMapOf(nickname to listOf(email))))
             .addOnSuccessListener {
                 Log.d(ContentValues.TAG, "NICKNAME 업로드에 성공하였습니다.")
             }
