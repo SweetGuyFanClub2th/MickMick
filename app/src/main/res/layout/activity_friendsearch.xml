@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".ui.main.friend.FriendSearchActivity">
+
+    <Spinner
+        android:id="@+id/spinner"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintBottom_toTopOf="@id/FriendSearchBg"
+        app:layout_constraintEnd_toEndOf="@id/FriendSearchBg"
+        android:layout_marginTop="13dp"
+        android:entries="@array/option" />
+
+    <ImageView
+        android:id="@+id/FriendSearchBg"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@drawable/search_background"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_marginTop="100dp"
+        />
+
+    <EditText
+        android:id="@+id/searchWord"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toTopOf="@id/FriendSearchBg"
+        app:layout_constraintStart_toStartOf="@id/FriendSearchBg"
+        android:layout_marginStart="10dp"
+        android:layout_marginTop="3dp"
+        android:textSize="20sp"
+        />
+
+    <ImageButton
+        android:id="@+id/searchBtn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="@drawable/search_button"
+        app:layout_constraintTop_toTopOf="@id/FriendSearchBg"
+        app:layout_constraintEnd_toEndOf="@id/FriendSearchBg"
+        android:layout_marginTop="13dp"
+        android:layout_marginEnd="15dp"
+        />
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/recyclerview"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginTop="170dp"
+        />
+</androidx.constraintlayout.widget.ConstraintLayout>
+
