@@ -3,9 +3,8 @@ package com.sweetguyfanclub2th.mickmick.ui.login
 import android.content.ContentValues
 import android.content.Intent
 import android.os.Bundle
-import android.os.PersistableBundle
-import android.text.Editable
 import android.util.Log
+import android.widget.EditText
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import com.google.firebase.auth.FirebaseAuth
@@ -25,9 +24,9 @@ class LoginActivity : AppCompatActivity() {
 
         auth = FirebaseAuth.getInstance()
         binding.loginBtn.setOnClickListener {
-            when(loginCompleteCheck(binding.email.text, binding.passwd.text)){
+            when (loginCompleteCheck(binding.email, binding.passwd)) {
                 true -> signIn()
-                false -> Toast.makeText(this, "로그인에 실패했습니다.", Toast.LENGTH_SHORT).show()
+                false -> Toast.makeText(this, "빈 칸 없이 정보를 입력하세요", Toast.LENGTH_SHORT).show()
             }
         }
 
@@ -41,11 +40,9 @@ class LoginActivity : AppCompatActivity() {
 //        moveMainPage(auth?.currentUser)
 //    }
 
-    private fun loginCompleteCheck(emailText: Editable, passwdText: Editable): Boolean {
-        val emailLength = emailText.length
-        val passwdLength = passwdText.length
-
-        return emailLength != 0 && passwdLength != 0
+    private fun loginCompleteCheck(emailText: EditText?, passwdText: EditText?): Boolean {
+        return !(emailText?.text.toString() == "" || passwdText?.text.toString() == ""
+                || emailText?.text.isNullOrEmpty() || passwdText?.text.isNullOrEmpty())
     }
 
     private fun signIn() {
@@ -64,8 +61,8 @@ class LoginActivity : AppCompatActivity() {
             }
     }
 
-    private fun moveMainPage(user: FirebaseUser?){
-        if(user != null) {
+    private fun moveMainPage(user: FirebaseUser?) {
+        if (user != null) {
             Toast.makeText(this, "로그인이 완료되었습니다!", Toast.LENGTH_SHORT).show()
             startActivity(Intent(this, MainActivity::class.java))
             finish()
