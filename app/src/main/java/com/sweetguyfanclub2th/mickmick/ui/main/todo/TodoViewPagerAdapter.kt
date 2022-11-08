@@ -3,7 +3,7 @@ package com.sweetguyfanclub2th.mickmick.ui.main.todo
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentActivity
 import androidx.viewpager2.adapter.FragmentStateAdapter
-import com.sweetguyfanclub2th.mickmick.ui.main.todo.menu.MapFragment
+import com.sweetguyfanclub2th.mickmick.ui.main.map.MapFragment
 import com.sweetguyfanclub2th.mickmick.ui.main.todo.menu.ScheduleFragment
 
 class TodoViewPagerAdapter(fragmentActivity: FragmentActivity) :

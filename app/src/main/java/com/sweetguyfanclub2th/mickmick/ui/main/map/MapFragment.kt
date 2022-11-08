@@ -1,4 +1,4 @@
-package com.sweetguyfanclub2th.mickmick.ui.main.todo.menu
+package com.sweetguyfanclub2th.mickmick.ui.main.map
 
 import android.os.Bundle
 import androidx.fragment.app.Fragment
@@ -27,6 +27,10 @@ class MapFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+    }
+
+    override fun onStart() {
+        super.onStart()
 
         val mapView = MapView(activity)
         val mapViewContainer = binding.mapView

@@ -9,9 +9,8 @@ import androidx.viewpager2.widget.ViewPager2
 import com.google.android.material.tabs.TabLayoutMediator
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
-import com.sweetguyfanclub2th.mickmick.databinding.ActivityLoginBinding
 import com.sweetguyfanclub2th.mickmick.databinding.FragmentTodoBinding
-import com.sweetguyfanclub2th.mickmick.ui.main.todo.menu.MapFragment
+import com.sweetguyfanclub2th.mickmick.ui.main.map.MapFragment
 import com.sweetguyfanclub2th.mickmick.ui.main.todo.menu.ScheduleFragment
 
 

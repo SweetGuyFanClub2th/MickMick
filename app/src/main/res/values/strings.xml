@@ -30,6 +30,9 @@
     <string name="main_nav_settings">SETTING</string>
     <string name="main_nav_main">MAIN</string>
     <string name="main_nav_friend">FRIEND</string>
+    <string name="main_nav_map">MAP</string>
+
+
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="setting_rename_txt">유저 정보 변경하기</string>

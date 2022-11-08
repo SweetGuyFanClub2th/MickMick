@@ -19,6 +19,12 @@
         android:icon="@drawable/ic_baseline_calendar_month_24" />
 
     <item
+        android:title="@string/main_nav_map"
+        android:enabled="true"
+        android:id="@+id/menu_map"
+        android:icon="@drawable/ic_baseline_map_24" />
+
+    <item
         android:title="@string/main_nav_settings"
         android:enabled="true"
         android:id="@+id/menu_settings"
