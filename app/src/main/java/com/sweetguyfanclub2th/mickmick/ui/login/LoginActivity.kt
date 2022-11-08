@@ -25,7 +25,12 @@ class LoginActivity : AppCompatActivity() {
         auth = FirebaseAuth.getInstance()
         binding.loginBtn.setOnClickListener {
             when (loginCompleteCheck(binding.email, binding.passwd)) {
-                true -> signIn()
+                true -> {
+                    val email = binding.email.text.toString()
+                    val passwd = binding.passwd.text.toString()
+                    signIn(email, passwd)
+                }
+
                 false -> Toast.makeText(this, "빈 칸 없이 정보를 입력하세요", Toast.LENGTH_SHORT).show()
             }
         }
@@ -45,11 +50,8 @@ class LoginActivity : AppCompatActivity() {
                 || emailText?.text.isNullOrEmpty() || passwdText?.text.isNullOrEmpty())
     }
 
-    private fun signIn() {
-        auth?.signInWithEmailAndPassword(
-            binding.email.text.toString(),
-            binding.passwd.text.toString()
-        )
+    private fun signIn(email : String, passwd : String) {
+        auth?.signInWithEmailAndPassword(email, passwd)
             ?.addOnCompleteListener { task ->
                 if (task.isSuccessful) {
                     Log.d(ContentValues.TAG, "signInWithEmail:success")
