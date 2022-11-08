@@ -2,6 +2,7 @@ plugins {
     id 'com.android.application'
     id 'org.jetbrains.kotlin.android'
     id 'com.google.gms.google-services'
+    id 'kotlin-android-extensions'
     id 'kotlin-kapt'
 }
 
@@ -99,4 +100,7 @@ dependencies {
     // firestore
     implementation 'com.google.firebase:firebase-firestore:24.4.0'
     implementation 'com.google.firebase:firebase-storage-ktx:20.1.0'
+
+    //cardview
+    implementation 'androidx.cardview:cardview:1.0.0'
 }
