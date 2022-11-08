@@ -96,6 +96,9 @@ dependencies {
     // auth
     implementation 'com.google.firebase:firebase-auth-ktx:21.1.0'
 
+    // Google Services
+    implementation 'com.google.android.gms:play-services-auth:20.3.0'
+
     // firestore
     implementation 'com.google.firebase:firebase-firestore:24.4.0'
     implementation 'com.google.firebase:firebase-storage-ktx:20.1.0'
