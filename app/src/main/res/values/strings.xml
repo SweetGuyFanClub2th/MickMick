@@ -11,6 +11,7 @@
     <string name="register_check_text">이메일 형식을 확인해주세요 (aaaa@gmail.com)</string>
     <string name="register_pw_text">비밀번호를 입력하세요</string>
     <string name="register_pw_check">특수문자, 영문, 숫자를 조합한 8~10글자로 설정하세요</string>
+    <string name="register_name">이름을 입력하세요</string>
     <string name="register_repw_text">비밀번호를 다시 입력하세요</string>
     <string name="register_repw_check">비밀번호가 일치하지 않습니다</string>
     <string name="register_btn_complete">완료</string>
@@ -40,6 +41,8 @@
     <string name="schedule_todo_input">추가할 TODO의 내용을 입력</string>
     <string name="schedule_add_btn">추가하기</string>
     <string name="schedule_title_text">TODO LIST</string>
+    <string name="register_passwd_text">비밀번호 설정하기</string>
+    <string name="register_userinfo_text">회원 정보 입력하기</string>
 
 
 </resources>

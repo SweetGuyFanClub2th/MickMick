@@ -36,8 +36,8 @@ class RegisterActivity : AppCompatActivity() {
     private var auth: FirebaseAuth? = null
     private lateinit var db: FirebaseFirestore
     private lateinit var itemToString: List<String>
-    private var nickNameCheck : Boolean = false
-    private lateinit var checkNickname : String
+    private var nickNameCheck: Boolean = false
+    private lateinit var checkNickname: String
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -65,8 +65,8 @@ class RegisterActivity : AppCompatActivity() {
         binding.nicknameCheck.setOnClickListener {
 
             checkNickname = binding.nickname.text.toString()
-            if(nickNameCheckFormat(checkNickname)){
-                if(checkNickName(checkNickname)){
+            if (nickNameCheckFormat(checkNickname)) {
+                if (checkNickName(checkNickname)) {
                     nickNameCheck = true
                 }
             }
@@ -78,27 +78,27 @@ class RegisterActivity : AppCompatActivity() {
             val pw = binding.registerPasswd.text.toString()
             val repeatPw = binding.registerRepeatPasswd.text.toString()
             val nickname = binding.nickname.text.toString()
+            val name = binding.name.text.toString()
 
-            if(registerNullableCheck(binding.registerEmail, binding.registerPasswd,
-                binding.registerRepeatPasswd, binding.nickname)){
-                if(nickNameCheck && (checkNickname == nickname)){
+            if (registerNullableCheck(
+                    binding.registerEmail, binding.registerPasswd,
+                    binding.registerRepeatPasswd, binding.nickname, binding.name
+                )
+            ) {
+                if (nickNameCheck && (checkNickname == nickname)) {
                     if (checkEmail(email)
                         && checkPasswd(pw)
                         && checkRepeatPasswd(pw, repeatPw)
                         && nickNameCheckFormat(nickname)
                     ) {
-                        createUser(email, pw, nickname)
+                        createUser(email, pw, nickname, name)
                     } else {
                         Toast.makeText(this, "각 형식을 확인해주세요", Toast.LENGTH_SHORT).show()
                     }
-                }
-
-                else{
+                } else {
                     Toast.makeText(this, "닉네임 형식체크가 되지 않았습니다.", Toast.LENGTH_SHORT).show()
                 }
-            }
-
-            else{
+            } else {
                 Toast.makeText(this, "입력되지 않은 칸이 존재합니다.", Toast.LENGTH_SHORT).show()
             }
         }
@@ -111,10 +111,13 @@ class RegisterActivity : AppCompatActivity() {
         binding.nicknameCheckText.visibility = View.INVISIBLE
     }
 
-    private fun registerNullableCheck(email : EditText?, passwd : EditText?,
-                                      repeatPasswd: EditText?, nickname: EditText?): Boolean {
+    private fun registerNullableCheck(
+        email: EditText?, passwd: EditText?,
+        repeatPasswd: EditText?, nickname: EditText?, name : EditText?
+    ): Boolean {
         return !(email?.text.isNullOrEmpty() || passwd?.text.isNullOrEmpty()
-                || repeatPasswd?.text.isNullOrEmpty() || nickname?.text.isNullOrEmpty())
+                || repeatPasswd?.text.isNullOrEmpty() || nickname?.text.isNullOrEmpty()
+                || name?.text.isNullOrEmpty())
     }
 
     private fun checkEmail(email: String): Boolean {
@@ -156,14 +159,13 @@ class RegisterActivity : AppCompatActivity() {
         }
     }
 
-    private fun checkNickName(nickname : String): Boolean {
+    private fun checkNickName(nickname: String): Boolean {
         var sameNickNameCheck = false
 
         for (element in itemToString) {
-            if(element != nickname) {
+            if (element != nickname) {
                 sameNickNameCheck = true
-            }
-            else {
+            } else {
                 sameNickNameCheck = false
                 break
             }
@@ -183,7 +185,7 @@ class RegisterActivity : AppCompatActivity() {
         }
     }
 
-    private fun nickNameCheckFormat(nickname: String) : Boolean{
+    private fun nickNameCheckFormat(nickname: String): Boolean {
         val nicknameFormatCheck = "^[a-zA-Z0-9ㄱ-ㅎ가-힣]{2,20}\$"
 
         return when (Pattern.matches(nicknameFormatCheck, nickname)) {
@@ -196,7 +198,7 @@ class RegisterActivity : AppCompatActivity() {
     }
 
     @SuppressLint("SimpleDateFormat")
-    private fun createUser(email: String, pw: String, nickname: String) {
+    private fun createUser(email: String, pw: String, nickname: String, name : String) {
         auth?.createUserWithEmailAndPassword(
             email, pw
         )
@@ -208,7 +210,7 @@ class RegisterActivity : AppCompatActivity() {
                     todoDataSetUpload(timestamp, nickname, email)
 
                     // 02. 유저정보 데이터셋
-                    userInfoDataSetUpload(nickname, timestamp, email)
+                    userInfoDataSetUpload(nickname, name, timestamp, email)
 
                     // 03. 닉네임 데이터셋
                     nicknameDataSetUpload(nickname)
@@ -227,13 +229,16 @@ class RegisterActivity : AppCompatActivity() {
             }
     }
 
-    private fun todoDataSetUpload(timestamp: String, nickname: String, email: String){
+    private fun todoDataSetUpload(timestamp: String, nickname: String, email: String) {
         val todoDataSet = Todo(
-            mutableMapOf(timestamp to
-            listOf(
-                "미크미크에 가입했어요",
-                "$nickname 님의 핸드폰에서 생성되었습니다",
-                "미크, $nickname"))
+            mutableMapOf(
+                timestamp to
+                        listOf(
+                            "미크미크에 가입했어요",
+                            "$nickname 님의 핸드폰에서 생성되었습니다",
+                            "미크, $nickname"
+                        )
+            )
         )
 
         // 이메일로 컬렉션을 구분
@@ -248,9 +253,15 @@ class RegisterActivity : AppCompatActivity() {
             }
     }
 
-    private fun userInfoDataSetUpload(nickname: String, timestamp: String, email: String) {
+    private fun userInfoDataSetUpload(
+        nickname: String,
+        name: String,
+        timestamp: String,
+        email: String
+    ) {
         val userDataSet = UserInfo(
             nickname,
+            name,
             null,
             null,
             arrayListOf(timestamp),
@@ -282,7 +293,7 @@ class RegisterActivity : AppCompatActivity() {
             }
     }
 
-    private fun friendSearchDataSetUpload(nickname: String, email : String){
+    private fun friendSearchDataSetUpload(nickname: String, email: String) {
         val friendRef = db.collection("friendSearch")
         val friendSearchDataSet = FriendSearch(
             nickname, email
