@@ -20,8 +20,8 @@
 
         <ImageView
             android:id="@+id/backpress"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_width="22dp"
+            android:layout_height="22dp"
             android:src="@drawable/backbtn"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
@@ -38,7 +38,7 @@
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toEndOf="@+id/backpress"
-            android:textSize="18sp"
+            android:textSize="22sp"
             android:fontFamily="@font/suit_medium"
         />
     </androidx.constraintlayout.widget.ConstraintLayout>
@@ -79,9 +79,9 @@
         app:layout_constraintTop_toBottomOf="@id/email_check_text"
         app:layout_constraintStart_toStartOf="parent"
         android:textColor="@color/green"
-        android:textSize="18dp"
+        android:textSize="22dp"
         android:fontFamily="@font/suit_medium"
-        android:layout_marginTop="48dp" />
+        android:layout_marginTop="58dp" />
 
     <EditText
         android:id="@+id/register_name"
@@ -100,13 +100,12 @@
         android:textSize="16sp" />
 
     <EditText
-        android:id="@+id/nickname"
+        android:id="@+id/register_nickname"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:hint="닉네임을 변경해주세요"
         android:padding="13dp"
         android:singleLine="true"
-        android:text="억울한 라람"
         android:paddingStart="20dp"
         android:textColorHint="@color/graygreen"
         android:background="@drawable/btborder"
@@ -123,7 +122,7 @@
         android:layout_height="wrap_content"
         android:text="@string/register_nickname_check"
         android:background="@drawable/border_basic"
-        app:layout_constraintTop_toTopOf="@id/nickname"
+        app:layout_constraintTop_toTopOf="@id/register_nickname"
         app:layout_constraintEnd_toEndOf="parent"
         android:layout_marginStart="10dp"
         android:textColor="@color/black"
