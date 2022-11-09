@@ -146,10 +146,12 @@ class RegisterActivity : AppCompatActivity() {
         }
     }
 
+    @SuppressLint("SetTextI18n")
     private fun checkRepeatPasswd(passwd: String, repeatPasswd: String): Boolean {
         return when (passwd == repeatPasswd) {
             true -> true
             false -> {
+                binding.nicknameCheckText.text = "특수문자, 영문, 숫자를 조합한 8~10글자로 설정하세요"
                 binding.repeatPasswdCheckText.visibility = View.VISIBLE
                 false
             }
@@ -157,6 +159,7 @@ class RegisterActivity : AppCompatActivity() {
     }
 
     private fun checkNickName(nickname : String): Boolean {
+        nickNameCheck = false
 
         for (element in itemToString) {
             if (element == nickname) {
