@@ -11,5 +11,9 @@ class ChangeIconActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         binding = ActivityChangeIconBinding.inflate(layoutInflater)
         setContentView(binding.root)
+
+        binding.backpress.setOnClickListener {
+            finish()
+        }
     }
 }
