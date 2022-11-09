@@ -79,7 +79,7 @@
         app:layout_constraintTop_toBottomOf="@id/email_check_text"
         app:layout_constraintStart_toStartOf="parent"
         android:textColor="@color/green"
-        android:textSize="22dp"
+        android:textSize="22sp"
         android:fontFamily="@font/suit_medium"
         android:layout_marginTop="58dp" />
 

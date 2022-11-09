@@ -43,6 +43,7 @@
     <string name="schedule_title_text">TODO LIST</string>
     <string name="register_passwd_text">비밀번호 설정하기</string>
     <string name="register_userinfo_text">회원 정보 입력하기</string>
+    <string name="change_password_txt">비밀번호 변경 전 인증이 필요해요.</string>
 
 
 </resources>
