@@ -64,7 +64,7 @@ class RegisterActivity : AppCompatActivity() {
 
         binding.nicknameCheck.setOnClickListener {
             binding.nicknameCheckText.visibility = View.INVISIBLE
-            
+
             checkNickname = binding.nickname.text.toString()
             if(nickNameCheckFormat(checkNickname)){
                 binding.nicknameCheckText.visibility = View.VISIBLE
