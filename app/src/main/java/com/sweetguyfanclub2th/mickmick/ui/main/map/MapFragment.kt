@@ -5,9 +5,8 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import com.skt.tmap.TMapView
 import com.sweetguyfanclub2th.mickmick.databinding.FragmentMapBinding
-import net.daum.mf.map.api.MapView
-import net.daum.mf.map.api.MapPoint
 
 class MapFragment : Fragment() {
     private var _binding: FragmentMapBinding? = null
@@ -32,8 +31,8 @@ class MapFragment : Fragment() {
     override fun onStart() {
         super.onStart()
 
-        val mapView = MapView(activity)
-        val mapViewContainer = binding.mapView
-        mapViewContainer.addView(mapView)
+        val tmapview = TMapView(requireContext())
+        tmapview.setSKTMapApiKey("l7xx7de642979fac440f8fad597ef2584f9e")
+        binding.mapView.addView(tmapview)
     }
 }
