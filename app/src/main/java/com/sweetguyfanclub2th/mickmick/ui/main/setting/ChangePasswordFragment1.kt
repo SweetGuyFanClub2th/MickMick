@@ -30,10 +30,8 @@ class ChangePasswordFragment1 : Fragment() {
 
         binding.apply {
             editComplete.setOnClickListener {
-                if (passwordFirstCheck.text.toString() != null) {
-                    val passwd = binding.passwordFirstCheck.text.toString()
-                    signIn(email, passwd)
-                }
+                val passwd = binding.passwordFirstCheck.text.toString()
+                signIn(email, passwd)
             }
         }
 

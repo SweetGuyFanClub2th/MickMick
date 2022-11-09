@@ -1,5 +1,6 @@
 package com.sweetguyfanclub2th.mickmick.ui.main.setting
 
+import android.content.Intent
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.ViewGroup
@@ -7,7 +8,10 @@ import android.view.View
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
+import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.firestore.FirebaseFirestore
 import com.sweetguyfanclub2th.mickmick.R
+import com.sweetguyfanclub2th.mickmick.ui.main.MainActivity
 
 class IconAdapter(private val recyclerViewItems: ArrayList<IconData>): RecyclerView.Adapter<IconAdapter.RecyclerViewViewHolder>()  {
 
@@ -36,8 +40,31 @@ class IconAdapter(private val recyclerViewItems: ArrayList<IconData>): RecyclerV
 
             itemView.setOnClickListener {
                 Log.d("num", i.toString())
+                changeIconTheme(i)
             }
         }
 
+        fun changeIconTheme(theme: Int) {
+            val email = FirebaseAuth.getInstance().currentUser?.email.toString()
+            var db: FirebaseFirestore = FirebaseFirestore.getInstance()
+            val userInfo = db.collection(email).document("userinfo")
+            var type: String = "default"
+
+            when (theme) {
+                0 -> type = "red"
+                1 -> type = "yellow"
+                2 -> type = "default"
+                3 -> type = "blue"
+                4 -> type = "purple"
+                5 -> type = "gray"
+            }
+
+            userInfo.update("iconType", type) // 업데이트
+                .addOnSuccessListener {
+                    Log.d("icon", "iconType 업데이트 성공")
+                    val intent = Intent(itemView.context, SettingFragment::class.java)
+                    itemView.context.startActivity(intent)
+                }
+        }
     }
 }
