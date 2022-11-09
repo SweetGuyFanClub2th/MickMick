@@ -7,7 +7,7 @@
     tools:context=".ui.main.friend.FriendListActivity">
 
     <ImageView
-        android:id="@+id/FriendSearchBg"
+        android:id="@+id/friend_search_bg"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:src="@drawable/search_background"
@@ -20,8 +20,8 @@
         android:id="@+id/FriendSearchId"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        app:layout_constraintTop_toTopOf="@id/FriendSearchBg"
-        app:layout_constraintStart_toStartOf="@id/FriendSearchBg"
+        app:layout_constraintTop_toTopOf="@id/friend_search_bg"
+        app:layout_constraintStart_toStartOf="@id/friend_search_bg"
         android:layout_marginStart="10dp"
         android:textSize="20sp"
         android:background="@null"
@@ -34,8 +34,8 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:background="@drawable/search_button"
-        app:layout_constraintTop_toTopOf="@id/FriendSearchBg"
-        app:layout_constraintEnd_toEndOf="@id/FriendSearchBg"
+        app:layout_constraintTop_toTopOf="@id/friend_search_bg"
+        app:layout_constraintEnd_toEndOf="@id/friend_search_bg"
         android:layout_marginTop="13dp"
         android:layout_marginRight="15dp"
         />
