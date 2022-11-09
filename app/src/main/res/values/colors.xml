@@ -14,4 +14,11 @@
     <color name="green">#FF5D7763</color>
     <color name="green_70">#B35D7763</color>
     <color name="whitegreen">#FFFBFFFC</color>
+
+    <color name="c_red">#FF94493F</color>
+    <color name="c_yellow">#FF8C7519</color>
+    <color name="c_green">#FF5D7763</color>
+    <color name="c_blue">#FF406695</color>
+    <color name="c_purple">#FF7357C2</color>
+    <color name="c_gray">#FF5F5F5F</color>
 </resources>

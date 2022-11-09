@@ -29,7 +29,7 @@ class IconAdapter(private val recyclerViewItems: ArrayList<IconData>): RecyclerV
     }
 
     inner class RecyclerViewViewHolder(itemView: View): RecyclerView.ViewHolder(itemView) {
-        private val img: ImageView = itemView.findViewById(R.id.img_view)
+        private val image: ImageView = itemView.findViewById(R.id.img_view)
         private val title: TextView = itemView.findViewById(R.id.title_txt)
         private val desc: TextView = itemView.findViewById(R.id.desc_text)
 
@@ -37,6 +37,7 @@ class IconAdapter(private val recyclerViewItems: ArrayList<IconData>): RecyclerV
 
             title.text = recyclerViewItem.title
             desc.text = recyclerViewItem.desc
+            image.setImageResource(recyclerViewItem.icon)
 
             itemView.setOnClickListener {
                 Log.d("num", i.toString())
