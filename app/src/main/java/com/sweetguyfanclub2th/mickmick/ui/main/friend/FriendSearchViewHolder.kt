@@ -7,8 +7,9 @@ import com.sweetguyfanclub2th.mickmick.databinding.FriendSearchLayoutBinding
 class FriendSearchViewHolder(private val binding: FriendSearchLayoutBinding) :
     RecyclerView.ViewHolder(binding.root) {
 
+
     fun bind(friendSearch: FriendSearch){
         binding.nickname.text = friendSearch.nickname
-        binding.email1.text = friendSearch.email
+        binding.email.text = friendSearch.email
     }
 }

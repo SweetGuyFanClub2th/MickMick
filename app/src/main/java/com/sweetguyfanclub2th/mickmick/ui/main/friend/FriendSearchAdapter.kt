@@ -1,5 +1,6 @@
 package com.sweetguyfanclub2th.mickmick.ui.main.friend
 
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
@@ -15,18 +16,26 @@ class FriendSearchAdapter : RecyclerView.Adapter<FriendSearchViewHolder>() {
     var userName: ArrayList<FriendSearch> = arrayListOf()
 
     init {  // telephoneBook의 문서를 불러온 뒤 Person으로 변환해 ArrayList에 담음
-        firestore?.collection("test")
-            ?.addSnapshotListener { querySnapshot, firebaseFirestoreException ->
-                // ArrayList 비워줌
-                userName.clear()
+
+        //userName.add(FriendSearch("roy","roy1109"))
+        //userName.add(FriendSearch("kangmin","kangmin913"))
+
+        firestore = FirebaseFirestore.getInstance()
+        firestore?.collection("friendSearch")?.addSnapshotListener { querySnapshot, firebaseFirestoreException ->
+            // ArrayList 비워줌
+            userName.clear()
 
 
-                for (snapshot in querySnapshot!!.documents) {
-                    var item = snapshot.toObject(FriendSearch::class.java)
-                    userName.add(item!!)
-                }
-                notifyDataSetChanged()
+            for (snapshot in querySnapshot!!.documents) {
+                var item = snapshot.toObject(FriendSearch::class.java)
+                userName.add(item!!)
+                Log.e("userName2", userName.toString())
             }
+
+            notifyDataSetChanged()
+
+        }
+
     }
 
     // xml파일을 inflate하여 ViewHolder를 생성
@@ -36,16 +45,22 @@ class FriendSearchAdapter : RecyclerView.Adapter<FriendSearchViewHolder>() {
         return FriendSearchViewHolder(binding)
     }
 
+
     // onCreateViewHolder에서 만든 view와 실제 데이터를 연결
     override fun onBindViewHolder(holder: FriendSearchViewHolder, position: Int) {
+        var viewHolder = (holder as FriendSearchViewHolder).itemView
+
         holder.bind(userName[position])
     }
 
     // 리사이클러뷰의 아이템 총 개수 반환
     override fun getItemCount(): Int = userName.size
 
+
+
+
     fun search(searchWord: String, option: String) {
-        firestore?.collection("test")
+        firestore?.collection("friendSearch")
             ?.addSnapshotListener { querySnapshot, firebaseFirestoreException ->
                 // ArrayList 비워줌
                 userName.clear()

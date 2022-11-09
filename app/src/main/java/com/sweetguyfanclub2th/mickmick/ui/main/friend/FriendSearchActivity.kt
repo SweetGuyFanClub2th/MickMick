@@ -1,6 +1,5 @@
 package com.sweetguyfanclub2th.mickmick.ui.main.friend
 
-
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -30,7 +29,7 @@ class FriendSearchActivity : AppCompatActivity() {
         binding.recyclerview.adapter = FriendSearchAdapter()
         binding.recyclerview.layoutManager = LinearLayoutManager(this)
 
-        var searchOption = "nickname"
+        var searchOption = "friendSearch"
 
         // 스피너 옵션에 따른 동작
         binding.spinner.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
@@ -43,12 +42,12 @@ class FriendSearchActivity : AppCompatActivity() {
                 position: Int,
                 id: Long
             ) {
-                when (binding.spinner.getItemAtPosition(position)) {
+                    when (binding.spinner.getItemAtPosition(position)) {
                     "닉네임" -> {
                         searchOption = "nickname"
                     }
                     "이메일" -> {
-                        searchOption = "email1"
+                        searchOption = "email"
                     }
                 }
             }
