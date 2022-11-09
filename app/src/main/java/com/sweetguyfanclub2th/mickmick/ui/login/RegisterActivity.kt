@@ -63,13 +63,10 @@ class RegisterActivity : AppCompatActivity() {
             }
 
         binding.nicknameCheck.setOnClickListener {
-            binding.nicknameCheckText.visibility = View.INVISIBLE
 
             checkNickname = binding.nickname.text.toString()
             if(nickNameCheckFormat(checkNickname)){
-                binding.nicknameCheckText.visibility = View.VISIBLE
-
-                if(!checkNickName(checkNickname)){
+                if(checkNickName(checkNickname)){
                     nickNameCheck = true
                 }
             }
@@ -148,6 +145,7 @@ class RegisterActivity : AppCompatActivity() {
 
     @SuppressLint("SetTextI18n")
     private fun checkRepeatPasswd(passwd: String, repeatPasswd: String): Boolean {
+        binding.nicknameCheckText.visibility = View.INVISIBLE
         return when (passwd == repeatPasswd) {
             true -> true
             false -> {
@@ -159,22 +157,28 @@ class RegisterActivity : AppCompatActivity() {
     }
 
     private fun checkNickName(nickname : String): Boolean {
-        nickNameCheck = false
+        var sameNickNameCheck = false
 
         for (element in itemToString) {
-            if (element == nickname) {
-                nickNameCheck = true
+            if(element != nickname) {
+                sameNickNameCheck = true
+            }
+            else {
+                sameNickNameCheck = false
+                break
             }
         }
 
-        return when (nickNameCheck) {
-            true -> {
-                binding.nicknameCheckText.text = "이미 사용중인 닉네임입니다."
-                true
-            }
+        return when (sameNickNameCheck) {
             false -> {
-                binding.nicknameCheckText.text = "사용할 수 있는 닉네임입니다."
+                binding.nicknameCheckText.visibility = View.VISIBLE
+                binding.nicknameCheckText.text = "이미 사용중인 닉네임입니다."
                 false
+            }
+            true -> {
+                binding.nicknameCheckText.visibility = View.VISIBLE
+                binding.nicknameCheckText.text = "사용할 수 있는 닉네임입니다."
+                true
             }
         }
     }
