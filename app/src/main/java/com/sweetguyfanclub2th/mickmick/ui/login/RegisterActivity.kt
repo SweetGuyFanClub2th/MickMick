@@ -6,12 +6,14 @@ import android.content.Intent
 import android.os.Bundle
 import android.util.Log
 import android.view.View
+import android.widget.EditText
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.FirebaseUser
 import com.google.firebase.firestore.FieldValue
 import com.google.firebase.firestore.FirebaseFirestore
+import com.sweetguyfanclub2th.mickmick.data.FriendSearch
 import com.sweetguyfanclub2th.mickmick.data.Nickname
 import com.sweetguyfanclub2th.mickmick.data.Todo
 import com.sweetguyfanclub2th.mickmick.data.UserInfo
@@ -27,12 +29,15 @@ import java.text.SimpleDateFormat
 import java.util.*
 import java.util.regex.Pattern
 import kotlin.concurrent.thread
+import kotlin.properties.Delegates
 
 class RegisterActivity : AppCompatActivity() {
     private lateinit var binding: ActivityRegisterBinding
     private var auth: FirebaseAuth? = null
     private lateinit var db: FirebaseFirestore
     private lateinit var itemToString: List<String>
+    private var nickNameCheck : Boolean = false
+    private lateinit var checkNickname : String
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -42,22 +47,32 @@ class RegisterActivity : AppCompatActivity() {
 
         auth = FirebaseAuth.getInstance()
         db = FirebaseFirestore.getInstance()
-//
-//        db.collection("nickname").get()
-//            .addOnSuccessListener { result ->
-//                for (document in result) {
-//                    itemToString = document["nickname"].toString()
-//                        .replace("[", "")
-//                        .replace("]", "")
-//                        .split(",")
-//                }
-//            }
-//            .addOnFailureListener { exception ->
-//                Log.w("RegisterActivity", "Error getting documents: $exception")
-//            }
+        nickNameCheck = false
+
+        db.collection("nickname").get()
+            .addOnSuccessListener { result ->
+                for (document in result) {
+                    itemToString = document["nickname"].toString()
+                        .replace("[", "")
+                        .replace("]", "")
+                        .split(",")
+                }
+            }
+            .addOnFailureListener { exception ->
+                Log.w("RegisterActivity", "Error getting documents: $exception")
+            }
 
         binding.nicknameCheck.setOnClickListener {
-            checkNickName(binding.nickname.text.toString())
+            binding.nicknameCheckText.visibility = View.INVISIBLE
+
+            checkNickname = binding.nickname.text.toString()
+            if(nickNameCheckFormat(checkNickname)){
+                binding.nicknameCheckText.visibility = View.VISIBLE
+
+                if(!checkNickName(checkNickname)){
+                    nickNameCheck = true
+                }
+            }
         }
 
         binding.registercomplete.setOnClickListener {
@@ -67,14 +82,27 @@ class RegisterActivity : AppCompatActivity() {
             val repeatPw = binding.registerRepeatPasswd.text.toString()
             val nickname = binding.nickname.text.toString()
 
-            if (checkEmail(email)
-                && checkPasswd(pw)
-                && checkRepeatPasswd(pw, repeatPw)
-//                && !checkNickName(nickname)
-            ) {
-                createUser(email, pw, nickname)
-            } else {
-                Toast.makeText(this, "각 형식을 확인해주세요", Toast.LENGTH_SHORT).show()
+            if(registerNullableCheck(binding.registerEmail, binding.registerPasswd,
+                binding.registerRepeatPasswd, binding.nickname)){
+                if(nickNameCheck && (checkNickname == nickname)){
+                    if (checkEmail(email)
+                        && checkPasswd(pw)
+                        && checkRepeatPasswd(pw, repeatPw)
+                        && nickNameCheckFormat(nickname)
+                    ) {
+                        createUser(email, pw, nickname)
+                    } else {
+                        Toast.makeText(this, "각 형식을 확인해주세요", Toast.LENGTH_SHORT).show()
+                    }
+                }
+
+                else{
+                    Toast.makeText(this, "닉네임 형식체크가 되지 않았습니다.", Toast.LENGTH_SHORT).show()
+                }
+            }
+
+            else{
+                Toast.makeText(this, "입력되지 않은 칸이 존재합니다.", Toast.LENGTH_SHORT).show()
             }
         }
     }
@@ -83,6 +111,13 @@ class RegisterActivity : AppCompatActivity() {
         binding.emailCheckText.visibility = View.INVISIBLE
         binding.passwdCheckText.visibility = View.INVISIBLE
         binding.repeatPasswdCheckText.visibility = View.INVISIBLE
+        binding.nicknameCheckText.visibility = View.INVISIBLE
+    }
+
+    private fun registerNullableCheck(email : EditText?, passwd : EditText?,
+                                      repeatPasswd: EditText?, nickname: EditText?): Boolean {
+        return !(email?.text.isNullOrEmpty() || passwd?.text.isNullOrEmpty()
+                || repeatPasswd?.text.isNullOrEmpty() || nickname?.text.isNullOrEmpty())
     }
 
     private fun checkEmail(email: String): Boolean {
@@ -112,7 +147,6 @@ class RegisterActivity : AppCompatActivity() {
     }
 
     private fun checkRepeatPasswd(passwd: String, repeatPasswd: String): Boolean {
-
         return when (passwd == repeatPasswd) {
             true -> true
             false -> {
@@ -123,29 +157,38 @@ class RegisterActivity : AppCompatActivity() {
     }
 
     private fun checkNickName(nickname : String): Boolean {
-        val nicknameFormatCheck = "^[a-zA-Z0-9ㄱ-ㅎ가-힣]{2,20}\$"
-        var isNicknameExist: Boolean = false
 
         for (element in itemToString) {
             if (element == nickname) {
-                isNicknameExist = true
+                nickNameCheck = true
             }
         }
 
-        return when (Pattern.matches(nicknameFormatCheck, nickname) && isNicknameExist) {
+        return when (nickNameCheck) {
             true -> {
                 binding.nicknameCheckText.text = "이미 사용중인 닉네임입니다."
-                binding.nicknameCheckText.visibility = View.VISIBLE
                 true
             }
             false -> {
                 binding.nicknameCheckText.text = "사용할 수 있는 닉네임입니다."
+                false
+            }
+        }
+    }
+
+    private fun nickNameCheckFormat(nickname: String) : Boolean{
+        val nicknameFormatCheck = "^[a-zA-Z0-9ㄱ-ㅎ가-힣]{2,20}\$"
+
+        return when (Pattern.matches(nicknameFormatCheck, nickname)) {
+            true -> true
+            false -> {
                 binding.nicknameCheckText.visibility = View.VISIBLE
                 false
             }
         }
     }
 
+    @SuppressLint("SimpleDateFormat")
     private fun createUser(email: String, pw: String, nickname: String) {
         auth?.createUserWithEmailAndPassword(
             email, pw
@@ -161,7 +204,10 @@ class RegisterActivity : AppCompatActivity() {
                     userInfoDataSetUpload(nickname, timestamp, email)
 
                     // 03. 닉네임 데이터셋
-                    nicknameDataSetUpload(nickname, email)
+                    nicknameDataSetUpload(nickname)
+
+                    // 04. 친구 검색 데이터셋
+                    friendSearchDataSetUpload(nickname, email)
 
                     moveMainPage(auth?.currentUser)
                 } else {
@@ -216,16 +262,32 @@ class RegisterActivity : AppCompatActivity() {
             }
     }
 
-    private fun nicknameDataSetUpload(nickname: String, email : String){
+    private fun nicknameDataSetUpload(nickname: String) {
         val nicknameRef = db.collection("nickname").document("names")
 
         nicknameRef
-            .update("nickname", FieldValue.arrayUnion(mutableMapOf(nickname to listOf(email))))
+            .update("nickname", FieldValue.arrayUnion(nickname))
             .addOnSuccessListener {
                 Log.d(ContentValues.TAG, "NICKNAME 업로드에 성공하였습니다.")
             }
             .addOnFailureListener {
                 Log.d(ContentValues.TAG, "NICKNAME 정보 업로드에 실패하였습니다.")
+            }
+    }
+
+    private fun friendSearchDataSetUpload(nickname: String, email : String){
+        val friendRef = db.collection("friendSearch")
+        val friendSearchDataSet = FriendSearch(
+            nickname, email
+        )
+
+        friendRef
+            .add(friendSearchDataSet)
+            .addOnSuccessListener {
+                Log.d(ContentValues.TAG, "FRIENDSEARCH 업로드에 성공하였습니다.")
+            }
+            .addOnFailureListener {
+                Log.d(ContentValues.TAG, "FRIENDSEARCH 정보 업로드에 실패하였습니다.")
             }
     }
 
