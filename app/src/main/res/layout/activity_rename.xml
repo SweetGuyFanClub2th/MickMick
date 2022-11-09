@@ -1,11 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:paddingStart="18dp"
     android:paddingTop="18dp"
+    android:paddingHorizontal="15dp"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:background="@color/whitegreen"
     tools:context=".ui.main.setting.RenameActivity">
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -30,7 +33,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/setting_rename_txt"
-            android:layout_marginStart="12dp"
+            android:layout_marginStart="20dp"
             android:textColor="@color/black"
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintBottom_toBottomOf="parent"
@@ -39,5 +42,107 @@
             android:fontFamily="@font/suit_medium"
         />
     </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <EditText
+        android:id="@+id/register_email"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="22sunrin085@sunrint.hs.kr"
+        android:padding="13dp"
+        android:singleLine="true"
+        android:textColorHint="@color/graygreen"
+        android:background="@drawable/btborder"
+        android:textColor="@color/green"
+        app:layout_constraintTop_toBottomOf="@+id/constraint"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_marginTop="30dp"
+        android:textSize="16sp" />
+
+    <TextView
+        android:id="@+id/email_check_text"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="한번 설정한 이메일은 바꿀 수 없어요."
+        android:textColor="@color/graygreen"
+        app:layout_constraintTop_toBottomOf="@+id/register_email"
+        app:layout_constraintStart_toStartOf="parent"
+        android:layout_marginStart="15dp"
+        android:layout_marginTop="5dp" />
+
+    <TextView
+        android:id="@+id/txt_info"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="기본 정보 수정"
+        app:layout_constraintTop_toBottomOf="@id/email_check_text"
+        app:layout_constraintStart_toStartOf="parent"
+        android:textColor="@color/green"
+        android:textSize="18dp"
+        android:fontFamily="@font/suit_medium"
+        android:layout_marginTop="48dp" />
+
+    <EditText
+        android:id="@+id/register_name"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="이름을 입력해주세요"
+        android:padding="13dp"
+        android:singleLine="true"
+        android:textColorHint="@color/graygreen"
+        android:background="@drawable/btborder"
+        android:textColor="@color/green"
+        app:layout_constraintTop_toBottomOf="@+id/txt_info"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_marginTop="30dp"
+        android:textSize="16sp" />
+
+    <EditText
+        android:id="@+id/nickname"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="닉네임을 변경해주세요"
+        android:padding="13dp"
+        android:singleLine="true"
+        android:text="억울한 라람"
+        android:paddingStart="20dp"
+        android:textColorHint="@color/graygreen"
+        android:background="@drawable/btborder"
+        android:textColor="@color/green"
+        app:layout_constraintTop_toBottomOf="@+id/register_name"
+        app:layout_constraintStart_toStartOf="parent"
+        android:layout_marginEnd="130dp"
+        android:layout_marginTop="20dp"
+        android:textSize="16sp" />
+
+    <Button
+        android:id="@+id/nickname_check"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/register_nickname_check"
+        android:background="@drawable/border_basic"
+        app:layout_constraintTop_toTopOf="@id/nickname"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_marginStart="10dp"
+        android:textColor="@color/black"
+        android:backgroundTint="@color/white"
+        />
+
+    <Button
+        android:id="@+id/edit_complete"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/register_btn_complete"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:background="@drawable/border_basic"
+        android:backgroundTint="@color/green"
+        android:textColor="@color/white"
+        android:textSize="18sp"
+        android:layout_marginBottom="50dp" />
+
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>

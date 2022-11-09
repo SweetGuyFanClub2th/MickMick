@@ -8,7 +8,6 @@ import android.view.View
 import android.view.ViewGroup
 
 import com.sweetguyfanclub2th.mickmick.databinding.FragmentSettingBinding
-import com.sweetguyfanclub2th.mickmick.ui.main.MainActivity
 
 class SettingFragment : Fragment() {
     private var _binding: FragmentSettingBinding? = null
@@ -20,18 +19,20 @@ class SettingFragment : Fragment() {
     ): View? {
         _binding = FragmentSettingBinding.inflate(inflater, container, false)
 
-//        binding.list1.setOnClickListener {
-//            val intent = Intent(MainActivity(), renameActivity::class.java)
-//            startActivity(intent)
-//        }
-//        binding.list2.setOnClickListener {
-//            val intent = Intent(MainActivity(), changeIconAcvitity::class.java)
-//            startActivity(intent)
-//        }
-//        binding.list3.setOnClickListener {
-//            val intent = Intent(MainActivity(), changePasswordAcvitity::class.java)
-//            startActivity(intent)
-//        }
+        binding.apply {
+            list1.setOnClickListener {
+                val intent = Intent(activity, RenameActivity::class.java)
+                startActivity(intent)
+            }
+            list2.setOnClickListener {
+                val intent = Intent(activity, ChangeIconActivity::class.java)
+                startActivity(intent)
+            }
+            list3.setOnClickListener {
+                val intent = Intent(activity, ChangePasswordActivity::class.java)
+                startActivity(intent)
+            }
+        }
 
         return binding.root
     }
