@@ -5,9 +5,40 @@
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
+    <EditText
+        android:id="@+id/map_search"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="@string/map_search_edit_text"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:padding="13dp"
+        android:singleLine="true"
+        android:textColorHint="@color/graygreen"
+        android:background="@drawable/btborder"
+        android:textColor="@color/green"
+        android:textSize="16sp"
+        android:layout_marginTop="10dp"
+        android:layout_marginStart="10dp"
+        android:layout_marginEnd="10dp"/>
+
+    <ImageButton
+        android:id="@+id/search_button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="@drawable/search_button"
+        app:layout_constraintTop_toTopOf="@id/map_search"
+        app:layout_constraintEnd_toEndOf="@+id/map_search"
+        android:layout_marginTop="13dp"
+        android:layout_marginEnd="15dp"
+        />
+
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/map_view"
         android:layout_width="match_parent"
-        android:layout_height="match_parent" />
+        android:layout_height="0dp"
+        app:layout_constraintBottom_toTopOf="@id/map_search"
+        />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
