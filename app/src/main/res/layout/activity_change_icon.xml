@@ -42,4 +42,86 @@
             android:fontFamily="@font/suit_medium"
             />
     </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <TextView
+        android:id="@+id/notice"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="현재 아이콘"
+        android:textColor="@color/black"
+        android:layout_marginTop="30dp"
+        app:layout_constraintStart_toStartOf="parent"
+        android:textSize="16dp"
+        app:layout_constraintTop_toBottomOf="@+id/constraint" />
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_marginTop="10dp"
+        android:id="@+id/current_icon"
+        app:layout_constraintTop_toBottomOf="@id/notice"
+        app:layout_constraintStart_toStartOf="parent"
+        android:layout_width="match_parent"
+        android:paddingVertical="10dp"
+        android:background="@color/whitegreen"
+        android:layout_height="wrap_content">
+
+    <ImageView
+        android:id="@+id/img_view"
+        android:layout_width="70dp"
+        android:layout_height="70dp"
+        android:src="@drawable/profile_logo"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        />
+
+    <TextView
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:text="기쁜 초록색 미크미크"
+        android:textColor="@color/black"
+        android:fontFamily="@font/pretendard_medium"
+        android:textSize="20sp"
+        android:id="@+id/title_txt"
+        app:layout_constraintTop_toTopOf="parent"
+        android:layout_marginStart="14dp"
+        app:layout_constraintStart_toEndOf="@id/img_view"
+        android:layout_marginTop="8dp"
+        />
+
+    <TextView
+        android:layout_width="0dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_height="wrap_content"
+        android:textColor="#80434343"
+        android:text="3년 전 미크왕국으로 돌아간 후 색이 변했다."
+        android:textSize="13sp"
+        android:layout_marginStart="14dp"
+        android:lineHeight="17sp"
+        android:layout_marginEnd="14dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toEndOf="@id/img_view"
+        android:layout_marginBottom="8dp"
+        tools:ignore="HardcodedText" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>
+
+    <TextView
+        android:id="@+id/notice2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="사용 가능한 아이콘"
+        android:textColor="@color/black"
+        android:layout_marginTop="30dp"
+        app:layout_constraintStart_toStartOf="parent"
+        android:textSize="16dp"
+        app:layout_constraintTop_toBottomOf="@+id/current_icon" />
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/icon_recycler"
+        app:layout_constraintTop_toBottomOf="@+id/notice2"
+        android:layout_marginTop="30dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        tools:listitem="@layout/icon_items"/>
+
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:paddingVertical="10dp"
+    android:background="@color/whitegreen"
+    android:layout_height="wrap_content">
+
+    <ImageView
+        android:id="@+id/img_view"
+        android:layout_width="70dp"
+        android:layout_height="70dp"
+        android:src="@drawable/profile_logo"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        />
+
+    <TextView
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:text="기쁜 초록색 미크미크"
+        android:textColor="@color/black"
+        android:fontFamily="@font/pretendard_medium"
+        android:textSize="20sp"
+        android:id="@+id/title_txt"
+        app:layout_constraintTop_toTopOf="parent"
+        android:layout_marginStart="14dp"
+        app:layout_constraintStart_toEndOf="@id/img_view"
+        android:layout_marginTop="8dp"
+    />
+
+    <TextView
+        android:id="@+id/desc_text"
+        android:layout_width="0dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_height="wrap_content"
+        android:textColor="#80434343"
+        android:text="3년 전 미크왕국으로 돌아간 후 색이 변했다."
+        android:textSize="13sp"
+        android:layout_marginStart="14dp"
+        android:lineHeight="17sp"
+        android:layout_marginEnd="14dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toEndOf="@id/img_view"
+        android:layout_marginBottom="8dp"
+        tools:ignore="HardcodedText" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>
