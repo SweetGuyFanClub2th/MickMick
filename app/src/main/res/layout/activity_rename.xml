@@ -106,7 +106,6 @@
         android:hint="닉네임을 변경해주세요"
         android:padding="13dp"
         android:singleLine="true"
-        android:paddingStart="20dp"
         android:textColorHint="@color/graygreen"
         android:background="@drawable/btborder"
         android:textColor="@color/green"
