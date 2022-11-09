@@ -47,7 +47,7 @@
         android:id="@+id/register_email"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:hint="22sunrin085@sunrint.hs.kr"
+        android:hint=""
         android:padding="13dp"
         android:singleLine="true"
         android:textColorHint="@color/graygreen"
@@ -57,6 +57,7 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         android:layout_marginTop="30dp"
+        android:imeOptions="actionDone"
         android:textSize="16sp" />
 
     <TextView
