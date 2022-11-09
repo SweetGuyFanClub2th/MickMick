@@ -12,10 +12,6 @@ import com.sweetguyfanclub2th.mickmick.databinding.ActivityRenameBinding
 
 class RenameActivity : AppCompatActivity() {
     private lateinit var binding: ActivityRenameBinding
-
-    private lateinit var bfNickname: String
-    private lateinit var bfName: String
-
     private var db: FirebaseFirestore = FirebaseFirestore.getInstance()
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -39,15 +35,12 @@ class RenameActivity : AppCompatActivity() {
 
             userInfo.get().addOnSuccessListener {
                 val nickname = it.get("nickname").toString()
+                val name = it.get("name").toString()
+                binding.registerName.text =
+                    Editable.Factory.getInstance().newEditable(name)
                 binding.registerNickname.text =
                     Editable.Factory.getInstance().newEditable(nickname)
-                bfNickname = binding.registerNickname.text.toString()
             }
-//            userInfo.get().addOnSuccessListener {
-//                val name = it.get("name").toString()
-//                binding.registerName.text =
-//                    Editable.Factory.getInstance().newEditable(name)
-//            }
         }
         else {
             binding.registerEmail.hint = "유저 정보가 잘못되었습니다."
@@ -75,10 +68,11 @@ class RenameActivity : AppCompatActivity() {
         try {
             val email = FirebaseAuth.getInstance().currentUser?.email.toString()
             val editUser = db.collection(email).document("userinfo")
-//            val beForeNickname = db.collection("nickname").document("names")
+            val beForeNickname = db.collection("nickname").document("names")
 
-//            beForeNickname.update("bfNickname", nickName)
+            beForeNickname.update(email, nickName)
             editUser.update("nickname", nickName)
+            editUser.update("name", name)
 
             Toast.makeText(this, "닉네임이 변경되었습니다.", Toast.LENGTH_SHORT).show()
             finish()
