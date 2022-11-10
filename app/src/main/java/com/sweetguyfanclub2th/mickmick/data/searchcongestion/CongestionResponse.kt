@@ -1,4 +1,4 @@
-package com.sweetguyfanclub2th.mickmick.searchcongestion
+package com.sweetguyfanclub2th.mickmick.data.searchcongestion
 
 data class CongestionResponse(
     val contents: Contents,

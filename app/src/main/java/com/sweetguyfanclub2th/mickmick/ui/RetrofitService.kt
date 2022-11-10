@@ -1,7 +1,6 @@
 package com.sweetguyfanclub2th.mickmick.ui
 
 import com.sweetguyfanclub2th.mickmick.data.searchpois.PoisResponse
-import com.sweetguyfanclub2th.mickmick.searchcongestion.CongestionResponse
 import retrofit2.Call
 import retrofit2.http.GET
 import retrofit2.http.Header
