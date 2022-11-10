@@ -30,6 +30,7 @@
         app:layout_constraintStart_toStartOf="parent"
         android:layout_marginBottom="4dp"
         android:scaleType="centerCrop"
+        android:background="@color/white"
         tools:ignore="ContentDescription" />
 
     <androidx.constraintlayout.widget.ConstraintLayout

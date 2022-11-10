@@ -84,13 +84,13 @@ class SettingFragment : Fragment() {
                 imgData = R.drawable.c_purple
                 backColor = R.drawable.btn_purple
             }
-            "gray" ->  {
+            "gray" -> {
                 imgData = R.drawable.c_gray
                 backColor = R.drawable.btn_gray
             }
         }
 
         binding.mainProfileImage2.setImageResource(imgData)
-        binding.mainProfileImage.background = backColor.toDrawable()
+        binding.mainProfileImage.setBackgroundResource(backColor)
     }
 }
