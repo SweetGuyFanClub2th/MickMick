@@ -63,8 +63,13 @@ class IconAdapter(private val recyclerViewItems: ArrayList<IconData>): RecyclerV
             userInfo.update("iconType", type) // 업데이트
                 .addOnSuccessListener {
                     Log.d("icon", "iconType 업데이트 성공")
-                    val intent = Intent(itemView.context, SettingFragment::class.java)
-                    itemView.context.startActivity(intent)
+
+                    Intent(itemView.context, MainActivity::class.java).apply {
+                        putExtra("toSetting", "icon")
+                            .run {
+                                itemView.context.startActivity(this)
+                            }
+                    }
                 }
         }
     }
