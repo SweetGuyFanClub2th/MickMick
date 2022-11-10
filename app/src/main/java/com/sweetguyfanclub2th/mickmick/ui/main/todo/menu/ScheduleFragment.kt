@@ -1,5 +1,7 @@
 package com.sweetguyfanclub2th.mickmick.ui.main.todo.menu
 
+import android.app.DatePickerDialog
+import android.app.TimePickerDialog
 import android.content.ContentValues
 import android.os.Bundle
 import android.provider.SyncStateContract.Helpers.update
@@ -9,6 +11,7 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.DatePicker
 import android.widget.Toast
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.DatabaseReference
@@ -16,6 +19,7 @@ import com.google.firebase.firestore.FieldValue
 import com.google.firebase.firestore.FirebaseFirestore
 import com.sweetguyfanclub2th.mickmick.R
 import com.sweetguyfanclub2th.mickmick.databinding.FragmentScheduleBinding
+import java.util.*
 
 
 class ScheduleFragment : Fragment() {
@@ -26,65 +30,59 @@ class ScheduleFragment : Fragment() {
     private var email = FirebaseAuth.getInstance().currentUser?.email.toString()
     private lateinit var nickname: String
 
-
-//    private lateinit var database: DatabaseReference
-//    database = Firebase.database.reference
-
+    private lateinit var dateValue: String
+    private lateinit var timeValue: String
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-
-
         _binding = FragmentScheduleBinding.inflate(inflater, container, false)
 
-        binding.addTodoBtn.setOnClickListener() {
-            var todo = binding.addTodoEdit.text.toString();  // 버튼 클릭시 입력한 텍스트를 문자열로 todo에 저장
-            todoDataSetUpload(todo, email);
+        binding.editDate.setOnClickListener {
+            Log.d("ddede", "openDateDialog")
+            openDateDialog()
+        }
 
+        binding.editTime.setOnClickListener {
+            Log.d("ddede", "openDateDialog")
+            openTimeDialog()
         }
 
 
         return binding.root
     }
 
-    private fun updateData(){
-        var todo = binding.addTodoEdit.text.toString();  // 버튼 클릭시 입력한 텍스트를 문자열로 todo에 저장
+    private fun openDateDialog() {
+        val today = GregorianCalendar()
 
-        var map= mutableMapOf<String,Any>()
-        map["todo"] = todo.toString();
+        val year: Int = today.get(Calendar.YEAR)
+        val month: Int = today.get(Calendar.MONTH)
+        val date: Int = today.get(Calendar.DATE)
 
+        // show dialog
+        val dialog = DatePickerDialog(requireContext(), { _, year, month, date ->
+            binding.editDate.text =
+                Editable.Factory.getInstance().newEditable("${year}년 ${month+1}월 ${date}일")
+            dateValue = "${year}${month+1}${date}"
+        }, year, month, date)
+
+        dialog.show()
     }
 
+    private fun openTimeDialog() {
+        val today = GregorianCalendar()
 
-    private fun todoDataSetUpload(todo: String, email : String){
+        val hour: Int = today.get(Calendar.HOUR)
+        val minute: Int = today.get(Calendar.MINUTE)
 
-        updateData()
+        // show dialog
+        val dialog = TimePickerDialog(requireContext(), { _, hour, minute ->
+            binding.editTime.text =
+                Editable.Factory.getInstance().newEditable("${hour}시 ${minute}분")
+            timeValue = "${hour}${minute}"
+        }, hour, minute, true)
 
-        fun updateData(){
-            val todo = binding.addTodoEdit.text.toString();  // 버튼 클릭시 입력한 텍스트를 문자열로 todo에 저장
-            val email = FirebaseAuth.getInstance().currentUser?.email.toString()  // 사용자의 email을 firebase에서 불러와 저장함
-
-            var map= mutableMapOf<String,Any>()
-            map["todo"] = todo.toString();
-
-            getEmail(email)
-
-            db.collection(email).document("todo").update(map)  // email을 기준으로 컬렉션을 고르고, 투두 문서에 내용을 저장?
-                .addOnCompleteListener {
-                    if (it.isSuccessful){
-                        // 프래그먼트 새로고침
-                    }
-                }
-        }
-
-    }
-
-    private fun getEmail(email: String) {
-        val todoRef = db.collection(email).document("names")
-        todoRef.get().addOnSuccessListener {
-            nickname = it.get("nickname").toString()
-        }
+        dialog.show()
     }
 }
