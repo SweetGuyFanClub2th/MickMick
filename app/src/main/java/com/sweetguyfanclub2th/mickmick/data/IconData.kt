@@ -1,4 +1,4 @@
-package com.sweetguyfanclub2th.mickmick.ui.main.setting
+package com.sweetguyfanclub2th.mickmick.data
 
 data class IconData (
     val icon: Int,

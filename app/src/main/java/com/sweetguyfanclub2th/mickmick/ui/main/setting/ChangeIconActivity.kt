@@ -2,9 +2,9 @@ package com.sweetguyfanclub2th.mickmick.ui.main.setting
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.widget.Toast
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.sweetguyfanclub2th.mickmick.R
+import com.sweetguyfanclub2th.mickmick.data.IconData
 import com.sweetguyfanclub2th.mickmick.databinding.ActivityChangeIconBinding
 
 class ChangeIconActivity : AppCompatActivity() {
