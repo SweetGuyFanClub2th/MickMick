@@ -12,6 +12,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.DatePicker
+import android.widget.EditText
 import android.widget.Toast
 import androidx.fragment.app.FragmentTransaction
 import com.google.firebase.auth.FirebaseAuth
@@ -55,10 +56,28 @@ class ScheduleFragment : Fragment() {
             // TODO
         }
         binding.addTodoBtn.setOnClickListener {
-            uploadData()
+            when (scheduleNullCheck(
+                binding.todoName,
+                binding.editDate,
+                binding.editTime,
+                binding.editFriend,
+                binding.editPlace
+            )) {
+                true -> uploadData()
+                else -> Toast.makeText(activity, "입력하지 않은 칸이 존재합니다", Toast.LENGTH_SHORT).show()
+            }
         }
 
         return binding.root
+    }
+
+    private fun scheduleNullCheck(
+        todoName: EditText?, editDate: EditText?,
+        editTime: EditText?, editFriend: EditText?, editPlace: EditText?
+    ): Boolean {
+        return !(todoName?.text.isNullOrEmpty() || editDate?.text.isNullOrEmpty()
+                || editTime?.text.isNullOrEmpty() || editFriend?.text.isNullOrEmpty()
+                || editPlace?.text.isNullOrEmpty())
     }
 
     private fun uploadData() {
@@ -69,15 +88,18 @@ class ScheduleFragment : Fragment() {
         binding.editPlace.text =
             Editable.Factory.getInstance().newEditable("임시 장소")
 
-        info.update((dateValue + timeValue), FieldValue.arrayUnion(
-            binding.todoName.text.toString(),
-            binding.editDate.text.toString(),
-            binding.editTime.text.toString(),
-            binding.editFriend.text.toString(),
-            binding.editPlace.text.toString(),
-        ))
+        info.update(
+            (dateValue + timeValue), FieldValue.arrayUnion(
+                binding.todoName.text.toString(),
+                binding.editDate.text.toString(),
+                binding.editTime.text.toString(),
+                binding.editFriend.text.toString(),
+                binding.editPlace.text.toString(),
+            )
+        )
 
-        val transaction: FragmentTransaction = requireActivity().supportFragmentManager.beginTransaction()
+        val transaction: FragmentTransaction =
+            requireActivity().supportFragmentManager.beginTransaction()
         transaction.replace(R.id.fragment, HomeFragment())
         transaction.commit()
 
@@ -94,8 +116,8 @@ class ScheduleFragment : Fragment() {
         // show dialog
         val dialog = DatePickerDialog(requireContext(), { _, year, month, date ->
             binding.editDate.text =
-                Editable.Factory.getInstance().newEditable("${year}년 ${month+1}월 ${date}일")
-            dateValue = "${year}${month+1}${date}"
+                Editable.Factory.getInstance().newEditable("${year}년 ${month + 1}월 ${date}일")
+            dateValue = "${year}${month + 1}${date}"
         }, year, month, date)
 
         dialog.show()
