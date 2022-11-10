@@ -5,12 +5,23 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import com.skt.tmap.TMapView
 import com.sweetguyfanclub2th.mickmick.databinding.FragmentMapBinding
+import okhttp3.OkHttpClient
+import okhttp3.Request
 
 class MapFragment : Fragment() {
     private var _binding: FragmentMapBinding? = null
     private val binding get() = _binding!!
+
+    companion object {
+        private val retrofitClient: MapFragment = MapFragment()
+
+        fun getInstance(): MapFragment {
+            return retrofitClient
+        }
+    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -21,6 +32,17 @@ class MapFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         _binding = FragmentMapBinding.inflate(inflater, container, false)
+
+        binding.searchButton.setOnClickListener {
+            if(binding.mapSearch.text.isNullOrEmpty()){
+                Toast.makeText(activity, "검색어를 입력하세요", Toast.LENGTH_SHORT).show()
+            }
+
+            else{
+
+            }
+        }
+
         return binding.root
     }
 
