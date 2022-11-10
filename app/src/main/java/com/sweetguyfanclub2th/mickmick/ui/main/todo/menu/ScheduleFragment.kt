@@ -13,12 +13,15 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.DatePicker
 import android.widget.Toast
+import androidx.fragment.app.FragmentTransaction
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.DatabaseReference
 import com.google.firebase.firestore.FieldValue
 import com.google.firebase.firestore.FirebaseFirestore
 import com.sweetguyfanclub2th.mickmick.R
 import com.sweetguyfanclub2th.mickmick.databinding.FragmentScheduleBinding
+import com.sweetguyfanclub2th.mickmick.ui.main.home.HomeFragment
+import com.sweetguyfanclub2th.mickmick.ui.main.setting.ChangePasswordFragment1
 import java.util.*
 
 
@@ -40,17 +43,45 @@ class ScheduleFragment : Fragment() {
         _binding = FragmentScheduleBinding.inflate(inflater, container, false)
 
         binding.editDate.setOnClickListener {
-            Log.d("ddede", "openDateDialog")
             openDateDialog()
         }
-
         binding.editTime.setOnClickListener {
-            Log.d("ddede", "openDateDialog")
             openTimeDialog()
         }
-
+        binding.editFriend.setOnClickListener {
+            // TODO
+        }
+        binding.editPlace.setOnClickListener {
+            // TODO
+        }
+        binding.addTodoBtn.setOnClickListener {
+            uploadData()
+        }
 
         return binding.root
+    }
+
+    private fun uploadData() {
+        val info = db.collection(email).document("todo")
+
+        binding.editFriend.text =
+            Editable.Factory.getInstance().newEditable("이하람, 이하람 외 3인")
+        binding.editPlace.text =
+            Editable.Factory.getInstance().newEditable("임시 장소")
+
+        info.update((dateValue + timeValue), FieldValue.arrayUnion(
+            binding.todoName.text.toString(),
+            binding.editDate.text.toString(),
+            binding.editTime.text.toString(),
+            binding.editFriend.text.toString(),
+            binding.editPlace.text.toString(),
+        ))
+
+        val transaction: FragmentTransaction = requireActivity().supportFragmentManager.beginTransaction()
+        transaction.replace(R.id.fragment, HomeFragment())
+        transaction.commit()
+
+        // TODO
     }
 
     private fun openDateDialog() {

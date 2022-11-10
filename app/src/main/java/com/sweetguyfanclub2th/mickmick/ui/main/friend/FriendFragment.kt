@@ -9,24 +9,17 @@ import com.google.firebase.firestore.FirebaseFirestore
 import com.sweetguyfanclub2th.mickmick.R
 import com.sweetguyfanclub2th.mickmick.databinding.FragmentFriendBinding
 
-
 class FriendFragment : Fragment() {
     private var _binding: FragmentFriendBinding? = null
     private val binding get() = _binding!!
-
-    val db = FirebaseFirestore.getInstance()    // Firestore 인스턴스 선언
-
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-    }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
         _binding = FragmentFriendBinding.inflate(inflater, container, false)
-        val view = binding.root
-        return view
+
+        return  binding.root
     }
 
 
