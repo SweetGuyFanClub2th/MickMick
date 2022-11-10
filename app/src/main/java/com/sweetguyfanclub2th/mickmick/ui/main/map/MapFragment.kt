@@ -12,13 +12,9 @@ import com.skt.tmap.TMapView
 import com.sweetguyfanclub2th.mickmick.data.searchpois.PoisResponse
 import com.sweetguyfanclub2th.mickmick.databinding.FragmentMapBinding
 import com.sweetguyfanclub2th.mickmick.ui.RetrofitClient
-import com.sweetguyfanclub2th.mickmick.ui.RetrofitService
-import okhttp3.OkHttpClient
-import okhttp3.Request
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
-import retrofit2.Retrofit
 
 class MapFragment : Fragment() {
     private var _binding: FragmentMapBinding? = null
@@ -62,7 +58,6 @@ class MapFragment : Fragment() {
 
         val tmapview = TMapView(requireContext())
         tmapview.setSKTMapApiKey(authToken)
-        binding.mapView.addView(tmapview)
     }
 
     private fun getDataToRetrofit(keyword : String){
