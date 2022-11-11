@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content">
 
@@ -9,7 +8,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         app:cardCornerRadius="10dp"
-        app:cardElevation="5dp"
+        app:cardElevation="0dp"
         app:cardUseCompatPadding="true"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -17,36 +16,46 @@
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent">
+            android:background="@drawable/border_basic"
+            android:paddingStart="20dp"
+            android:paddingTop="20dp"
+            android:padding="10dp"
+            android:layout_height="80dp">
 
             <TextView
                 android:id="@+id/nickname"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="이름"
-                android:textSize="24sp"
-                app:layout_constraintEnd_toEndOf="parent"
+                android:fontFamily="@font/pretendard_medium"
+                android:textColor="@color/green"
+                android:layout_marginTop="4dp"
+                android:textSize="22sp"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
 
             <TextView
                 android:id="@+id/email"
                 android:layout_width="wrap_content"
+                android:textColor="@color/graygreen"
                 android:layout_height="wrap_content"
+                android:layout_marginTop="2dp"
                 android:text="이메일"
-                app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/nickname" />
 
             <Button
                 android:id="@+id/friendPlus"
-                android:layout_width="50dp"
+                android:layout_width="90dp"
+                android:background="@drawable/btn_roundbtn"
+                android:textColor="@color/white"
                 android:layout_height="50dp"
-                android:text="추가"
+                android:text="친구 추가"
                 app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
                 android:layout_marginTop="2dp"
-                android:layout_marginRight="10dp"/>
+                android:layout_marginRight="4dp"/>
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 

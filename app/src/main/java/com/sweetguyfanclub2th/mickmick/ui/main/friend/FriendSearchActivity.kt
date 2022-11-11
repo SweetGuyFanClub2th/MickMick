@@ -32,6 +32,10 @@ class FriendSearchActivity : AppCompatActivity() {
         binding.recyclerview.adapter = FriendSearchAdapter()
         binding.recyclerview.layoutManager = LinearLayoutManager(this)
 
+        binding.backpress.setOnClickListener {
+            finish()
+        }
+
         var searchOption = "friendSearch"
 
         // 스피너 옵션에 따른 동작
@@ -48,9 +52,11 @@ class FriendSearchActivity : AppCompatActivity() {
                     when (binding.spinner.getItemAtPosition(position)) {
                     "닉네임" -> {
                         searchOption = "nickname"
+                        binding.searchWord.hint = "닉네임으로 검색하세요"
                     }
                     "이메일" -> {
                         searchOption = "email"
+                        binding.searchWord.hint = "이메일로 검색하세요"
                     }
                 }
             }
