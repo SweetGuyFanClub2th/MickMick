@@ -3,6 +3,7 @@ package com.sweetguyfanclub2th.mickmick.ui.main.search
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
+import com.skt.tmap.TMapView
 import com.sweetguyfanclub2th.mickmick.data.searchpois.Poi
 import com.sweetguyfanclub2th.mickmick.databinding.ItemSearchBinding
 
