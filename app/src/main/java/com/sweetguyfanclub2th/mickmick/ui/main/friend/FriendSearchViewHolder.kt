@@ -12,4 +12,5 @@ class FriendSearchViewHolder(private val binding: FriendSearchLayoutBinding) :
         binding.nickname.text = friendSearch.nickname
         binding.email.text = friendSearch.email
     }
+
 }
