@@ -128,6 +128,18 @@
         android:backgroundTint="@color/white"
         />
 
+    <TextView
+        android:id="@+id/nickname_check_text"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text=""
+        android:textColor="#CC3838"
+        android:visibility="invisible"
+        app:layout_constraintTop_toBottomOf="@+id/nickname_check"
+        app:layout_constraintStart_toStartOf="parent"
+        android:layout_marginStart="15dp"
+        android:layout_marginTop="5dp" />
+
     <Button
         android:id="@+id/edit_complete"
         android:layout_width="match_parent"

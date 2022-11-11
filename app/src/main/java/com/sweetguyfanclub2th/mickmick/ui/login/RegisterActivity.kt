@@ -230,27 +230,32 @@ class RegisterActivity : AppCompatActivity() {
     }
 
     private fun todoDataSetUpload(timestamp: String, nickname: String, email: String) {
-        val todoDataSet = Todo(
+        val todoDataSet =
             mutableMapOf(
-                timestamp to
+                "209912312359" to
                         listOf(
-                            "미크미크에 가입했어요",
-                            "$nickname 님의 핸드폰에서 생성되었습니다",
-                            "미크, $nickname"
+                            "미크미크와 함께하기",
+                            "2099년 12월 31일",
+                            "23시 59분",
+                            "미크미크 개발자들",
+                            "당신이 있는 모든 곳"
                         )
             )
-        )
 
         // 이메일로 컬렉션을 구분
-        db.collection(email)
-            .document("todo") // 투두 문서 생성
-            .set(todoDataSet) // 투두 데이터 셋 생성
-            .addOnSuccessListener {
-                Log.d(ContentValues.TAG, "TODO 업로드에 성공하였습니다.")
-            }
-            .addOnFailureListener {
-                Log.d(ContentValues.TAG, "TODO 정보 업로드에 실패하였습니다.")
-            }
+        val emails = auth?.currentUser?.email.toString()
+        db.collection(emails).document("todo").set(
+            todoDataSet
+        )
+        .addOnSuccessListener {
+            Log.d("TodoDataSet", "TodoDataSetUpload Success")
+        }
+        .addOnFailureListener {
+            Log.d("TodoDataSet", "TodoDataSetUpload Fail")
+        }
+
+
+
     }
 
     private fun userInfoDataSetUpload(
@@ -264,7 +269,7 @@ class RegisterActivity : AppCompatActivity() {
             name,
             null,
             null,
-            arrayListOf(timestamp),
+            arrayListOf("209912312359"),
             "default",
             null
         )

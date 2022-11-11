@@ -4,6 +4,7 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.text.Editable
 import android.util.Log
+import android.view.View
 import android.widget.Toast
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.FirebaseUser
@@ -13,11 +14,31 @@ import com.sweetguyfanclub2th.mickmick.databinding.ActivityRenameBinding
 class RenameActivity : AppCompatActivity() {
     private lateinit var binding: ActivityRenameBinding
     private var db: FirebaseFirestore = FirebaseFirestore.getInstance()
+    private lateinit var itemToString: List<String>
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityRenameBinding.inflate(layoutInflater)
         setContentView(binding.root)
+
+        itemToString = listOf()
+
+        db.collection("nickname").get()
+            .addOnSuccessListener { result ->
+                for (document in result) {
+                    itemToString = document["nickname"].toString()
+                        .replace("[", "")
+                        .replace("]", "")
+                        .split(",")
+                }
+            }
+            .addOnFailureListener { exception ->
+                Log.w("RegisterActivity", "Error getting documents: $exception")
+            }
+
+        binding.nicknameCheck.setOnClickListener {
+            checkNickName(binding.registerNickname.text.toString())
+        }
 
         binding.backpress.setOnClickListener {
             finish()
@@ -81,6 +102,32 @@ class RenameActivity : AppCompatActivity() {
             Toast.makeText(this, "유저 정보 불러오기에 실패했습니다.", Toast.LENGTH_SHORT).show()
             Log.d("TAG", "editInfo: NullPointerException")
             finish()
+        }
+    }
+
+    private fun checkNickName(nickname: String): Boolean {
+        var sameNickNameCheck = false
+
+        for (element in itemToString) {
+            if (element != nickname) {
+                sameNickNameCheck = true
+            } else {
+                sameNickNameCheck = false
+                break
+            }
+        }
+
+        return when (sameNickNameCheck) {
+            false -> {
+                binding.nicknameCheckText.visibility = View.VISIBLE
+                binding.nicknameCheckText.text = "이미 사용중인 닉네임입니다."
+                false
+            }
+            true -> {
+                binding.nicknameCheckText.visibility = View.VISIBLE
+                binding.nicknameCheckText.text = "사용할 수 있는 닉네임입니다."
+                true
+            }
         }
     }
 }
