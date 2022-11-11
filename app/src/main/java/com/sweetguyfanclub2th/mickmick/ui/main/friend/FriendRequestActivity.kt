@@ -31,6 +31,10 @@ class FriendRequestActivity : AppCompatActivity() {
         binding = ActivityFriendrequestBinding.inflate(layoutInflater)
         binding1 = FriendRequestLayoutBinding.inflate(layoutInflater)
 
+        binding.backpress.setOnClickListener {
+            finish()
+        }
+
         val view = binding.root
         setContentView(view)
 
