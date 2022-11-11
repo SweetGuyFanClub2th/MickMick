@@ -17,14 +17,11 @@ import java.security.MessageDigest
 
 class MainActivity : AppCompatActivity() {
     private lateinit var binding: ActivityMainBinding
-    private var mBackWait : Long = 0
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
-
-        getAppKeyHash()
 
         binding.bottomNavigationView.setOnItemSelectedListener {
             when(it.itemId) {
@@ -46,23 +43,6 @@ class MainActivity : AppCompatActivity() {
             }
 
             true
-        }
-    }
-
-    // 앱 해시 키 얻는 코드
-    fun getAppKeyHash() {
-        try {
-            val info =
-                packageManager.getPackageInfo(packageName, PackageManager.GET_SIGNATURES)
-            for (signature in info.signatures) {
-                var md: MessageDigest
-                md = MessageDigest.getInstance("SHA")
-                md.update(signature.toByteArray())
-                val something = String(Base64.encode(md.digest(), 0))
-                Log.e("Hash key", something)
-            }
-        } catch (e: Exception) {
-            Log.e("name not found", e.toString())
         }
     }
 
