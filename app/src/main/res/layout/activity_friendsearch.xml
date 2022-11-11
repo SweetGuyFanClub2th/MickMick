@@ -4,28 +4,69 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:paddingTop="18dp"
+    android:paddingEnd="18dp"
+    android:paddingStart="18dp"
     tools:context=".ui.main.friend.FriendSearchActivity">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/constraint"
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintStart_toStartOf="parent">
+
+        <ImageView
+            android:id="@+id/backpress"
+            android:layout_width="22dp"
+            android:layout_height="22dp"
+            android:src="@drawable/backbtn"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            />
+
+        <TextView
+            android:id="@+id/title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="친구 검색하기"
+            android:layout_marginStart="20dp"
+            android:textColor="@color/black"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/backpress"
+            android:textSize="22sp"
+            android:fontFamily="@font/suit_medium"
+            />
+    </androidx.constraintlayout.widget.ConstraintLayout>
 
     <Spinner
         android:id="@+id/spinner"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:background="@drawable/border_padding"
         app:layout_constraintBottom_toTopOf="@id/search_word"
         app:layout_constraintEnd_toEndOf="@id/search_word"
+        android:layout_marginBottom="24dp"
         android:layout_marginTop="13dp"
         android:entries="@array/option" />
 
 
     <EditText
         android:id="@+id/search_word"
-        android:layout_width="wrap_content"
+        android:padding="10dp"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        android:layout_marginTop="100dp"
+        android:layout_marginTop="60dp"
+        android:hint="친구 이름을 검색하세요"
         android:background="@drawable/search_background"
-        android:textSize="20sp"
+        android:textSize="16sp"
+        android:textColorHint="@color/graygreen"
+        android:paddingStart="16dp"
         />
 
     <ImageButton
@@ -43,7 +84,9 @@
         android:id="@+id/recyclerview"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_marginTop="170dp"
+        android:layout_marginTop="130dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        android:layout_marginBottom="30dp"
         />
 </androidx.constraintlayout.widget.ConstraintLayout>
 

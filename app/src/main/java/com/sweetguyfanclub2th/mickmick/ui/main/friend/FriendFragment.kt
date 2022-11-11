@@ -19,7 +19,6 @@ class FriendFragment : Fragment() {
 
     val db = FirebaseFirestore.getInstance()    // Firestore 인스턴스 선언
 
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 

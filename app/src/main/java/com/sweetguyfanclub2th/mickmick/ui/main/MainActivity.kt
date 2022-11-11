@@ -37,7 +37,7 @@ class MainActivity : AppCompatActivity() {
                 R.id.menu_todo -> {
                     supportFragmentManager.beginTransaction().replace(R.id.fragment, TodoFragment()).commit()
                 }
-                R.id.menu_map -> {
+                R.id.menu_search -> {
                     supportFragmentManager.beginTransaction().replace(R.id.fragment, SearchFragment()).commit()
                 }
                 R.id.menu_settings -> {
