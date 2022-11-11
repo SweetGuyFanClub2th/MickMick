@@ -53,9 +53,6 @@ class FriendSearchAdapter : RecyclerView.Adapter<FriendSearchViewHolder>() {
         return FriendSearchViewHolder(binding)
     }
 
-
-
-
     // onCreateViewHolder에서 만든 view와 실제 데이터를 연결
     override fun onBindViewHolder(holder: FriendSearchViewHolder, position: Int) {
         //var viewHolder = (holder as FriendSearchViewHolder).itemView
@@ -105,8 +102,4 @@ class FriendSearchAdapter : RecyclerView.Adapter<FriendSearchViewHolder>() {
                 notifyDataSetChanged()
             }
     }
-
-
-
-
 }

@@ -8,7 +8,6 @@ import com.sweetguyfanclub2th.mickmick.databinding.FriendRequestLayoutBinding
 class FriendRequestViewHolder(private val binding: FriendRequestLayoutBinding) :
     RecyclerView.ViewHolder(binding.root) {
 
-
     fun bind(friendRequest: FriendRequest){
         binding.nickname1.text = friendRequest.nickname1
         binding.email1.text = friendRequest.email1

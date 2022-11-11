@@ -26,12 +26,10 @@ class FriendRequestActivity : AppCompatActivity() {
     val itemList = arrayListOf<FriendRequest>()    // 리스트 아이템 배열
     val adapter = FriendRequestAdapter(itemList)         // 리사이클러 뷰 어댑터
 
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityFriendrequestBinding.inflate(layoutInflater)
         binding1 = FriendRequestLayoutBinding.inflate(layoutInflater)
-
 
         val view = binding.root
         setContentView(view)
@@ -42,20 +40,14 @@ class FriendRequestActivity : AppCompatActivity() {
 
 
         val myEmail = Firebase.auth.currentUser?.email.toString()
-
         val userInfo = db.collection(myEmail).document("userinfo")
 
 
         userInfo.get().addOnSuccessListener {
             val requestedEmail = it.get("friendRequest").toString()
 
-
-
             Log.e("MyEmail", myEmail)
-
             Log.e("RequestedEmail", requestedEmail)
-
-
 
             db.collection("friendSearch")   // 작업할 컬렉션
                 .get()      // 문서 가져오기
@@ -64,8 +56,7 @@ class FriendRequestActivity : AppCompatActivity() {
                     itemList.clear()
                     for (document in result) {  // 가져온 문서들은 result에 들어감
                         val item = FriendRequest(
-                            document["nickname"] as String,
-                            document["email"] as String
+                            document["nickname"] as String, document["email"] as String
                         )
                         Log.e("myitem1", document["nickname"] as String)
                         Log.e("myitem2", document["email"] as String)
@@ -76,8 +67,6 @@ class FriendRequestActivity : AppCompatActivity() {
                         }
                     }
                     adapter.notifyDataSetChanged()  // 리사이클러 뷰 갱신
-
-
                 }
 
 

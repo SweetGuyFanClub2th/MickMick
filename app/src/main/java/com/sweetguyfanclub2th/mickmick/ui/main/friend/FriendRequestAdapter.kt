@@ -16,7 +16,8 @@ import com.sweetguyfanclub2th.mickmick.data.FriendRequest
 import com.sweetguyfanclub2th.mickmick.databinding.FriendRequestLayoutBinding
 import com.sweetguyfanclub2th.mickmick.databinding.FriendSearchLayoutBinding
 
-class FriendRequestAdapter(val itemList: ArrayList<FriendRequest> = arrayListOf()) : RecyclerView.Adapter<FriendRequestViewHolder>() {
+class FriendRequestAdapter(val itemList: ArrayList<FriendRequest> = arrayListOf()) :
+    RecyclerView.Adapter<FriendRequestViewHolder>() {
     private var firestore: FirebaseFirestore? = null
     private lateinit var binding: FriendRequestLayoutBinding
     private lateinit var db: FirebaseFirestore
@@ -29,7 +30,7 @@ class FriendRequestAdapter(val itemList: ArrayList<FriendRequest> = arrayListOf(
     override fun onCreateViewHolder(
         parent: ViewGroup,
         viewType: Int
-    ): FriendRequestViewHolder{
+    ): FriendRequestViewHolder {
 
         binding =
             FriendRequestLayoutBinding.inflate(LayoutInflater.from(parent.context), parent, false)
@@ -41,11 +42,7 @@ class FriendRequestAdapter(val itemList: ArrayList<FriendRequest> = arrayListOf(
     }
 
 
-
-
-        override fun onBindViewHolder(holder: FriendRequestViewHolder, position: Int) {
-
-
+    override fun onBindViewHolder(holder: FriendRequestViewHolder, position: Int) {
         holder.bind(itemList[position])
         binding.friendPlus1.setOnClickListener {
             val myEmail = Firebase.auth.currentUser?.email.toString()
@@ -53,24 +50,25 @@ class FriendRequestAdapter(val itemList: ArrayList<FriendRequest> = arrayListOf(
             val userInfo = db.collection(myEmail).document("userinfo")
             userInfo.get().addOnSuccessListener {
                 val requestedEmail = it.get("friendRequest").toString()
-                db.collection(myEmail).document("userinfo").update("friend",requestedEmail)
-                db.collection(myEmail).document("userinfo").update("friendRequest",null)
+                db.collection(myEmail).document("userinfo").update("friend", requestedEmail)
+                db.collection(myEmail).document("userinfo").update("friendRequest", null)
 
-            }
+                db.collection(requestedEmail).document("userinfo").update("friend", myEmail)
             }
         }
-
-        //val myEmail = Firebase.auth.currentUser?.email.toString()
-        //holder.
-
-        /*val myEmail = Firebase.auth.currentUser?.email.toString()
-        binding.friendPlus1.setOnClickListener {
-            Log.e("e","e")
-            db.collection(myEmail).document("userinfo").update("friend",myEmail)
-        }*/
-
-
     }
+
+    //val myEmail = Firebase.auth.currentUser?.email.toString()
+    //holder.
+
+    /*val myEmail = Firebase.auth.currentUser?.email.toString()
+    binding.friendPlus1.setOnClickListener {
+        Log.e("e","e")
+        db.collection(myEmail).document("userinfo").update("friend",myEmail)
+    }*/
+
+
+}
 
 
 
