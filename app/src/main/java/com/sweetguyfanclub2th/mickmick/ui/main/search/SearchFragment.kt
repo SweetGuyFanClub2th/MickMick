@@ -10,9 +10,6 @@ import android.view.ViewGroup
 import android.widget.Toast
 import androidx.recyclerview.widget.RecyclerView
 import com.skt.tmap.TMapView
-import com.skt.tmap.poi.NewAddress
-import com.sweetguyfanclub2th.mickmick.data.searchpois.NewAddres
-import com.sweetguyfanclub2th.mickmick.data.searchpois.NewAddressList
 import com.sweetguyfanclub2th.mickmick.data.searchpois.Poi
 import com.sweetguyfanclub2th.mickmick.data.searchpois.PoisResponse
 import com.sweetguyfanclub2th.mickmick.databinding.FragmentSearchBinding
@@ -57,17 +54,6 @@ class SearchFragment : Fragment() {
         return binding.root
     }
 
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        super.onViewCreated(view, savedInstanceState)
-    }
-
-    override fun onStart() {
-        super.onStart()
-
-        val tmapview = TMapView(requireContext())
-        tmapview.setSKTMapApiKey(authToken)
-    }
-
     private fun getDataToRetrofit(keyword : String){
         val retrofit = RetrofitClient.getApiService().getPois(1, keyword, authToken)
 
@@ -80,11 +66,6 @@ class SearchFragment : Fragment() {
                 call: Call<PoisResponse>,
                 response: Response<PoisResponse>
             ) {
-                Log.d(TAG, "response : ${response.body()?.searchPoiInfo}") // 정상출력
-                Log.d(TAG, "response (errorBody) : ${response.errorBody()}")
-                Log.d(TAG, "response (message) : ${response.message()}")
-                Log.d(TAG, "response (code) : ${response.code()}")
-
                 val poiResult = response.body()?.searchPoiInfo?.pois?.poi!!
                 adapter = SearchAdapter(poiResult as ArrayList<Poi>)
 
