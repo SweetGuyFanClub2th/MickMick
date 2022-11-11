@@ -8,11 +8,16 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Adapter
+import androidx.recyclerview.widget.LinearLayoutManager
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
 import com.sweetguyfanclub2th.mickmick.R
+import com.sweetguyfanclub2th.mickmick.data.IconData
+import com.sweetguyfanclub2th.mickmick.data.TodoData
 import com.sweetguyfanclub2th.mickmick.databinding.ActivityRenameBinding
 import com.sweetguyfanclub2th.mickmick.databinding.FragmentHomeBinding
+import com.sweetguyfanclub2th.mickmick.ui.main.setting.IconAdapter
 import java.time.LocalDate
 import java.time.LocalDateTime
 import java.time.format.DateTimeFormatter
@@ -25,23 +30,24 @@ class HomeFragment : Fragment() {
     private var todoList: MutableList<String>  = mutableListOf()
     private var recyclerItems: MutableList<List<String>>  = mutableListOf()
 
+    private lateinit var todayTime: String
+
     @SuppressLint("NewApi", "SetTextI18n")
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
+    ): View {
         _binding = FragmentHomeBinding.inflate(inflater, container, false)
-
 
         val current = LocalDateTime.now()
         val time = current.format((DateTimeFormatter.ofPattern("yyyyMMdd")))
         val showingTime = current.format(DateTimeFormatter.ofPattern("MM월 dd일"))
 
+        todayTime = time
+
         findTodoId()
 
         binding.nowDate.text = "$showingTime, "
-
-        // TODO: 유저 todo 목록에서 앞 연도, 월, 일이 현재 연도, 월, 일과 같은 것만 뽑아서 보여주기
 
         return binding.root
     }
@@ -51,11 +57,16 @@ class HomeFragment : Fragment() {
 
         info.get().addOnSuccessListener {
             val nickname: List<String> = it.get("todoId") as List<String>
-            for (i in nickname.indices) {
-                todoList.add(nickname[i])
+            if (nickname == null) {
+                Log.d("todoId", "null")
             }
-            Log.d("time1", nickname.toString())
-            findRecyclerItem()
+            else {
+                for (i in nickname.indices) {
+                    todoList.add(nickname[i])
+                }
+                Log.d("time1", nickname.toString())
+                findRecyclerItem()
+            }
         }
     }
 
@@ -68,6 +79,23 @@ class HomeFragment : Fragment() {
                 recyclerItems.add(todoTitle)
             }
             Log.d("time2", recyclerItems.toString())
+
+            val recyclerViewItems = ArrayList<TodoData>()
+
+            for (i in 0 until todoList.size) {
+                recyclerViewItems.add(
+                    TodoData(
+                        recyclerItems[i][0],
+                        recyclerItems[i][1].substring(7, 12),
+                        recyclerItems[i][2],
+                        recyclerItems[i][3],
+                        recyclerItems[i][4]
+                    )
+                )
+            }
+
+            binding.todoRecycler.layoutManager = LinearLayoutManager(this.context)
+            binding.todoRecycler.adapter = TodoAdapter(recyclerViewItems)
         }
 
     }
