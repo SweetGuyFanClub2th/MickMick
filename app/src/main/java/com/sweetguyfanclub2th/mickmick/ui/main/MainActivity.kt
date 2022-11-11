@@ -26,8 +26,6 @@ class MainActivity : AppCompatActivity() {
 
         getAppKeyHash()
 
-        supportFragmentManager.beginTransaction().add(R.id.fragment, SettingFragment()).commit()
-
         binding.bottomNavigationView.setOnItemSelectedListener {
             when(it.itemId) {
                 R.id.menu_home -> {

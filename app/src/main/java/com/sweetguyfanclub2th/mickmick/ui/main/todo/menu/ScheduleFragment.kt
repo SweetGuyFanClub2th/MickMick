@@ -32,7 +32,6 @@ class ScheduleFragment : Fragment() {
 
     private val db: FirebaseFirestore = FirebaseFirestore.getInstance()  // Firestore 인스턴스 선언
     private var email = FirebaseAuth.getInstance().currentUser?.email.toString()
-    private lateinit var nickname: String
 
     private lateinit var dateValue: String
     private lateinit var timeValue: String
@@ -82,6 +81,7 @@ class ScheduleFragment : Fragment() {
 
     private fun uploadData() {
         val info = db.collection(email).document("todo")
+        val todoData = db.collection(email).document("userInfo")
 
         binding.editFriend.text =
             Editable.Factory.getInstance().newEditable("이하람, 이하람 외 3인")
@@ -95,6 +95,12 @@ class ScheduleFragment : Fragment() {
                 binding.editTime.text.toString(),
                 binding.editFriend.text.toString(),
                 binding.editPlace.text.toString(),
+            )
+        )
+
+        todoData.update(
+            "todoId", FieldValue.arrayUnion(
+                dateValue + timeValue
             )
         )
 
