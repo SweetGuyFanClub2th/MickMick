@@ -1,4 +1,4 @@
-package com.sweetguyfanclub2th.mickmick.ui.main.map
+package com.sweetguyfanclub2th.mickmick.ui.main.search
 
 import android.content.ContentValues.TAG
 import android.os.Bundle
@@ -10,21 +10,21 @@ import android.view.ViewGroup
 import android.widget.Toast
 import com.skt.tmap.TMapView
 import com.sweetguyfanclub2th.mickmick.data.searchpois.PoisResponse
-import com.sweetguyfanclub2th.mickmick.databinding.FragmentMapBinding
+import com.sweetguyfanclub2th.mickmick.databinding.FragmentSearchBinding
 import com.sweetguyfanclub2th.mickmick.ui.RetrofitClient
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
 
-class MapFragment : Fragment() {
-    private var _binding: FragmentMapBinding? = null
+class SearchFragment : Fragment() {
+    private var _binding: FragmentSearchBinding? = null
     private val binding get() = _binding!!
 
     private val authToken = "l7xx7de642979fac440f8fad597ef2584f9e"
     companion object {
-        private val retrofitClient: MapFragment = MapFragment()
+        private val retrofitClient: SearchFragment = SearchFragment()
 
-        fun getInstance(): MapFragment {
+        fun getInstance(): SearchFragment {
             return retrofitClient
         }
     }
@@ -33,7 +33,7 @@ class MapFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        _binding = FragmentMapBinding.inflate(inflater, container, false)
+        _binding = FragmentSearchBinding.inflate(inflater, container, false)
 
         binding.searchButton.setOnClickListener {
             if(binding.mapSearch.text.isNullOrEmpty()){

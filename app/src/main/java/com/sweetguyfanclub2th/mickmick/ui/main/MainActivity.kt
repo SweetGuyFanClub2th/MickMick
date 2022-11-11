@@ -10,7 +10,7 @@ import com.sweetguyfanclub2th.mickmick.R
 import com.sweetguyfanclub2th.mickmick.databinding.ActivityMainBinding
 import com.sweetguyfanclub2th.mickmick.ui.main.friend.FriendFragment
 import com.sweetguyfanclub2th.mickmick.ui.main.home.HomeFragment
-import com.sweetguyfanclub2th.mickmick.ui.main.map.MapFragment
+import com.sweetguyfanclub2th.mickmick.ui.main.search.SearchFragment
 import com.sweetguyfanclub2th.mickmick.ui.main.setting.SettingFragment
 import com.sweetguyfanclub2th.mickmick.ui.main.todo.TodoFragment
 import java.security.MessageDigest
@@ -40,7 +40,7 @@ class MainActivity : AppCompatActivity() {
                     supportFragmentManager.beginTransaction().replace(R.id.fragment, TodoFragment()).commit()
                 }
                 R.id.menu_map -> {
-                    supportFragmentManager.beginTransaction().replace(R.id.fragment, MapFragment()).commit()
+                    supportFragmentManager.beginTransaction().replace(R.id.fragment, SearchFragment()).commit()
                 }
                 R.id.menu_settings -> {
                     supportFragmentManager.beginTransaction().replace(R.id.fragment, SettingFragment()).commit()

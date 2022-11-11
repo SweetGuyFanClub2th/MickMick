@@ -10,7 +10,7 @@ import com.google.android.material.tabs.TabLayoutMediator
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
 import com.sweetguyfanclub2th.mickmick.databinding.FragmentTodoBinding
-import com.sweetguyfanclub2th.mickmick.ui.main.map.MapFragment
+import com.sweetguyfanclub2th.mickmick.ui.main.search.SearchFragment
 import com.sweetguyfanclub2th.mickmick.ui.main.todo.menu.ScheduleFragment
 
 
@@ -43,7 +43,7 @@ class TodoFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         val viewPagerAdapter = TodoViewPagerAdapter(requireActivity())
-        viewPagerAdapter.addFragment(MapFragment())
+        viewPagerAdapter.addFragment(SearchFragment())
         viewPagerAdapter.addFragment(ScheduleFragment())
 
         binding.todoViewPager.adapter = viewPagerAdapter
