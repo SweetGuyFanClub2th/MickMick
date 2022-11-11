@@ -83,10 +83,10 @@ class ScheduleFragment : Fragment() {
         val info = db.collection(email).document("todo")
         val todoData = db.collection(email).document("userInfo")
 
-        binding.editFriend.text =
-            Editable.Factory.getInstance().newEditable("이하람, 이하람 외 3인")
-        binding.editPlace.text =
-            Editable.Factory.getInstance().newEditable("임시 장소")
+//        binding.editFriend.text =
+//            Editable.Factory.getInstance().newEditable("이하람, 이하람 외 3인")
+//        binding.editPlace.text =
+//            Editable.Factory.getInstance().newEditable("임시 장소")
 
         info.update(
             (dateValue + timeValue), FieldValue.arrayUnion(

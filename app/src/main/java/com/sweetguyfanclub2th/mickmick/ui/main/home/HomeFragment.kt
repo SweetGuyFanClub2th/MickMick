@@ -56,17 +56,12 @@ class HomeFragment : Fragment() {
         val info = db.collection(email).document("userinfo")
 
         info.get().addOnSuccessListener {
-            val nickname: List<String> = it.get("todoId") as List<String>
-            if (nickname == null) {
-                Log.d("todoId", "null")
+        val nickname: List<String> = it.get("todoId") as List<String>
+            for (i in nickname.indices) {
+                todoList.add(nickname[i])
             }
-            else {
-                for (i in nickname.indices) {
-                    todoList.add(nickname[i])
-                }
-                Log.d("time1", nickname.toString())
-                findRecyclerItem()
-            }
+            Log.d("time1", nickname.toString())
+            findRecyclerItem()
         }
     }
 
@@ -97,6 +92,5 @@ class HomeFragment : Fragment() {
             binding.todoRecycler.layoutManager = LinearLayoutManager(this.context)
             binding.todoRecycler.adapter = TodoAdapter(recyclerViewItems)
         }
-
     }
 }
