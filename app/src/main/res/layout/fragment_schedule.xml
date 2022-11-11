@@ -141,7 +141,7 @@
                 android:id="@+id/info_text5"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="함께하는 친구를 초대해봐요."
+                android:text="함께하는 장소를 검색해봐요."
                 app:layout_constraintTop_toBottomOf="@+id/edit_friend"
                 app:layout_constraintStart_toStartOf="parent"
                 android:layout_marginTop="44dp"

@@ -81,7 +81,7 @@ class HomeFragment : Fragment() {
                 recyclerViewItems.add(
                     TodoData(
                         recyclerItems[i][0],
-                        recyclerItems[i][1].substring(7, 12),
+                        recyclerItems[i][1].substring(7, 13),
                         recyclerItems[i][2],
                         recyclerItems[i][3],
                         recyclerItems[i][4]
