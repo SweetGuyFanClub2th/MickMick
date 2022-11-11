@@ -8,7 +8,12 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
+import androidx.recyclerview.widget.RecyclerView
 import com.skt.tmap.TMapView
+import com.skt.tmap.poi.NewAddress
+import com.sweetguyfanclub2th.mickmick.data.searchpois.NewAddres
+import com.sweetguyfanclub2th.mickmick.data.searchpois.NewAddressList
+import com.sweetguyfanclub2th.mickmick.data.searchpois.Poi
 import com.sweetguyfanclub2th.mickmick.data.searchpois.PoisResponse
 import com.sweetguyfanclub2th.mickmick.databinding.FragmentSearchBinding
 import com.sweetguyfanclub2th.mickmick.ui.RetrofitClient
@@ -19,6 +24,9 @@ import retrofit2.Response
 class SearchFragment : Fragment() {
     private var _binding: FragmentSearchBinding? = null
     private val binding get() = _binding!!
+
+    private lateinit var adapter : SearchAdapter
+    private lateinit var recyclerView: RecyclerView
 
     private val authToken = "l7xx7de642979fac440f8fad597ef2584f9e"
     companion object {
@@ -73,10 +81,15 @@ class SearchFragment : Fragment() {
                 response: Response<PoisResponse>
             ) {
                 Log.d(TAG, "response : ${response.body()?.searchPoiInfo}") // 정상출력
-
                 Log.d(TAG, "response (errorBody) : ${response.errorBody()}")
                 Log.d(TAG, "response (message) : ${response.message()}")
                 Log.d(TAG, "response (code) : ${response.code()}")
+
+                val poiResult = response.body()?.searchPoiInfo?.pois?.poi!!
+                adapter = SearchAdapter(poiResult as ArrayList<Poi>)
+
+                recyclerView = binding.searchRecycler
+                recyclerView.adapter = adapter
             }
         })
     }

@@ -14,8 +14,8 @@
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         android:textColor="@color/green"
-        android:fontFamily="@font/rix_regular"
-        android:textSize="24sp" />
+        android:fontFamily="@font/pretendard_bold"
+        android:textSize="18sp" />
 
     <TextView
         android:id="@+id/item_middle_biz_name"
