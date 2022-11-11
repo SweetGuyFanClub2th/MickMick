@@ -45,6 +45,21 @@
     <string name="register_userinfo_text">회원 정보 입력하기</string>
     <string name="change_password_txt">비밀번호 변경 전 인증이 필요해요.</string>
     <string name="map_search_edit_text">검색어를 입력하세요</string>
+    <string name="friend_search_hint">친구 이름을 검색하세요</string>
+    <string name="friend_search_title">친구 검색하기</string>
+    <string name="iconchange_title">유저 아이콘 변경하기</string>
+    <string name="icon_change_notice2">사용 가능한 아이콘</string>
+    <string name="change_passwd_title">비밀번호 변경하기</string>
+    <string name="request_text">친구요청</string>
+    <string name="rename_email_text">한번 설정한 이메일은 바꿀 수 없어요.</string>
+    <string name="rename_info_text">기본 정보 수정</string>
+    <string name="rename_input_text">이름을 입력해주세요</string>
+    <string name="rename_nickname_hint">닉네임을 변경해주세요</string>
+    <string name="change_passwd_hint">비밀번호를 입력하세요</string>
+    <string name="change_passwd_btn">다음</string>
+    <string name="change_passwd2_title">이메일로 링크가 발송됩니다.</string>
+    <string name="change_passwd_email_hint">이메일을 입력하세요</string>
+    <string name="change_passwd2_nextbtn">다음</string>
 
 
 </resources>

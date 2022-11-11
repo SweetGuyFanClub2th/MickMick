@@ -35,7 +35,8 @@
         app:layout_constraintStart_toStartOf="parent"
         android:layout_marginTop="50dp"
         app:layout_constraintTop_toBottomOf="@+id/login_txt"
-        android:autofillHints="" />
+        android:autofillHints=""
+        tools:ignore="RtlSymmetry" />
 
 
     <EditText

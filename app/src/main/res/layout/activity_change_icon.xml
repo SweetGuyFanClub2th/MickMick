@@ -4,9 +4,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:paddingStart="18dp"
     android:paddingTop="18dp"
-    android:paddingHorizontal="15dp"
+    android:paddingHorizontal="18dp"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:background="@color/whitegreen"
     tools:context=".ui.main.setting.ChangeIconActivity">
@@ -32,7 +31,7 @@
             android:id="@+id/title"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="유저 아이콘 변경하기"
+            android:text="@string/iconchange_title"
             android:layout_marginStart="20dp"
             android:textColor="@color/black"
             app:layout_constraintTop_toTopOf="parent"
@@ -47,11 +46,11 @@
         android:id="@+id/notice2"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="사용 가능한 아이콘"
+        android:text="@string/icon_change_notice2"
         android:textColor="@color/black"
         android:layout_marginTop="30dp"
         app:layout_constraintStart_toStartOf="parent"
-        android:textSize="16dp"
+        android:textSize="16sp"
         app:layout_constraintTop_toBottomOf="@+id/constraint" />
 
     <androidx.recyclerview.widget.RecyclerView

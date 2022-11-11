@@ -9,7 +9,8 @@
     android:paddingHorizontal="15dp"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:background="@color/whitegreen"
-    tools:context=".ui.main.setting.RenameActivity">
+    tools:context=".ui.main.setting.RenameActivity"
+    tools:ignore="RtlSymmetry">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/constraint"
@@ -58,13 +59,14 @@
         app:layout_constraintEnd_toEndOf="parent"
         android:layout_marginTop="30dp"
         android:imeOptions="actionDone"
-        android:textSize="16sp" />
+        android:textSize="16sp"
+        tools:ignore="LabelFor" />
 
     <TextView
         android:id="@+id/email_check_text"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="한번 설정한 이메일은 바꿀 수 없어요."
+        android:text="@string/rename_email_text"
         android:textColor="@color/graygreen"
         app:layout_constraintTop_toBottomOf="@+id/register_email"
         app:layout_constraintStart_toStartOf="parent"
@@ -75,7 +77,7 @@
         android:id="@+id/txt_info"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="기본 정보 수정"
+        android:text="@string/rename_info_text"
         app:layout_constraintTop_toBottomOf="@id/email_check_text"
         app:layout_constraintStart_toStartOf="parent"
         android:textColor="@color/green"
@@ -87,7 +89,7 @@
         android:id="@+id/register_name"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:hint="이름을 입력해주세요"
+        android:hint="@string/rename_input_text"
         android:padding="13dp"
         android:singleLine="true"
         android:textColorHint="@color/graygreen"
@@ -103,7 +105,7 @@
         android:id="@+id/register_nickname"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:hint="닉네임을 변경해주세요"
+        android:hint="@string/rename_nickname_hint"
         android:padding="13dp"
         android:singleLine="true"
         android:textColorHint="@color/graygreen"

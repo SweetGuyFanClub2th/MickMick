@@ -14,8 +14,9 @@
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         android:layout_marginTop="100dp"
-        android:layout_marginLeft="35dp"
+        android:layout_marginStart="35dp"
         />
+
     <EditText
         android:id="@+id/FriendSearchId"
         android:layout_width="wrap_content"
@@ -27,8 +28,6 @@
         android:background="@null"
         />
 
-
-
     <ImageButton
         android:id="@+id/FriendSearchBt"
         android:layout_width="wrap_content"
@@ -37,6 +36,6 @@
         app:layout_constraintTop_toTopOf="@id/friend_search_bg"
         app:layout_constraintEnd_toEndOf="@id/friend_search_bg"
         android:layout_marginTop="13dp"
-        android:layout_marginRight="15dp"
+        android:layout_marginEnd="15dp"
         />
 </androidx.constraintlayout.widget.ConstraintLayout>

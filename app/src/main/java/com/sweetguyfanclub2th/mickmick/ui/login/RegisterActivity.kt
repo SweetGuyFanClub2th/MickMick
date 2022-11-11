@@ -253,9 +253,6 @@ class RegisterActivity : AppCompatActivity() {
         .addOnFailureListener {
             Log.d("TodoDataSet", "TodoDataSetUpload Fail")
         }
-
-
-
     }
 
     private fun userInfoDataSetUpload(

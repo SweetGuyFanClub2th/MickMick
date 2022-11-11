@@ -73,7 +73,8 @@
         app:layout_constraintStart_toStartOf="parent"
         android:layout_marginEnd="130dp"
         android:layout_marginTop="10dp"
-        android:textSize="16sp" />
+        android:textSize="16sp"
+        tools:ignore="RtlSymmetry" />
 
     <Button
         android:id="@+id/nickname_check"
@@ -113,7 +114,8 @@
         android:textColor="@color/green"
         app:layout_constraintTop_toBottomOf="@+id/nickname_check_text"
         android:layout_marginTop="10dp"
-        android:textSize="16sp" />
+        android:textSize="16sp"
+        tools:ignore="RtlSymmetry" />
 
     <TextView
         android:id="@+id/te2"
@@ -143,7 +145,8 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         android:layout_marginTop="30dp"
-        android:textSize="16sp" />
+        android:textSize="16sp"
+        tools:ignore="RtlSymmetry" />
 
     <TextView
         android:id="@+id/passwd_check_text"
@@ -173,7 +176,8 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         android:layout_marginTop="10dp"
-        android:textSize="16sp" />
+        android:textSize="16sp"
+        tools:ignore="RtlSymmetry" />
 
     <TextView
         android:id="@+id/repeat_passwd_check_text"
