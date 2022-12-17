@@ -106,6 +106,7 @@
             app:layout_constraintEnd_toEndOf="parent"
             android:layout_marginTop="20dp"
             android:clickable="true"
+            android:focusable="false"
             android:textSize="16sp" />
 
         <TextView
@@ -159,7 +160,6 @@
                 android:textColorHint="@color/graygreen"
                 android:background="@drawable/btborder"
                 android:textColor="@color/green"
-                android:focusable="false"
                 app:layout_constraintTop_toBottomOf="@+id/info_text5"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
