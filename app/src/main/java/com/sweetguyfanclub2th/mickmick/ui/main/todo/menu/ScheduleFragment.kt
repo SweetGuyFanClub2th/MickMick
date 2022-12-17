@@ -24,6 +24,7 @@ import com.sweetguyfanclub2th.mickmick.databinding.FragmentScheduleBinding
 import com.sweetguyfanclub2th.mickmick.ui.main.home.HomeFragment
 import com.sweetguyfanclub2th.mickmick.ui.main.setting.ChangePasswordFragment1
 import java.util.*
+import kotlin.collections.ArrayList
 
 
 class ScheduleFragment : Fragment() {
@@ -35,6 +36,10 @@ class ScheduleFragment : Fragment() {
 
     private lateinit var dateValue: String
     private lateinit var timeValue: String
+
+    private lateinit var selectDate: String
+    private lateinit var selectHour: String
+    private lateinit var selectMinute: String
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -81,28 +86,34 @@ class ScheduleFragment : Fragment() {
 
     private fun uploadData() {
         val info = db.collection(email).document("todo")
-        val todoData = db.collection(email).document("userInfo")
-
-//        binding.editFriend.text =
-//            Editable.Factory.getInstance().newEditable("이하람, 이하람 외 3인")
-//        binding.editPlace.text =
-//            Editable.Factory.getInstance().newEditable("임시 장소")
+        val tododata = db.collection(email).document("userinfo")
 
         info.update(
             (dateValue + timeValue), FieldValue.arrayUnion(
                 binding.todoName.text.toString(),
-                binding.editDate.text.toString(),
-                binding.editTime.text.toString(),
+                selectDate,
+                "$selectHour:$selectMinute",
                 binding.editFriend.text.toString(),
                 binding.editPlace.text.toString(),
             )
         )
 
-        todoData.update(
-            "todoId", FieldValue.arrayUnion(
-                dateValue + timeValue
-            )
-        )
+        var emptyList = ArrayList<String>()
+
+        tododata.update("todoId", FieldValue.arrayUnion(
+            dateValue + timeValue
+        ))
+        tododata.get().addOnSuccessListener {
+            val nickname: List<String> = it.get("todoId") as List<String>
+            for (i in nickname.indices) {
+                emptyList.add(nickname[i])
+            }
+            Log.d("apple1", emptyList.toString())
+            emptyList.sort()
+            Log.d("apple2", emptyList.toString())
+        }
+        tododata.delete()
+        tododata.update("todoId",  emptyList)
 
         val transaction: FragmentTransaction =
             requireActivity().supportFragmentManager.beginTransaction()
@@ -124,6 +135,7 @@ class ScheduleFragment : Fragment() {
             binding.editDate.text =
                 Editable.Factory.getInstance().newEditable("${year}년 ${month + 1}월 ${date}일")
             dateValue = "${year}${month + 1}${date}"
+            selectDate = year.toString() + month.toString() + date.toString()
         }, year, month, date)
 
         dialog.show()
@@ -140,6 +152,8 @@ class ScheduleFragment : Fragment() {
             binding.editTime.text =
                 Editable.Factory.getInstance().newEditable("${hour}시 ${minute}분")
             timeValue = "${hour}${minute}"
+            selectHour = hour.toString()
+            selectMinute = minute.toString()
         }, hour, minute, true)
 
         dialog.show()

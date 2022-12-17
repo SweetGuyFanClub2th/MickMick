@@ -75,17 +75,16 @@ class HomeFragment : Fragment() {
             }
             Log.d("time2", recyclerItems.toString())
 
-            val recyclerViewItems = ArrayList<TodoData>()
+            var recyclerViewItems = ArrayList<TodoData>()
 
-            for (i in 0 until todoList.size) {
+            for (i in 0 until recyclerItems.size) {
                 recyclerViewItems.add(
                     TodoData(
                         recyclerItems[i][0],
-                        recyclerItems[i][1].substring(7, 13),
+                        recyclerItems[i][1],
                         recyclerItems[i][2],
                         recyclerItems[i][3],
-                        recyclerItems[i][4]
-                    )
+                        recyclerItems[i][4])
                 )
             }
 

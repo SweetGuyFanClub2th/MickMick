@@ -35,8 +35,8 @@ class TodoAdapter(private val recyclerViewItems: ArrayList<TodoData>):
 
         @SuppressLint("SetTextI18n")
         fun bind(recyclerViewItem: TodoData, i: Int) {
-            title.text = recyclerViewItem.title
-            dateTime.text = recyclerViewItem.date + " " + recyclerViewItem.time
+            dateTime.text = recyclerViewItem.title
+            title.text = recyclerViewItem.time
             member.text = recyclerViewItem.member
             place.text = recyclerViewItem.place
         }
