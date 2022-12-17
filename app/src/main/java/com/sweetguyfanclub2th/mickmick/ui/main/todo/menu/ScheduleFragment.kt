@@ -104,16 +104,15 @@ class ScheduleFragment : Fragment() {
             dateValue + timeValue
         ))
         tododata.get().addOnSuccessListener {
-            val nickname: List<String> = it.get("todoId") as List<String>
+            var nickname: List<String> = it.get("todoId") as List<String>
             for (i in nickname.indices) {
                 emptyList.add(nickname[i])
             }
             Log.d("apple1", emptyList.toString())
             emptyList.sort()
             Log.d("apple2", emptyList.toString())
+            tododata.update("todoId", emptyList)
         }
-        tododata.delete()
-        tododata.update("todoId",  emptyList)
 
         val transaction: FragmentTransaction =
             requireActivity().supportFragmentManager.beginTransaction()
