@@ -1,28 +1,23 @@
-package com.sweetguyfanclub2th.mickmick.ui.main.todo.menu
+package com.sweetguyfanclub2th.mickmick.ui.main.todo
 
 import android.app.DatePickerDialog
 import android.app.TimePickerDialog
-import android.content.ContentValues
 import android.os.Bundle
-import android.provider.SyncStateContract.Helpers.update
 import android.text.Editable
 import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.DatePicker
 import android.widget.EditText
 import android.widget.Toast
 import androidx.fragment.app.FragmentTransaction
 import com.google.firebase.auth.FirebaseAuth
-import com.google.firebase.database.DatabaseReference
 import com.google.firebase.firestore.FieldValue
 import com.google.firebase.firestore.FirebaseFirestore
 import com.sweetguyfanclub2th.mickmick.R
 import com.sweetguyfanclub2th.mickmick.databinding.FragmentScheduleBinding
 import com.sweetguyfanclub2th.mickmick.ui.main.home.HomeFragment
-import com.sweetguyfanclub2th.mickmick.ui.main.setting.ChangePasswordFragment1
 import java.util.*
 import kotlin.collections.ArrayList
 

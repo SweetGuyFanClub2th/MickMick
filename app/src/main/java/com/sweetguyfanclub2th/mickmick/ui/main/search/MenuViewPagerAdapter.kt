@@ -1,12 +1,12 @@
-package com.sweetguyfanclub2th.mickmick.ui.main.todo
+package com.sweetguyfanclub2th.mickmick.ui.main.search
 
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentActivity
 import androidx.viewpager2.adapter.FragmentStateAdapter
-import com.sweetguyfanclub2th.mickmick.ui.main.search.SearchFragment
-import com.sweetguyfanclub2th.mickmick.ui.main.todo.menu.ScheduleFragment
+import com.sweetguyfanclub2th.mickmick.ui.main.search.name.NameFragment
+import com.sweetguyfanclub2th.mickmick.ui.main.todo.ScheduleFragment
 
-class TodoViewPagerAdapter(fragmentActivity: FragmentActivity) :
+class MenuViewPagerAdapter(fragmentActivity: FragmentActivity) :
     FragmentStateAdapter(fragmentActivity) {
     private var fragments: ArrayList<Fragment> = ArrayList()
 
@@ -15,11 +15,11 @@ class TodoViewPagerAdapter(fragmentActivity: FragmentActivity) :
     }
 
     override fun createFragment(position: Int): Fragment {
-        when(position){
+        when (position) {
             0 -> return ScheduleFragment()
-            1 -> return SearchFragment()
+            1 -> return NameFragment()
         }
-        return SearchFragment()
+        return NameFragment()
     }
 
     fun addFragment(fragment: Fragment) {

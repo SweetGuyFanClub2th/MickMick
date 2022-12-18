@@ -1,19 +1,16 @@
 package com.sweetguyfanclub2th.mickmick.ui.main
 
-import android.content.pm.PackageManager
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.util.Base64
 import android.util.Log
 import android.widget.Toast
 import com.sweetguyfanclub2th.mickmick.R
 import com.sweetguyfanclub2th.mickmick.databinding.ActivityMainBinding
 import com.sweetguyfanclub2th.mickmick.ui.main.friend.FriendFragment
 import com.sweetguyfanclub2th.mickmick.ui.main.home.HomeFragment
-import com.sweetguyfanclub2th.mickmick.ui.main.search.SearchFragment
+import com.sweetguyfanclub2th.mickmick.ui.main.search.MenuFragment
 import com.sweetguyfanclub2th.mickmick.ui.main.setting.SettingFragment
-import com.sweetguyfanclub2th.mickmick.ui.main.todo.TodoFragment
-import java.security.MessageDigest
+import com.sweetguyfanclub2th.mickmick.ui.main.todo.ScheduleFragment
 
 class MainActivity : AppCompatActivity() {
     private lateinit var binding: ActivityMainBinding
@@ -34,10 +31,10 @@ class MainActivity : AppCompatActivity() {
                     supportFragmentManager.beginTransaction().replace(R.id.fragment, FriendFragment()).commit()
                 }
                 R.id.menu_todo -> {
-                    supportFragmentManager.beginTransaction().replace(R.id.fragment, TodoFragment()).commit()
+                    supportFragmentManager.beginTransaction().replace(R.id.fragment, ScheduleFragment()).commit()
                 }
                 R.id.menu_search -> {
-                    supportFragmentManager.beginTransaction().replace(R.id.fragment, SearchFragment()).commit()
+                    supportFragmentManager.beginTransaction().replace(R.id.fragment, MenuFragment()).commit()
                 }
                 R.id.menu_settings -> {
                     supportFragmentManager.beginTransaction().replace(R.id.fragment, SettingFragment()).commit()
