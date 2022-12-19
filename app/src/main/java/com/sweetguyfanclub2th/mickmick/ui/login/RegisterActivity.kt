@@ -207,10 +207,10 @@ class RegisterActivity : AppCompatActivity() {
                     val timestamp = SimpleDateFormat("yyyyMMddHHmmss").format(Date())
                     // 01. 투두 데이터 셋
                     // 투두 데이터 셋 구성 - 순서대로 timestamp : title / place(address) / participant
-                    todoDataSetUpload(timestamp, nickname, email)
+                    todoDataSetUpload(email)
 
                     // 02. 유저정보 데이터셋
-                    userInfoDataSetUpload(nickname, name, timestamp, email)
+                    userInfoDataSetUpload(nickname, name, email)
 
                     // 03. 닉네임 데이터셋
                     nicknameDataSetUpload(nickname)
@@ -229,7 +229,7 @@ class RegisterActivity : AppCompatActivity() {
             }
     }
 
-    private fun todoDataSetUpload(timestamp: String, nickname: String, email: String) {
+    private fun todoDataSetUpload(email: String) {
         val todoDataSet =
             mutableMapOf(
                 "209912312359" to
@@ -243,8 +243,7 @@ class RegisterActivity : AppCompatActivity() {
             )
 
         // 이메일로 컬렉션을 구분
-        val emails = auth?.currentUser?.email.toString()
-        db.collection(emails).document("todo").set(
+        db.collection(email).document("todo").set(
             todoDataSet
         )
         .addOnSuccessListener {
@@ -258,7 +257,6 @@ class RegisterActivity : AppCompatActivity() {
     private fun userInfoDataSetUpload(
         nickname: String,
         name: String,
-        timestamp: String,
         email: String
     ) {
         val userDataSet = UserInfo(
