@@ -264,8 +264,8 @@ class RegisterActivity : AppCompatActivity() {
         val userDataSet = UserInfo(
             nickname,
             name,
-            null,
-            null,
+            arrayListOf(),
+            arrayListOf(),
             arrayListOf("209912312359"),
             "default",
             null

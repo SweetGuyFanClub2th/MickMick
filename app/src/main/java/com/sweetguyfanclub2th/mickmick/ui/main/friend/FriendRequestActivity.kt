@@ -9,6 +9,7 @@ import android.widget.Button
 import android.widget.TextView
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.google.firebase.auth.ktx.auth
+import com.google.firebase.firestore.FieldValue
 import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.ktx.Firebase
 import com.sweetguyfanclub2th.mickmick.R
@@ -48,26 +49,33 @@ class FriendRequestActivity : AppCompatActivity() {
 
 
         userInfo.get().addOnSuccessListener {
-            val requestedEmail = it.get("friendRequest").toString()
+
+            //val requestedEmail = it.get("friendRequest")
+            val requestedEmail : List<String> = it.get("friendRequest") as List<String>
+
 
             Log.e("MyEmail", myEmail)
-            Log.e("RequestedEmail", requestedEmail)
+            //Log.e("RequestedEmail", requestedEmail)
 
-            db.collection("friendSearch")   // 작업할 컬렉션
+            db.collection("friendSearch")  // 작업할 컬렉션
                 .get()      // 문서 가져오기
                 .addOnSuccessListener { result ->
                     // 성공할 경우
                     itemList.clear()
                     for (document in result) {  // 가져온 문서들은 result에 들어감
+                        var count = requestedEmail.size
                         val item = FriendRequest(
                             document["nickname"] as String, document["email"] as String
                         )
                         Log.e("myitem1", document["nickname"] as String)
                         Log.e("myitem2", document["email"] as String)
 
-                        if (document["email"] as String == requestedEmail) {
-                            itemList.add(item)
-
+                        while(count != 0) {
+                            --count
+                            if ((document["email"].toString() == requestedEmail[count])) {
+                                itemList.add(item)
+                                Log.e("stringList ", requestedEmail[count])
+                            }
                         }
                     }
                     adapter.notifyDataSetChanged()  // 리사이클러 뷰 갱신

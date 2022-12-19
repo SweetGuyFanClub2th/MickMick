@@ -41,6 +41,10 @@ class FriendFragment : Fragment() {
                 val intent = Intent(activity, FriendRequestActivity::class.java)
                 startActivity(intent)
             }
+            gotoFriendList.setOnClickListener{
+                val intent = Intent(activity, FriendListActivity::class.java)
+                startActivity(intent)
+            }
         }
 
         val view = binding.root

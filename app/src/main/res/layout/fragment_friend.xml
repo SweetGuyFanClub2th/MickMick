@@ -35,6 +35,16 @@
             android:textColor="@color/white"
             />
 
+        <Button
+            android:id="@+id/goto_friend_List"
+            android:layout_width="100dp"
+            android:layout_height="wrap_content"
+            android:text="친구 목록"
+            android:layout_marginStart="40dp"
+            android:background="@drawable/btn_roundbtn"
+            android:textColor="@color/white"
+            />
+
     </LinearLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

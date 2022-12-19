@@ -6,8 +6,10 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
 import android.widget.TextView
+import android.widget.Toast
 import androidx.recyclerview.widget.RecyclerView
 import com.google.firebase.auth.ktx.auth
+import com.google.firebase.firestore.FieldValue
 import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.firestore.FirebaseFirestore.getInstance
 import com.google.firebase.ktx.Firebase
@@ -21,6 +23,7 @@ class FriendRequestAdapter(val itemList: ArrayList<FriendRequest> = arrayListOf(
     private var firestore: FirebaseFirestore? = null
     private lateinit var binding: FriendRequestLayoutBinding
     private lateinit var db: FirebaseFirestore
+    private val data = arrayListOf<FriendRequest>()
 
     init {
         firestore = FirebaseFirestore.getInstance()
@@ -35,26 +38,49 @@ class FriendRequestAdapter(val itemList: ArrayList<FriendRequest> = arrayListOf(
         binding =
             FriendRequestLayoutBinding.inflate(LayoutInflater.from(parent.context), parent, false)
         return FriendRequestViewHolder(binding)
+
     }
+
 
     override fun getItemCount(): Int {
         return itemList.size
     }
 
 
+
+
+
     override fun onBindViewHolder(holder: FriendRequestViewHolder, position: Int) {
         holder.bind(itemList[position])
         binding.friendPlus1.setOnClickListener {
             val myEmail = Firebase.auth.currentUser?.email.toString()
-
             val userInfo = db.collection(myEmail).document("userinfo")
             userInfo.get().addOnSuccessListener {
-                val requestedEmail = it.get("friendRequest").toString()
-                db.collection(myEmail).document("userinfo").update("friend", requestedEmail)
-                db.collection(myEmail).document("userinfo").update("friendRequest", null)
+                //val requestedEmail = it.get("friendRequest").toString()
+                //val requestedEmail : List<String> = it.get("friendRequest") as List<String>
+                val requestedEmail = itemList[position].email1.toString()
+                itemList[position].email1
 
-                db.collection(requestedEmail).document("userinfo").update("friend", myEmail)
+                db.collection(myEmail).document("userinfo").update("friend", FieldValue.arrayUnion(requestedEmail))
+                db.collection(myEmail).document("userinfo").update("friend", FieldValue.arrayUnion(requestedEmail))
+                db.collection(myEmail).document("userinfo").update("friendRequest", FieldValue.arrayRemove(requestedEmail))
+                db.collection(requestedEmail).document("userinfo").update("friendRequest", FieldValue.arrayRemove(myEmail))
+                db.collection(requestedEmail).document("userinfo").update("friend", FieldValue.arrayUnion(myEmail))
+
             }
+
+        }
+
+        binding.friendDelete1.setOnClickListener {
+            val myEmail = Firebase.auth.currentUser?.email.toString()
+            val userInfo = db.collection(myEmail).document("userinfo")
+            userInfo.get().addOnSuccessListener {
+                val requestedEmail = itemList[position].email1.toString()
+                itemList[position].email1
+
+                db.collection(myEmail).document("userinfo").update("friendRequest", FieldValue.arrayRemove(requestedEmail))
+            }
+
         }
     }
 

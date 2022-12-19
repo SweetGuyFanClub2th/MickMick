@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content">
 
@@ -24,7 +23,7 @@
             android:layout_height="80dp">
 
             <TextView
-                android:id="@+id/nickname1"
+                android:id="@+id/nickname2"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="이름"
@@ -36,42 +35,27 @@
                 app:layout_constraintTop_toTopOf="parent" />
 
             <TextView
-                android:id="@+id/email1"
+                android:id="@+id/email2"
                 android:layout_width="wrap_content"
                 android:textColor="@color/graygreen"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="2dp"
                 android:text="이메일"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/nickname1" />
+                app:layout_constraintTop_toBottomOf="@+id/nickname2" />
 
             <Button
-                android:id="@+id/friendPlus1"
-                android:layout_width="85dp"
-                android:background="@drawable/btn_roundbtn"
-                android:textColor="@color/white"
-                android:layout_height="45dp"
-                android:text="수락"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
-                android:layout_marginTop="2dp"
-                android:layout_marginRight="90dp"/>
-
-            <Button
-                android:id="@+id/friendDelete1"
+                android:id="@+id/friendDelete2"
                 android:layout_width="85dp"
                 android:background="@drawable/btn_roundbtn1"
                 android:textColor="@color/white"
                 android:layout_height="45dp"
-                android:text="거절"
-                app:layout_constraintStart_toEndOf="@id/friendPlus1"
+                android:text="삭제"
+                app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
                 android:layout_marginTop="2dp"
-                android:layout_marginLeft="5dp"
-
-                android:layout_marginRight="4dp"/>
+                android:layout_marginRight="5dp"/>
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 

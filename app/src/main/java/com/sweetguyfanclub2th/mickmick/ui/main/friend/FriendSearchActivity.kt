@@ -1,16 +1,11 @@
 package com.sweetguyfanclub2th.mickmick.ui.main.friend
 
-import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.view.LayoutInflater
 import android.view.View
-import android.view.ViewGroup
 import android.widget.AdapterView
 import androidx.recyclerview.widget.LinearLayoutManager
-import androidx.recyclerview.widget.RecyclerView
 import com.google.firebase.firestore.FirebaseFirestore
-import com.sweetguyfanclub2th.mickmick.R
 import com.sweetguyfanclub2th.mickmick.databinding.ActivityFriendsearchBinding
 
 class FriendSearchActivity : AppCompatActivity() {
@@ -31,16 +26,18 @@ class FriendSearchActivity : AppCompatActivity() {
 
         binding.recyclerview.adapter = FriendSearchAdapter()
         binding.recyclerview.layoutManager = LinearLayoutManager(this)
-
+        var searchOption = "friendSearch"
         binding.backpress.setOnClickListener {
             finish()
         }
 
-        var searchOption = "friendSearch"
+
 
         // 스피너 옵션에 따른 동작
         binding.spinner.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
+
             override fun onNothingSelected(parent: AdapterView<*>?) {
+
             }
 
             override fun onItemSelected(
@@ -60,13 +57,14 @@ class FriendSearchActivity : AppCompatActivity() {
                     }
                 }
             }
+
         }
+
         binding.searchBtn.setOnClickListener {
             (binding.recyclerview.adapter as FriendSearchAdapter).search(
                 binding.searchWord.text.toString(),
                 searchOption
             )
         }
-
     }
 }
