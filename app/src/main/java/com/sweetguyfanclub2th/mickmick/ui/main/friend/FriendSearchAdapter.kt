@@ -118,7 +118,7 @@ class FriendSearchAdapter : RecyclerView.Adapter<FriendSearchViewHolder>() {
 
         //Log.e("test", userName[position].email.toString())
         binding.friendPlus.setOnClickListener {
-            binding.friendPlus.visibility = INVISIBLE
+            //binding.friendPlus.visibility = INVISIBLE
             val myEmail = Firebase.auth.currentUser?.email.toString()
             val otherEmail = userName[position].email.toString()
             Log.e("test01", myEmail)
