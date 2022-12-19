@@ -129,7 +129,7 @@ class ScheduleFragment : Fragment() {
             binding.editDate.text =
                 Editable.Factory.getInstance().newEditable("${year}년 ${month + 1}월 ${date}일")
             dateValue = "${year}${month + 1}${date}"
-            selectDate = year.toString() + month.toString() + date.toString()
+            selectDate = year.toString() + (month + 1).toString() + date.toString()
         }, year, month, date)
 
         dialog.show()
