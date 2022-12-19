@@ -1,6 +1,7 @@
 package com.sweetguyfanclub2th.mickmick.ui.main.search.name
 
 import android.content.ContentValues.TAG
+import android.content.Context
 import android.os.Bundle
 import android.util.Log
 import androidx.fragment.app.Fragment
@@ -66,7 +67,7 @@ class NameFragment : Fragment() {
                 response: Response<PoisResponse>
             ) {
                 val poiResult = response.body()?.searchPoiInfo?.pois?.poi!!
-                adapter = NameAdapter(poiResult as ArrayList<Poi>)
+                adapter = context?.let { NameAdapter(it, poiResult as ArrayList<Poi>) }!!
 
                 recyclerView = binding.searchRecycler
                 recyclerView.adapter = adapter

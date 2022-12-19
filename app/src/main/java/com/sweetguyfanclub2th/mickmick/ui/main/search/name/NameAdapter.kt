@@ -1,12 +1,13 @@
 package com.sweetguyfanclub2th.mickmick.ui.main.search.name
 
+import android.content.Context
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.sweetguyfanclub2th.mickmick.data.searchpois.Poi
 import com.sweetguyfanclub2th.mickmick.databinding.ItemSearchBinding
 
-class NameAdapter(private val postList: ArrayList<Poi>) : RecyclerView.Adapter<NameViewHolder>() {
+class NameAdapter(val context: Context, private val postList: ArrayList<Poi>) : RecyclerView.Adapter<NameViewHolder>() {
     private lateinit var binding: ItemSearchBinding
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): NameViewHolder {
@@ -16,7 +17,7 @@ class NameAdapter(private val postList: ArrayList<Poi>) : RecyclerView.Adapter<N
 
     override fun onBindViewHolder(holder: NameViewHolder, position: Int) {
         val addressResult = postList[position].newAddressList.newAddress
-        holder.bind(postList[position], addressResult[0])
+        holder.bind(postList[position], addressResult[0], context)
     }
 
     override fun getItemCount(): Int = postList.size

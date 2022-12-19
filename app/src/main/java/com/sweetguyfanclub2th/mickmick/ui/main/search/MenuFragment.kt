@@ -20,7 +20,7 @@ class MenuFragment : Fragment() {
     private var auth: FirebaseAuth? = null
     private lateinit var db: FirebaseFirestore
 
-    private val tabTitleArray = arrayOf("", "Map")
+    private val tabTitleArray = arrayOf("Search", "Infomation")
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
