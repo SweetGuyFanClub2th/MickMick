@@ -17,7 +17,7 @@ import com.sweetguyfanclub2th.mickmick.ui.main.MainActivity
 class IconAdapter(private val recyclerViewItems: ArrayList<IconData>): RecyclerView.Adapter<IconAdapter.RecyclerViewViewHolder>()  {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerViewViewHolder {
-        val itemView = LayoutInflater.from(parent.context).inflate(R.layout.icon_items, parent, false)
+        val itemView = LayoutInflater.from(parent.context).inflate(R.layout.item_icon, parent, false)
         return RecyclerViewViewHolder(itemView)
     }
 

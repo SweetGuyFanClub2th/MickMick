@@ -30,7 +30,7 @@
         android:textSize="16sp" />
 
     <TextView
-        android:id="@+id/item_full_adress_road"
+        android:id="@+id/item_full_address_road"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="주소"

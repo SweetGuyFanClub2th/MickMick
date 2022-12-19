@@ -14,7 +14,7 @@ class NameViewHolder(private val binding: ItemSearchBinding) :
     fun bind(itemPoi: Poi, itemAddress: NewAddres, context: Context){
         binding.itemName.text = itemPoi.name
         binding.itemMiddleBizName.text = itemPoi.middleBizName
-        binding.itemFullAdressRoad.text = itemAddress.fullAddressRoad
+        binding.itemFullAddressRoad.text = itemAddress.fullAddressRoad
 
         itemView.setOnClickListener {
             Intent(context, DetailNameActivity::class.java).apply {
