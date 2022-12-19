@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".ui.main.search.name.detail.DetailNameActivity">
+    tools:context=".ui.main.search.name.detail.DetailPlaceActivity">
 
     <ImageView
         android:id="@+id/backpress"
@@ -42,14 +42,14 @@
         android:fontFamily="@font/pretendard_medium"
         android:textSize="16sp" />
 
-    <androidx.constraintlayout.widget.ConstraintLayout
+    <LinearLayout
         android:id="@+id/map_view"
         android:layout_width="match_parent"
         android:layout_height="0dp"
         app:layout_constraintTop_toBottomOf="@+id/item_full_address_road"
         app:layout_constraintBottom_toBottomOf="parent"
         android:layout_marginTop="15dp"
-        />
+        android:orientation="horizontal" />
 
     <Button
         android:id="@+id/todo_add"

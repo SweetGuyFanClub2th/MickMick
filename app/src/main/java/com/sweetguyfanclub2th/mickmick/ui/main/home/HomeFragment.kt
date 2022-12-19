@@ -22,6 +22,7 @@ import java.time.LocalDate
 import java.time.LocalDateTime
 import java.time.format.DateTimeFormatter
 
+@Suppress("UNCHECKED_CAST")
 class HomeFragment : Fragment() {
     private var db: FirebaseFirestore = FirebaseFirestore.getInstance()
     private var _binding: FragmentHomeBinding? = null
@@ -75,7 +76,7 @@ class HomeFragment : Fragment() {
             }
             Log.d("time2", recyclerItems.toString())
 
-            var recyclerViewItems = ArrayList<TodoData>()
+            val recyclerViewItems = ArrayList<TodoData>()
 
             for (i in 0 until recyclerItems.size) {
                 recyclerViewItems.add(

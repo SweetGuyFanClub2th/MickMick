@@ -8,7 +8,7 @@ import com.sweetguyfanclub2th.mickmick.R
 import com.sweetguyfanclub2th.mickmick.databinding.ActivityMainBinding
 import com.sweetguyfanclub2th.mickmick.ui.main.friend.FriendFragment
 import com.sweetguyfanclub2th.mickmick.ui.main.home.HomeFragment
-import com.sweetguyfanclub2th.mickmick.ui.main.search.MenuFragment
+import com.sweetguyfanclub2th.mickmick.ui.main.search.SearchMenuFragment
 import com.sweetguyfanclub2th.mickmick.ui.main.setting.SettingFragment
 import com.sweetguyfanclub2th.mickmick.ui.main.todo.ScheduleFragment
 
@@ -34,7 +34,7 @@ class MainActivity : AppCompatActivity() {
                     supportFragmentManager.beginTransaction().replace(R.id.fragment, ScheduleFragment()).commit()
                 }
                 R.id.menu_search -> {
-                    supportFragmentManager.beginTransaction().replace(R.id.fragment, MenuFragment()).commit()
+                    supportFragmentManager.beginTransaction().replace(R.id.fragment, SearchMenuFragment()).commit()
                 }
                 R.id.menu_settings -> {
                     supportFragmentManager.beginTransaction().replace(R.id.fragment, SettingFragment()).commit()

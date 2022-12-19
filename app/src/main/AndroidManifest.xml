@@ -20,7 +20,7 @@
         android:usesCleartextTraffic="true"
         tools:targetApi="31">
         <activity
-            android:name=".ui.main.search.name.detail.DetailNameActivity"
+            android:name=".ui.main.search.name.detail.DetailPlaceActivity"
             android:exported="false">
             <meta-data
                 android:name="android.app.lib_name"

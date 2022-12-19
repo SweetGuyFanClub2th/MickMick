@@ -1,7 +1,6 @@
 package com.sweetguyfanclub2th.mickmick.ui.main.search.name
 
 import android.content.ContentValues.TAG
-import android.content.Context
 import android.os.Bundle
 import android.util.Log
 import androidx.fragment.app.Fragment
@@ -18,18 +17,18 @@ import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
 
-class NameFragment : Fragment() {
+class PlaceFragment : Fragment() {
     private var _binding: FragmentSearchBinding? = null
     private val binding get() = _binding!!
 
-    private lateinit var adapter : NameAdapter
+    private lateinit var adapter : PlaceAdapter
     private lateinit var recyclerView: RecyclerView
 
     private val authToken = "l7xx7de642979fac440f8fad597ef2584f9e"
     companion object {
-        private val retrofitClient: NameFragment = NameFragment()
+        private val retrofitClient: PlaceFragment = PlaceFragment()
 
-        fun getInstance(): NameFragment {
+        fun getInstance(): PlaceFragment {
             return retrofitClient
         }
     }
@@ -67,7 +66,7 @@ class NameFragment : Fragment() {
                 response: Response<PoisResponse>
             ) {
                 val poiResult = response.body()?.searchPoiInfo?.pois?.poi!!
-                adapter = context?.let { NameAdapter(it, poiResult as ArrayList<Poi>) }!!
+                adapter = context?.let { PlaceAdapter(it, poiResult as ArrayList<Poi>) }!!
 
                 recyclerView = binding.searchRecycler
                 recyclerView.adapter = adapter

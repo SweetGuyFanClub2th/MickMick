@@ -10,10 +10,10 @@ import com.google.android.material.tabs.TabLayoutMediator
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
 import com.sweetguyfanclub2th.mickmick.databinding.FragmentMenuBinding
-import com.sweetguyfanclub2th.mickmick.ui.main.search.name.NameFragment
+import com.sweetguyfanclub2th.mickmick.ui.main.search.name.PlaceFragment
 import com.sweetguyfanclub2th.mickmick.ui.main.todo.ScheduleFragment
 
-class MenuFragment : Fragment() {
+class SearchMenuFragment : Fragment() {
     private var _binding: FragmentMenuBinding? = null
     private val binding get() = _binding!!
 
@@ -39,8 +39,8 @@ class MenuFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        val viewPagerAdapter = MenuViewPagerAdapter(requireActivity())
-        viewPagerAdapter.addFragment(NameFragment())
+        val viewPagerAdapter = SearchMenuViewPagerAdapter(requireActivity())
+        viewPagerAdapter.addFragment(PlaceFragment())
         viewPagerAdapter.addFragment(ScheduleFragment())
 
         binding.viewPager.adapter = viewPagerAdapter

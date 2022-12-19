@@ -3,10 +3,10 @@ package com.sweetguyfanclub2th.mickmick.ui.main.search
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentActivity
 import androidx.viewpager2.adapter.FragmentStateAdapter
-import com.sweetguyfanclub2th.mickmick.ui.main.search.name.NameFragment
+import com.sweetguyfanclub2th.mickmick.ui.main.search.name.PlaceFragment
 import com.sweetguyfanclub2th.mickmick.ui.main.todo.ScheduleFragment
 
-class MenuViewPagerAdapter(fragmentActivity: FragmentActivity) :
+class SearchMenuViewPagerAdapter(fragmentActivity: FragmentActivity) :
     FragmentStateAdapter(fragmentActivity) {
     private var fragments: ArrayList<Fragment> = ArrayList()
 
@@ -17,9 +17,9 @@ class MenuViewPagerAdapter(fragmentActivity: FragmentActivity) :
     override fun createFragment(position: Int): Fragment {
         when (position) {
             0 -> return ScheduleFragment()
-            1 -> return NameFragment()
+            1 -> return PlaceFragment()
         }
-        return NameFragment()
+        return PlaceFragment()
     }
 
     fun addFragment(fragment: Fragment) {
