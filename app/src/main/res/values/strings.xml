@@ -60,6 +60,8 @@
     <string name="change_passwd2_title">이메일로 링크가 발송됩니다.</string>
     <string name="change_passwd_email_hint">이메일을 입력하세요</string>
     <string name="change_passwd2_nextbtn">다음</string>
+    <string name="icon_img">Character</string>
+    <string name="icon_title">기쁜 초록색 미크미크</string>
 
 
 </resources>
