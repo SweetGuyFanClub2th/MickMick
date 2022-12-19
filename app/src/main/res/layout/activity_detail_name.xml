@@ -26,7 +26,7 @@
         app:layout_constraintStart_toEndOf="@id/backpress"
         android:textColor="@color/green"
         android:fontFamily="@font/pretendard_bold"
-        android:textSize="24sp"
+        android:textSize="20sp"
         android:layout_marginTop="18dp"
         android:layout_marginStart="18dp"/>
 
@@ -40,9 +40,9 @@
         android:layout_marginTop="4dp"
         android:textColor="@color/green"
         android:fontFamily="@font/pretendard_medium"
-        android:textSize="18sp" />
+        android:textSize="16sp" />
 
-    <com.skt.tmap.TMapView
+    <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/map_view"
         android:layout_width="match_parent"
         android:layout_height="0dp"
