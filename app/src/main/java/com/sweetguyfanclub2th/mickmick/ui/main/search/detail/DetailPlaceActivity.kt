@@ -23,7 +23,7 @@ class DetailPlaceActivity : AppCompatActivity(), OnMapReadyCallback {
 
     override fun onMapReady(googleMap: GoogleMap) {
         map = googleMap
-        map.moveCamera(CameraUpdateFactory.newLatLngZoom(LatLng(lat, lon), 16f))
+        map.moveCamera(com.google.android.gms.maps.CameraUpdateFactory.newLatLngZoom(LatLng(lat, lon), 16f))
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {

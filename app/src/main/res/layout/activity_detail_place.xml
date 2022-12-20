@@ -53,12 +53,15 @@
 
     <Button
         android:id="@+id/todo_add"
+        android:background="@drawable/btn_signature"
+        android:textColor="@color/white"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="30dp"
+        android:textSize="18sp"
         android:text="TODO에 추가하기"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         android:layout_marginHorizontal="10dp"
-        android:layout_marginBottom="10dp"/>
+        android:layout_marginBottom="16dp"/>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
