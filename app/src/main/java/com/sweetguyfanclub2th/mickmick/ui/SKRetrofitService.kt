@@ -8,7 +8,7 @@ import retrofit2.http.Header
 import retrofit2.http.Path
 import retrofit2.http.Query
 
-interface RetrofitService {
+interface SKRetrofitService {
     @GET("tmap/pois")
     fun getPois(
         @Query("version", encoded = true) version: Int,

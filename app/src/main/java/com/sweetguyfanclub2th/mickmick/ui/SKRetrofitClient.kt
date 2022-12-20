@@ -3,7 +3,7 @@ package com.sweetguyfanclub2th.mickmick.ui
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 
-object RetrofitClient {
+object SKRetrofitClient {
     private const val URL = "https://apis.openapi.sk.com/"
 
     private val retrofit: Retrofit = Retrofit.Builder()
@@ -11,7 +11,7 @@ object RetrofitClient {
         .addConverterFactory(GsonConverterFactory.create())
         .build()
 
-    fun getApiService() : RetrofitService {
-        return retrofit.create(RetrofitService::class.java)
+    fun getApiService() : SKRetrofitService {
+        return retrofit.create(SKRetrofitService::class.java)
     }
 }

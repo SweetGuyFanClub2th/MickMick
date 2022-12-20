@@ -12,7 +12,7 @@ import com.sweetguyfanclub2th.mickmick.R
 import com.sweetguyfanclub2th.mickmick.databinding.ActivityDetailPlaceBinding
 
 
-class DetailPlaceActivity : AppCompatActivity(), OnMapReadyCallback {
+class SearchDetailInfoActivity : AppCompatActivity(), OnMapReadyCallback {
     private lateinit var map: GoogleMap
     private lateinit var binding: ActivityDetailPlaceBinding
     private lateinit var id : String

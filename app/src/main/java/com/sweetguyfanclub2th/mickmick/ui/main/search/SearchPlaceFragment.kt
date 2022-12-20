@@ -12,23 +12,23 @@ import androidx.recyclerview.widget.RecyclerView
 import com.sweetguyfanclub2th.mickmick.data.searchpois.Poi
 import com.sweetguyfanclub2th.mickmick.data.searchpois.PoisResponse
 import com.sweetguyfanclub2th.mickmick.databinding.FragmentSearchBinding
-import com.sweetguyfanclub2th.mickmick.ui.RetrofitClient
+import com.sweetguyfanclub2th.mickmick.ui.SKRetrofitClient
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
 
-class PlaceFragment : Fragment() {
+class SearchPlaceFragment : Fragment() {
     private var _binding: FragmentSearchBinding? = null
     private val binding get() = _binding!!
 
-    private lateinit var adapter : PlaceAdapter
+    private lateinit var adapter : SearchPlaceAdapter
     private lateinit var recyclerView: RecyclerView
 
     private val authToken = "l7xx7de642979fac440f8fad597ef2584f9e"
     companion object {
-        private val retrofitClient: PlaceFragment = PlaceFragment()
+        private val retrofitClient: SearchPlaceFragment = SearchPlaceFragment()
 
-        fun getInstance(): PlaceFragment {
+        fun getInstance(): SearchPlaceFragment {
             return retrofitClient
         }
     }
@@ -54,7 +54,7 @@ class PlaceFragment : Fragment() {
     }
 
     private fun getDataToRetrofit(keyword : String){
-        val retrofit = RetrofitClient.getApiService().getPois(1, keyword, authToken)
+        val retrofit = SKRetrofitClient.getApiService().getPois(1, keyword, authToken)
 
         retrofit.enqueue(object : Callback<PoisResponse>{
             override fun onFailure(call: Call<PoisResponse>, t: Throwable) {
@@ -67,7 +67,7 @@ class PlaceFragment : Fragment() {
             ) {
                 try{
                     val poiResult = response.body()?.searchPoiInfo?.pois?.poi!!
-                    adapter = context?.let { PlaceAdapter(it, poiResult as ArrayList<Poi>) }!!
+                    adapter = context?.let { SearchPlaceAdapter(it, poiResult as ArrayList<Poi>) }!!
 
                     recyclerView = binding.searchRecycler
                     recyclerView.adapter = adapter

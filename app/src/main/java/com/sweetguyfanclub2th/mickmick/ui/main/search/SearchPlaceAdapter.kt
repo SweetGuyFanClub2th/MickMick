@@ -9,9 +9,9 @@ import androidx.recyclerview.widget.RecyclerView
 import com.sweetguyfanclub2th.mickmick.data.searchpois.NewAddres
 import com.sweetguyfanclub2th.mickmick.data.searchpois.Poi
 import com.sweetguyfanclub2th.mickmick.databinding.ItemSearchBinding
-import com.sweetguyfanclub2th.mickmick.ui.main.search.detail.DetailPlaceActivity
+import com.sweetguyfanclub2th.mickmick.ui.main.search.detail.SearchDetailInfoActivity
 
-class PlaceAdapter(val context: Context, private val postList: ArrayList<Poi>) : RecyclerView.Adapter<PlaceAdapter.NameViewHolder>() {
+class SearchPlaceAdapter(val context: Context, private val postList: ArrayList<Poi>) : RecyclerView.Adapter<SearchPlaceAdapter.NameViewHolder>() {
     private lateinit var binding: ItemSearchBinding
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): NameViewHolder {
@@ -35,7 +35,7 @@ class PlaceAdapter(val context: Context, private val postList: ArrayList<Poi>) :
             binding.itemFullAddressRoad.text = itemAddress.fullAddressRoad
 
             itemView.setOnClickListener {
-                val intent = Intent(itemView.context, DetailPlaceActivity::class.java)
+                val intent = Intent(itemView.context, SearchDetailInfoActivity::class.java)
 
                 intent.putExtra("id", itemPoi.id)
                 intent.putExtra("name", itemPoi.name)
