@@ -59,7 +59,6 @@ class FriendListActivity : AppCompatActivity() {
             //val intent = Intent(this, FriendRequestActivity::class.java)
             //intent.putExtra("친구이름","문자열 전달쓰")
             //startActivity(intent)
-            Log.e("MyEmail", myEmail)
 
             db.collection("friendSearch")   // 작업할 컬렉션
                 .get()      // 문서 가져오기
