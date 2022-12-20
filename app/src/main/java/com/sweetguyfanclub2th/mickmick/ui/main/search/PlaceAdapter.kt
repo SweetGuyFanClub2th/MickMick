@@ -1,4 +1,4 @@
-package com.sweetguyfanclub2th.mickmick.ui.main.search.name
+package com.sweetguyfanclub2th.mickmick.ui.main.search
 
 import android.content.Context
 import android.content.Intent
@@ -9,7 +9,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.sweetguyfanclub2th.mickmick.data.searchpois.NewAddres
 import com.sweetguyfanclub2th.mickmick.data.searchpois.Poi
 import com.sweetguyfanclub2th.mickmick.databinding.ItemSearchBinding
-import com.sweetguyfanclub2th.mickmick.ui.main.search.name.detail.DetailPlaceActivity
+import com.sweetguyfanclub2th.mickmick.ui.main.search.detail.DetailPlaceActivity
 
 class PlaceAdapter(val context: Context, private val postList: ArrayList<Poi>) : RecyclerView.Adapter<PlaceAdapter.NameViewHolder>() {
     private lateinit var binding: ItemSearchBinding

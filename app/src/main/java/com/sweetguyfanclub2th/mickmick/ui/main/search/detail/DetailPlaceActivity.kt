@@ -1,14 +1,12 @@
-package com.sweetguyfanclub2th.mickmick.ui.main.search.name.detail
+package com.sweetguyfanclub2th.mickmick.ui.main.search.detail
 
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
-import androidx.lifecycle.lifecycleScope
 import com.google.android.gms.maps.CameraUpdateFactory
 import com.google.android.gms.maps.GoogleMap
 import com.google.android.gms.maps.OnMapReadyCallback
 import com.google.android.gms.maps.SupportMapFragment
 import com.google.android.gms.maps.model.LatLng
-import com.google.android.gms.maps.model.LatLngBounds
 import com.google.android.gms.maps.model.MarkerOptions
 import com.sweetguyfanclub2th.mickmick.R
 import com.sweetguyfanclub2th.mickmick.databinding.ActivityDetailPlaceBinding
@@ -56,7 +54,11 @@ class DetailPlaceActivity : AppCompatActivity(), OnMapReadyCallback {
                 )
             }
         }
-        
+
+        binding.todoAdd.setOnClickListener {
+
+        }
+
         binding.backpress.setOnClickListener {
             finish()
         }

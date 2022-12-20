@@ -1,4 +1,4 @@
-package com.sweetguyfanclub2th.mickmick.ui.main.search.name
+package com.sweetguyfanclub2th.mickmick.ui.main.search
 
 import android.content.ContentValues.TAG
 import android.os.Bundle
