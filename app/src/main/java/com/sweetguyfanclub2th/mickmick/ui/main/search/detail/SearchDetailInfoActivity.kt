@@ -13,8 +13,6 @@ import com.google.android.gms.maps.model.MarkerOptions
 import com.sweetguyfanclub2th.mickmick.R
 import com.sweetguyfanclub2th.mickmick.databinding.ActivityDetailPlaceBinding
 import com.sweetguyfanclub2th.mickmick.ui.main.MainActivity
-import com.sweetguyfanclub2th.mickmick.ui.main.search.SearchPlaceFragment
-import com.sweetguyfanclub2th.mickmick.ui.main.todo.ScheduleFragment
 
 
 class SearchDetailInfoActivity : AppCompatActivity(), OnMapReadyCallback {
