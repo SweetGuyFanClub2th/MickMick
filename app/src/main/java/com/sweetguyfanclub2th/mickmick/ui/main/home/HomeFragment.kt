@@ -34,7 +34,7 @@ class HomeFragment : Fragment() {
         _binding = FragmentHomeBinding.inflate(inflater, container, false)
 
         val current = LocalDateTime.now()
-        var time = current.format((DateTimeFormatter.ofPattern("yyyyMMdd")))
+        val time = current.format((DateTimeFormatter.ofPattern("yyyyMMdd")))
         val showingTime = current.format(DateTimeFormatter.ofPattern("MM월 dd일"))
 
         todayTime = time
@@ -66,42 +66,40 @@ class HomeFragment : Fragment() {
         val todo = db.collection(email).document("todo")
 
         todo.get().addOnSuccessListener {
-            if (todoList.size > 1) {
-                for (i in 0 until todoList.size) {
-                    val todoTitle: List<String> = it.get(todoList[i]) as List<String>
-                    recyclerItems.add(todoTitle)
-                }
-                Log.d("time2", recyclerItems.toString())
+            for (i in 0 until todoList.size) {
+                val todoTitle: List<String> = it.get(todoList[i]) as List<String>
+                recyclerItems.add(todoTitle)
+            }
+            Log.d("time2", recyclerItems.toString())
 
-                val recyclerViewItems = ArrayList<TodoData>()
-                if (recyclerItems.size >= 1) {
-                    binding.emp.visibility = View.VISIBLE
-                    binding.todoTitle.text = recyclerItems[0][2]
-                    binding.todoDate.text = recyclerItems[0][0]
-                    binding.todoPlace.text = recyclerItems[0][3]
-                    binding.todoMember.text = recyclerItems[0][4]
-                }
-                if (recyclerItems.size >= 2) {
-                    for (i in 1 until recyclerItems.size) {
-                        Log.d("ee1", recyclerItems[i][1])
-                        Log.d("ee2", todayTime)
-                        if (checkToday(recyclerItems[i][1])) {
-                            recyclerViewItems.add(
-                                TodoData(
-                                    recyclerItems[i][0],
-                                    recyclerItems[i][1],
-                                    recyclerItems[i][2],
-                                    recyclerItems[i][3],
-                                    recyclerItems[i][4]
-                                )
+            val recyclerViewItems = ArrayList<TodoData>()
+            if (recyclerItems.size >= 1) {
+                binding.emp.visibility = View.VISIBLE
+                binding.todoTitle.text = recyclerItems[0][2]
+                binding.todoDate.text = recyclerItems[0][0]
+                binding.todoPlace.text = recyclerItems[0][3]
+                binding.todoMember.text = recyclerItems[0][4]
+            }
+            if (recyclerItems.size >= 2) {
+                for (i in 1 until recyclerItems.size) {
+                    Log.d("ee1", recyclerItems[i][1])
+                    Log.d("ee2", todayTime)
+                    if (checkToday(recyclerItems[i][1])) {
+                        recyclerViewItems.add(
+                            TodoData(
+                                recyclerItems[i][0],
+                                recyclerItems[i][1],
+                                recyclerItems[i][2],
+                                recyclerItems[i][3],
+                                recyclerItems[i][4]
                             )
-                        }
+                        )
                     }
                 }
-
-                binding.todoRecycler.layoutManager = LinearLayoutManager(this.context)
-                binding.todoRecycler.adapter = HomeAdapter(recyclerViewItems)
             }
+
+            binding.todoRecycler.layoutManager = LinearLayoutManager(this.context)
+            binding.todoRecycler.adapter = HomeAdapter(recyclerViewItems)
         }
     }
 }

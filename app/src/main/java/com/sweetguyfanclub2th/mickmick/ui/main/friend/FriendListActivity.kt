@@ -13,7 +13,6 @@ import com.google.firebase.ktx.Firebase
 import com.sweetguyfanclub2th.mickmick.R
 import com.sweetguyfanclub2th.mickmick.data.FriendList
 import com.sweetguyfanclub2th.mickmick.databinding.ActivityFriendlistBinding
-import com.sweetguyfanclub2th.mickmick.databinding.FragmentScheduleBinding
 import com.sweetguyfanclub2th.mickmick.databinding.FriendListLayoutBinding
 
 
@@ -29,7 +28,7 @@ class FriendListActivity : AppCompatActivity() {
     var plusfriend = String()
     val adapter = FriendListAdapter(itemList,plusfriend)         // 리사이클러 뷰 어댑터
 
-    @SuppressLint("SetTextI18n")
+    @SuppressLint("SetTextI18n", "NotifyDataSetChanged")
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityFriendlistBinding.inflate(layoutInflater)
@@ -42,9 +41,6 @@ class FriendListActivity : AppCompatActivity() {
             //bundle.putInt("친구이름",19)
             //scFragment.arguments = bundle
             finish()
-
-
-
         }
 
         val view = binding.root
@@ -63,9 +59,6 @@ class FriendListActivity : AppCompatActivity() {
             //val intent = Intent(this, FriendRequestActivity::class.java)
             //intent.putExtra("친구이름","문자열 전달쓰")
             //startActivity(intent)
-
-
-
             Log.e("MyEmail", myEmail)
 
             db.collection("friendSearch")   // 작업할 컬렉션
@@ -82,9 +75,6 @@ class FriendListActivity : AppCompatActivity() {
                         tv1 = findViewById(R.id.friend_number)
                        tv1?.text = count3.toString()+"명"
 
-
-
-
                         var count = friendListEmail.size
                         val item = FriendList(
                             document["nickname"] as String, document["email"] as String
@@ -100,12 +90,8 @@ class FriendListActivity : AppCompatActivity() {
                         }
                         }
                     }
-
                     adapter.notifyDataSetChanged()  // 리사이클러 뷰 갱신
-
                 }
-
-
 
             /*fun friendRequest(requestEmail : String, myEmail : String){
                 db.collection(myEmail).document("userinfo").update("friend", requestEmail)

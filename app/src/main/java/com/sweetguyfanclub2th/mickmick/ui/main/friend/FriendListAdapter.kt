@@ -10,7 +10,6 @@ import com.google.firebase.firestore.FieldValue
 import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.ktx.Firebase
 import com.sweetguyfanclub2th.mickmick.data.FriendList
-import com.sweetguyfanclub2th.mickmick.databinding.FragmentScheduleBinding
 import com.sweetguyfanclub2th.mickmick.databinding.FriendListLayoutBinding
 import kotlin.coroutines.coroutineContext
 

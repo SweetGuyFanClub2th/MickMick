@@ -66,14 +66,15 @@
         app:layout_constraintVertical_bias="0.0"
         tools:layout_editor_absoluteX="0dp" />
 
+
     <Button
-        android:id="@+id/todo_add"
+        android:id="@+id/todo_set"
         android:background="@drawable/btn_signature"
         android:textColor="@color/white"
         android:layout_width="match_parent"
         android:layout_height="60dp"
         android:textSize="18sp"
-        android:text="TODO에 추가하기"
+        android:text="TODO 관리하기"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         android:layout_marginHorizontal="10dp"

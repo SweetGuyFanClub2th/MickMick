@@ -11,12 +11,11 @@ import com.google.android.gms.maps.SupportMapFragment
 import com.google.android.gms.maps.model.LatLng
 import com.google.android.gms.maps.model.MarkerOptions
 import com.sweetguyfanclub2th.mickmick.R
-import com.sweetguyfanclub2th.mickmick.databinding.ActivityDetailPlaceBinding
-import com.sweetguyfanclub2th.mickmick.ui.main.MainActivity
+import com.sweetguyfanclub2th.mickmick.databinding.ActivityDetailHomeBinding
 
 class HomeDetailActivity : AppCompatActivity(), OnMapReadyCallback {
     private lateinit var map: GoogleMap
-    private lateinit var binding: ActivityDetailPlaceBinding
+    private lateinit var binding: ActivityDetailHomeBinding
     private lateinit var id: String
     private lateinit var name: String
     private lateinit var fullAddressRoad: String
@@ -30,7 +29,7 @@ class HomeDetailActivity : AppCompatActivity(), OnMapReadyCallback {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        binding = ActivityDetailPlaceBinding.inflate(layoutInflater)
+        binding = ActivityDetailHomeBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
         binding.itemName.text = intent.getStringExtra("name").toString()
@@ -47,9 +46,8 @@ class HomeDetailActivity : AppCompatActivity(), OnMapReadyCallback {
         val mapFragment =
             supportFragmentManager.findFragmentById(R.id.map_view) as? SupportMapFragment
         mapFragment?.getMapAsync {
+            it.moveCamera(CameraUpdateFactory.newLatLngZoom(LatLng(lat, lon), 16f))
             it.setOnMapLoadedCallback {
-                it.moveCamera(CameraUpdateFactory.newLatLngZoom(LatLng(lat, lon), 16f))
-
                 val location = LatLng(lat, lon)
                 it.addMarker(
                     MarkerOptions()
