@@ -9,6 +9,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Adapter
+import androidx.annotation.RequiresApi
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
@@ -41,7 +42,7 @@ class HomeFragment : Fragment() {
         _binding = FragmentHomeBinding.inflate(inflater, container, false)
 
         val current = LocalDateTime.now()
-        val time = current.format((DateTimeFormatter.ofPattern("yyyyMMdd")))
+        var time = current.format((DateTimeFormatter.ofPattern("yyyyMMdd")))
         val showingTime = current.format(DateTimeFormatter.ofPattern("MM월 dd일"))
 
         todayTime = time
@@ -66,6 +67,11 @@ class HomeFragment : Fragment() {
         }
     }
 
+    fun checkToday(date: String): Boolean {
+        return date == todayTime
+    }
+
+
     private fun findRecyclerItem() {
         val todo = db.collection(email).document("todo")
 
@@ -79,14 +85,19 @@ class HomeFragment : Fragment() {
             val recyclerViewItems = ArrayList<TodoData>()
 
             for (i in 0 until recyclerItems.size) {
-                recyclerViewItems.add(
-                    TodoData(
-                        recyclerItems[i][0],
-                        recyclerItems[i][1],
-                        recyclerItems[i][2],
-                        recyclerItems[i][3],
-                        recyclerItems[i][4])
-                )
+                Log.d("ee1", recyclerItems[i][1])
+                Log.d("ee2", todayTime)
+                if (checkToday(recyclerItems[i][1])) {
+                    recyclerViewItems.add(
+                        TodoData(
+                            recyclerItems[i][0],
+                            recyclerItems[i][1],
+                            recyclerItems[i][2],
+                            recyclerItems[i][3],
+                            recyclerItems[i][4]
+                        )
+                    )
+                }
             }
 
             binding.todoRecycler.layoutManager = LinearLayoutManager(this.context)
