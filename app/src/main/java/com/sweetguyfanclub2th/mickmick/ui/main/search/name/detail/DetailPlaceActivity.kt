@@ -2,11 +2,13 @@ package com.sweetguyfanclub2th.mickmick.ui.main.search.name.detail
 
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
+import androidx.lifecycle.lifecycleScope
 import com.google.android.gms.maps.CameraUpdateFactory
 import com.google.android.gms.maps.GoogleMap
 import com.google.android.gms.maps.OnMapReadyCallback
 import com.google.android.gms.maps.SupportMapFragment
 import com.google.android.gms.maps.model.LatLng
+import com.google.android.gms.maps.model.LatLngBounds
 import com.google.android.gms.maps.model.MarkerOptions
 import com.sweetguyfanclub2th.mickmick.R
 import com.sweetguyfanclub2th.mickmick.databinding.ActivityDetailPlaceBinding
@@ -23,13 +25,7 @@ class DetailPlaceActivity : AppCompatActivity(), OnMapReadyCallback {
 
     override fun onMapReady(googleMap: GoogleMap) {
         map = googleMap
-
-        val sydney = LatLng(-33.852, 151.211)
-        googleMap.addMarker(
-            MarkerOptions()
-                .position(sydney)
-                .title("Marker in Sydney")
-        )
+        map.moveCamera(CameraUpdateFactory.newLatLngZoom(LatLng(lat, lon), 16f))
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -43,18 +39,24 @@ class DetailPlaceActivity : AppCompatActivity(), OnMapReadyCallback {
         lat = intent.getStringExtra("lat")?.toDouble()!!
         lon = intent.getStringExtra("lon")?.toDouble()!!
 
-        val mapFragment = supportFragmentManager.findFragmentById(R.id.map_view) as? SupportMapFragment
-        mapFragment?.getMapAsync {
-            it.setOnMapLoadedCallback{
-                it.moveCamera(CameraUpdateFactory.newLatLngZoom(LatLng(lat, lon), 16f))
-            }
-        }
-
         id = intent.getStringExtra("id").toString()
         name = intent.getStringExtra("name").toString()
         fullAddressRoad = intent.getStringExtra("fullAddressRoad").toString()
 
+        val mapFragment = supportFragmentManager.findFragmentById(R.id.map_view) as? SupportMapFragment
+        mapFragment?.getMapAsync {
+            it.setOnMapLoadedCallback{
+                it.moveCamera(CameraUpdateFactory.newLatLngZoom(LatLng(lat, lon), 16f))
 
+                val location = LatLng(lat, lon)
+                it.addMarker(
+                    MarkerOptions()
+                        .position(location)
+                        .title(name)
+                )
+            }
+        }
+        
         binding.backpress.setOnClickListener {
             finish()
         }

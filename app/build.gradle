@@ -88,6 +88,9 @@ dependencies {
     implementation 'com.google.android.gms:play-services-location:21.0.1'
     implementation 'com.google.maps.android:android-maps-utils:0.6.1'
 
+    // lifecycle
+    implementation "androidx.lifecycle:lifecycle-runtime-ktx:2.5.1"
+
     /* firebase */
     // database
     implementation 'com.google.firebase:firebase-database:20.1.0'
