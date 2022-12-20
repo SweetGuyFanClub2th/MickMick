@@ -49,6 +49,12 @@ class TodoFragment : Fragment() {
         Log.d("투두 프래그먼트", num1.toString())
 
         if (num1 != null) {
+            val mainActivity = activity as MainActivity
+            mainActivity.savingTextShow(binding.todoName,
+                binding.editDate,
+                binding.editTime,
+                binding.editFriend,
+                binding.editPlace)
             binding.editPlace.setText(num1)
             binding.editPlace.isEnabled = false
         }
@@ -70,6 +76,12 @@ class TodoFragment : Fragment() {
 
         binding.editPlace.setOnClickListener {
             val mainActivity = activity as MainActivity
+            mainActivity.editTextSaving(
+                binding.todoName,
+                binding.editDate,
+                binding.editTime,
+                binding.editFriend,
+                binding.editPlace)
             mainActivity.changeToSearchFragment()
         }
 
