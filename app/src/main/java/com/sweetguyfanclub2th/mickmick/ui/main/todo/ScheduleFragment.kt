@@ -5,12 +5,12 @@ import android.app.TimePickerDialog
 import android.os.Bundle
 import android.text.Editable
 import android.util.Log
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.EditText
 import android.widget.Toast
+import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentTransaction
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FieldValue
@@ -19,7 +19,6 @@ import com.sweetguyfanclub2th.mickmick.R
 import com.sweetguyfanclub2th.mickmick.databinding.FragmentScheduleBinding
 import com.sweetguyfanclub2th.mickmick.ui.main.home.HomeFragment
 import java.util.*
-import kotlin.collections.ArrayList
 
 
 class ScheduleFragment : Fragment() {
@@ -41,6 +40,14 @@ class ScheduleFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         _binding = FragmentScheduleBinding.inflate(inflater, container, false)
+
+        val num1 = arguments?.getString("message")
+        Log.d("투두 프래그먼트", num1.toString())
+
+        if (num1 != null) {
+            binding.editPlace.setText(num1)
+            binding.editPlace.isEnabled = false
+        }
 
         binding.editDate.setOnClickListener {
             openDateDialog()

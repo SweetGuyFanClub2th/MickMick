@@ -1,9 +1,11 @@
 package com.sweetguyfanclub2th.mickmick.ui.main
 
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
 import android.widget.Toast
+import androidx.appcompat.app.AppCompatActivity
+import androidx.fragment.app.FragmentManager
+import androidx.fragment.app.FragmentTransaction
 import com.sweetguyfanclub2th.mickmick.R
 import com.sweetguyfanclub2th.mickmick.databinding.ActivityMainBinding
 import com.sweetguyfanclub2th.mickmick.ui.main.friend.FriendFragment
@@ -11,6 +13,7 @@ import com.sweetguyfanclub2th.mickmick.ui.main.home.HomeFragment
 import com.sweetguyfanclub2th.mickmick.ui.main.search.SearchPlaceFragment
 import com.sweetguyfanclub2th.mickmick.ui.main.setting.SettingFragment
 import com.sweetguyfanclub2th.mickmick.ui.main.todo.ScheduleFragment
+
 
 class MainActivity : AppCompatActivity() {
     private lateinit var binding: ActivityMainBinding
@@ -20,8 +23,20 @@ class MainActivity : AppCompatActivity() {
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        supportFragmentManager.beginTransaction().add(R.id.fragment, HomeFragment()).commit()
+        val number = intent?.getStringExtra("message")
+        Log.d("메인 액티비티", number.toString())
 
+        if (number != null) {
+            var fragment = ScheduleFragment()
+            val bundle = Bundle()
+            bundle.putString("message", number.toString())
+            fragment.arguments = bundle
+
+            supportFragmentManager.beginTransaction().add(R.id.fragment, fragment).commit()
+        }
+        else {
+            supportFragmentManager.beginTransaction().add(R.id.fragment, HomeFragment()).commit()
+        }
         binding.bottomNavigationView.setOnItemSelectedListener {
             when(it.itemId) {
                 R.id.menu_home -> {

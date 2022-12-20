@@ -1,6 +1,8 @@
 package com.sweetguyfanclub2th.mickmick.ui.main.search.detail
 
+import android.content.Intent
 import android.os.Bundle
+import android.util.Log
 import androidx.appcompat.app.AppCompatActivity
 import com.google.android.gms.maps.CameraUpdateFactory
 import com.google.android.gms.maps.GoogleMap
@@ -10,6 +12,9 @@ import com.google.android.gms.maps.model.LatLng
 import com.google.android.gms.maps.model.MarkerOptions
 import com.sweetguyfanclub2th.mickmick.R
 import com.sweetguyfanclub2th.mickmick.databinding.ActivityDetailPlaceBinding
+import com.sweetguyfanclub2th.mickmick.ui.main.MainActivity
+import com.sweetguyfanclub2th.mickmick.ui.main.search.SearchPlaceFragment
+import com.sweetguyfanclub2th.mickmick.ui.main.todo.ScheduleFragment
 
 
 class SearchDetailInfoActivity : AppCompatActivity(), OnMapReadyCallback {
@@ -23,7 +28,7 @@ class SearchDetailInfoActivity : AppCompatActivity(), OnMapReadyCallback {
 
     override fun onMapReady(googleMap: GoogleMap) {
         map = googleMap
-        map.moveCamera(com.google.android.gms.maps.CameraUpdateFactory.newLatLngZoom(LatLng(lat, lon), 16f))
+        map.moveCamera(CameraUpdateFactory.newLatLngZoom(LatLng(lat, lon), 16f))
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -32,7 +37,8 @@ class SearchDetailInfoActivity : AppCompatActivity(), OnMapReadyCallback {
         setContentView(binding.root)
 
         binding.itemName.text = intent.getStringExtra("name").toString()
-        binding.itemFullAddressRoad.text = intent.getStringExtra("fullAddressRoad").toString()
+        val address = intent.getStringExtra("fullAddressRoad").toString()
+        binding.itemFullAddressRoad.text = address
 
         lat = intent.getStringExtra("lat")?.toDouble()!!
         lon = intent.getStringExtra("lon")?.toDouble()!!
@@ -56,7 +62,13 @@ class SearchDetailInfoActivity : AppCompatActivity(), OnMapReadyCallback {
         }
 
         binding.todoAdd.setOnClickListener {
-
+            val intent = Intent(this@SearchDetailInfoActivity, MainActivity::class.java)
+            intent.apply {
+                this.putExtra("message", name + " (${address})") // 데이터 넣기
+            }
+            Log.d("서치프래그먼트", name.toString() + " (${address})")
+            startActivity(intent)
+            finish()
         }
 
         binding.backpress.setOnClickListener {
