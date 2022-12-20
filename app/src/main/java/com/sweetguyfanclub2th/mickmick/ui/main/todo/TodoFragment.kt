@@ -56,24 +56,17 @@ class TodoFragment : Fragment() {
         binding.editDate.setOnClickListener {
             openDateDialog()
         }
+
         binding.editTime.setOnClickListener {
             openTimeDialog()
         }
+
         binding.editFriend.setOnClickListener {
             activity?.let{
                 val intent = Intent(context, FriendListActivity::class.java)
                 startActivity(intent)
             }
-            //val friendName = arguments?.getInt("친구이름").toString()
-            //Log.e("확인",friendName)
-
-            // TODO
         }
-
-        //val intent = Intent(activity, FriendListActivity::class.java)
-
-        //val value1 = intent.getStringExtra("친구이름")
-        //Log.e("확인",value1.toString())
 
         binding.editPlace.setOnClickListener {
             val mainActivity = activity as MainActivity
@@ -95,8 +88,6 @@ class TodoFragment : Fragment() {
 
         return binding.root
     }
-
-
 
     private fun scheduleNullCheck(
         todoName: EditText?, editDate: EditText?,
@@ -143,8 +134,6 @@ class TodoFragment : Fragment() {
             requireActivity().supportFragmentManager.beginTransaction()
         transaction.replace(R.id.fragment, HomeFragment())
         transaction.commit()
-
-        // TODO
     }
 
     private fun openDateDialog() {
