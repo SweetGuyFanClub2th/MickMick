@@ -65,11 +65,15 @@ class PlaceFragment : Fragment() {
                 call: Call<PoisResponse>,
                 response: Response<PoisResponse>
             ) {
-                val poiResult = response.body()?.searchPoiInfo?.pois?.poi!!
-                adapter = context?.let { PlaceAdapter(it, poiResult as ArrayList<Poi>) }!!
+                try{
+                    val poiResult = response.body()?.searchPoiInfo?.pois?.poi!!
+                    adapter = context?.let { PlaceAdapter(it, poiResult as ArrayList<Poi>) }!!
 
-                recyclerView = binding.searchRecycler
-                recyclerView.adapter = adapter
+                    recyclerView = binding.searchRecycler
+                    recyclerView.adapter = adapter
+                } catch(e : Exception){
+                    Toast.makeText(activity, "검색 결과가 없습니다", Toast.LENGTH_SHORT).show()
+                }
             }
         })
     }
