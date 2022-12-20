@@ -17,14 +17,16 @@ import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FieldValue
 import com.google.firebase.firestore.FirebaseFirestore
 import com.sweetguyfanclub2th.mickmick.R
-import com.sweetguyfanclub2th.mickmick.databinding.FragmentScheduleBinding
+import com.sweetguyfanclub2th.mickmick.databinding.FragmentTodoBinding
+import com.sweetguyfanclub2th.mickmick.ui.main.MainActivity
 import com.sweetguyfanclub2th.mickmick.ui.main.friend.FriendListActivity
 import com.sweetguyfanclub2th.mickmick.ui.main.home.HomeFragment
+import com.sweetguyfanclub2th.mickmick.ui.main.search.SearchPlaceFragment
 import java.util.*
 
 
-class ScheduleFragment : Fragment() {
-    private var _binding: FragmentScheduleBinding? = null
+class TodoFragment : Fragment() {
+    private var _binding: FragmentTodoBinding? = null
     private val binding get() = _binding!!
 
     private val db: FirebaseFirestore = FirebaseFirestore.getInstance()  // Firestore 인스턴스 선언
@@ -41,7 +43,7 @@ class ScheduleFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        _binding = FragmentScheduleBinding.inflate(inflater, container, false)
+        _binding = FragmentTodoBinding.inflate(inflater, container, false)
 
         val num1 = arguments?.getString("message")
         Log.d("투두 프래그먼트", num1.toString())
@@ -73,10 +75,11 @@ class ScheduleFragment : Fragment() {
         //val value1 = intent.getStringExtra("친구이름")
         //Log.e("확인",value1.toString())
 
-
         binding.editPlace.setOnClickListener {
-            // TODO
+            val mainActivity = activity as MainActivity
+            mainActivity.changeToSearchFragment()
         }
+
         binding.addTodoBtn.setOnClickListener {
             when (scheduleNullCheck(
                 binding.todoName,
@@ -107,6 +110,7 @@ class ScheduleFragment : Fragment() {
     private fun uploadData() {
         val info = db.collection(email).document("todo")
         val tododata = db.collection(email).document("userinfo")
+        val poi = arguments?.getInt("poi")
 
         info.update(
             (dateValue + timeValue), FieldValue.arrayUnion(
@@ -115,16 +119,17 @@ class ScheduleFragment : Fragment() {
                 "$selectHour:$selectMinute",
                 binding.editFriend.text.toString(),
                 binding.editPlace.text.toString(),
+                poi
             )
         )
 
-        var emptyList = ArrayList<String>()
+        val emptyList = ArrayList<String>()
 
         tododata.update("todoId", FieldValue.arrayUnion(
             dateValue + timeValue
         ))
         tododata.get().addOnSuccessListener {
-            var nickname: List<String> = it.get("todoId") as List<String>
+            val nickname: List<String> = it.get("todoId") as List<String>
             for (i in nickname.indices) {
                 emptyList.add(nickname[i])
             }

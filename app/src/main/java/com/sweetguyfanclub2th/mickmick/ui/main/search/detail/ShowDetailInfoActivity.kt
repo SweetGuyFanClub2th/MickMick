@@ -22,7 +22,7 @@ import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 
 
-class SearchDetailInfoActivity : AppCompatActivity(), OnMapReadyCallback {
+class ShowDetailInfoActivity : AppCompatActivity(), OnMapReadyCallback {
     private lateinit var map: GoogleMap
     private lateinit var binding: ActivityDetailPlaceBinding
     private lateinit var id : String
@@ -96,9 +96,10 @@ class SearchDetailInfoActivity : AppCompatActivity(), OnMapReadyCallback {
         }
 
         binding.todoAdd.setOnClickListener {
-            val intent = Intent(this@SearchDetailInfoActivity, MainActivity::class.java)
+            val intent = Intent(this@ShowDetailInfoActivity, MainActivity::class.java)
             intent.apply {
-                this.putExtra("message", name + " (${address})") // 데이터 넣기
+                this.putExtra("message", name) // 데이터 넣기
+                this.putExtra("poi", id)
             }
             Log.d("서치프래그먼트", name.toString() + " (${address})")
             startActivity(intent)
