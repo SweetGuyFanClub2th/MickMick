@@ -1,29 +1,23 @@
 package com.sweetguyfanclub2th.mickmick.ui.main.home
 
 import android.annotation.SuppressLint
-import android.content.Intent
-import android.os.Build
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import android.view.View
 import android.widget.TextView
-import androidx.annotation.RequiresApi
 import androidx.recyclerview.widget.RecyclerView
 import com.sweetguyfanclub2th.mickmick.R
 import com.sweetguyfanclub2th.mickmick.data.TodoData
-import java.time.LocalDateTime
-import java.time.format.DateTimeFormatter
 
-class TodoAdapter(private val recyclerViewItems: ArrayList<TodoData>):
-    RecyclerView.Adapter<TodoAdapter.TodoViewHolder>()  {
+class HomeAdapter(private val recyclerViewItems: ArrayList<TodoData>):
+    RecyclerView.Adapter<HomeAdapter.HomeViewHolder>()  {
 
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): TodoViewHolder {
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): HomeViewHolder {
         val itemView = LayoutInflater.from(parent.context).inflate(R.layout.item_todo, parent, false)
-        return TodoViewHolder(itemView)
+        return HomeViewHolder(itemView)
     }
 
-    override fun onBindViewHolder(holder: TodoViewHolder, position: Int) {
+    override fun onBindViewHolder(holder: HomeViewHolder, position: Int) {
         holder.bind(recyclerViewItems[position], position)
     }
 
@@ -31,7 +25,7 @@ class TodoAdapter(private val recyclerViewItems: ArrayList<TodoData>):
         return recyclerViewItems.size
     }
 
-    inner class TodoViewHolder(itemView: View): RecyclerView.ViewHolder(itemView) {
+    inner class HomeViewHolder(itemView: View): RecyclerView.ViewHolder(itemView) {
         private var title: TextView = itemView.findViewById(R.id.todo_title)
         private var dateTime: TextView = itemView.findViewById(R.id.todo_date)
         private var member: TextView = itemView.findViewById(R.id.todo_member)

@@ -1,25 +1,17 @@
 package com.sweetguyfanclub2th.mickmick.ui.main.home
 
 import android.annotation.SuppressLint
-import android.os.Build
 import android.os.Bundle
 import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Adapter
-import androidx.annotation.RequiresApi
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
-import com.sweetguyfanclub2th.mickmick.R
-import com.sweetguyfanclub2th.mickmick.data.IconData
 import com.sweetguyfanclub2th.mickmick.data.TodoData
-import com.sweetguyfanclub2th.mickmick.databinding.ActivityRenameBinding
 import com.sweetguyfanclub2th.mickmick.databinding.FragmentHomeBinding
-import com.sweetguyfanclub2th.mickmick.ui.main.setting.IconAdapter
-import java.time.LocalDate
 import java.time.LocalDateTime
 import java.time.format.DateTimeFormatter
 
@@ -46,10 +38,18 @@ class HomeFragment : Fragment() {
         val showingTime = current.format(DateTimeFormatter.ofPattern("MM월 dd일"))
 
         todayTime = time
-
         findTodoId()
-
         binding.nowDate.text = "$showingTime, "
+
+        // Focus Element Click
+        binding.emp.setOnClickListener {
+
+        }
+
+        // Default Element Click
+        binding.todoRecycler.setOnClickListener{
+
+        }
 
         return binding.root
     }
@@ -109,7 +109,7 @@ class HomeFragment : Fragment() {
             }
 
             binding.todoRecycler.layoutManager = LinearLayoutManager(this.context)
-            binding.todoRecycler.adapter = TodoAdapter(recyclerViewItems)
+            binding.todoRecycler.adapter = HomeAdapter(recyclerViewItems)
         }
     }
 }

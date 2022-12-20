@@ -54,9 +54,9 @@ class SearchPlaceFragment : Fragment() {
     }
 
     private fun getDataToRetrofit(keyword : String){
-        val retrofit = SKRetrofitClient.getApiService().getPois(1, keyword, authToken)
+        val poiRetrofit = SKRetrofitClient.getApiService().getPois(1, keyword, authToken)
 
-        retrofit.enqueue(object : Callback<PoisResponse>{
+        poiRetrofit.enqueue(object : Callback<PoisResponse>{
             override fun onFailure(call: Call<PoisResponse>, t: Throwable) {
                 Log.d(TAG, t.message!!)
             }
