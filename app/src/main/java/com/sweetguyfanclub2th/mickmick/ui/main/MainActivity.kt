@@ -33,6 +33,7 @@ class MainActivity : AppCompatActivity() {
             fragment.arguments = bundle
 
             supportFragmentManager.beginTransaction().add(R.id.fragment, fragment).commit()
+            binding.bottomNavigationView.selectedItemId = R.id.menu_todo
         }
         else {
             supportFragmentManager.beginTransaction().add(R.id.fragment, HomeFragment()).commit()
