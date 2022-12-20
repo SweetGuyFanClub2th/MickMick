@@ -40,6 +40,11 @@ class HomeAdapter(private val recyclerViewItems: ArrayList<TodoData>):
             title.text = recyclerViewItem.time
             member.text = recyclerViewItem.member
             place.text = recyclerViewItem.place
+<<<<<<< Updated upstream
+=======
+<<<<<<< HEAD
+=======
+>>>>>>> Stashed changes
 
             itemView.setOnClickListener{
                 val intent = Intent(itemView.context, SearchDetailInfoActivity::class.java)
@@ -52,6 +57,10 @@ class HomeAdapter(private val recyclerViewItems: ArrayList<TodoData>):
 
                 ContextCompat.startActivity(itemView.context, intent, null)
             }
+<<<<<<< Updated upstream
+=======
+>>>>>>> 2d6b96694e81df26d2e13fa82dbe7a8466e32e0d
+>>>>>>> Stashed changes
         }
     }
 }

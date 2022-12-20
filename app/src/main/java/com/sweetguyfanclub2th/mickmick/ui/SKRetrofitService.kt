@@ -15,10 +15,11 @@ interface SKRetrofitService {
         @Query("searchKeyword", encoded = false) keyword: String,
         @Header("appKey") authToken: String
     ): Call<PoisResponse>
-    
+
     @GET("puzzle/congestion/rltm/pois/{poiId}")
     fun getCongestion(
-        @Header("appKey") authToken: String,
+        @Header("accept") acceptType: String,
+        @Header("appkey") authToken: String,
         @Path("poiId") poiId : String
     ): Call<CongestionResponse>
 }

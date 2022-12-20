@@ -71,7 +71,7 @@
         android:background="@drawable/btn_signature"
         android:textColor="@color/white"
         android:layout_width="match_parent"
-        android:layout_height="30dp"
+        android:layout_height="60dp"
         android:textSize="18sp"
         android:text="TODO에 추가하기"
         app:layout_constraintBottom_toBottomOf="parent"
