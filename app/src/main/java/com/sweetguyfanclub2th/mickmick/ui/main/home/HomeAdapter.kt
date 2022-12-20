@@ -1,13 +1,16 @@
 package com.sweetguyfanclub2th.mickmick.ui.main.home
 
 import android.annotation.SuppressLint
+import android.content.Intent
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import android.view.View
 import android.widget.TextView
+import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.RecyclerView
 import com.sweetguyfanclub2th.mickmick.R
 import com.sweetguyfanclub2th.mickmick.data.TodoData
+import com.sweetguyfanclub2th.mickmick.ui.main.search.detail.SearchDetailInfoActivity
 
 class HomeAdapter(private val recyclerViewItems: ArrayList<TodoData>):
     RecyclerView.Adapter<HomeAdapter.HomeViewHolder>()  {
@@ -38,7 +41,17 @@ class HomeAdapter(private val recyclerViewItems: ArrayList<TodoData>):
             member.text = recyclerViewItem.member
             place.text = recyclerViewItem.place
 
+            itemView.setOnClickListener{
+                val intent = Intent(itemView.context, SearchDetailInfoActivity::class.java)
+//
+//                intent.putExtra("id", itemPoi.id)
+//                intent.putExtra("name", itemPoi.name)
+//                intent.putExtra("fullAddressRoad", itemAddress.fullAddressRoad)
+//                intent.putExtra("lat", itemPoi.noorLat)
+//                intent.putExtra("lon", itemPoi.noorLon)
 
+                ContextCompat.startActivity(itemView.context, intent, null)
+            }
         }
     }
 }
