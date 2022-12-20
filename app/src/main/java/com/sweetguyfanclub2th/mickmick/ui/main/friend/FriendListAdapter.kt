@@ -72,8 +72,6 @@ class FriendListAdapter(val itemList: ArrayList<FriendList> = arrayListOf(),var 
 
 
         binding.friendAdd.setOnClickListener {
-
-
             val myEmail = Firebase.auth.currentUser?.email.toString()
             val userInfo = db.collection(myEmail).document("userinfo")
             userInfo.get().addOnSuccessListener {
@@ -84,25 +82,9 @@ class FriendListAdapter(val itemList: ArrayList<FriendList> = arrayListOf(),var 
                 builder.setTitle("추가").setMessage("일정에 친구가 추가되었습니다.")
                 val alertDialog = builder.create()
                 alertDialog.show()
-                //binding3.editFriend.setText(friendEmail)
-                //db.collection(myEmail).document("userinfo").update("friend", FieldValue.arrayRemove(friendEmail))
-                //db.collection(friendEmail).document("userinfo").update("friend", FieldValue.arrayRemove(myEmail))
-
             }
-
         }
     }
-
-    //val myEmail = Firebase.auth.currentUser?.email.toString()
-    //holder.
-
-    /*val myEmail = Firebase.auth.currentUser?.email.toString()
-    binding.friendPlus1.setOnClickListener {
-        Log.e("e","e")
-        db.collection(myEmail).document("userinfo").update("friend",myEmail)
-    }*/
-
-
 }
 
 

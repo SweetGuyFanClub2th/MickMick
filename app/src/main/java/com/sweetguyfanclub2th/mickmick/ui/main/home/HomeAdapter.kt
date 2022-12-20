@@ -10,6 +10,7 @@ import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.RecyclerView
 import com.sweetguyfanclub2th.mickmick.R
 import com.sweetguyfanclub2th.mickmick.data.TodoData
+import com.sweetguyfanclub2th.mickmick.ui.main.home.detail.HomeDetailActivity
 import com.sweetguyfanclub2th.mickmick.ui.main.search.detail.ShowDetailInfoActivity
 
 class HomeAdapter(private val recyclerViewItems: ArrayList<TodoData>):
@@ -42,13 +43,13 @@ class HomeAdapter(private val recyclerViewItems: ArrayList<TodoData>):
             place.text = recyclerViewItem.place
 
             itemView.setOnClickListener{
-                val intent = Intent(itemView.context, ShowDetailInfoActivity::class.java)
+                val intent = Intent(itemView.context, HomeDetailActivity::class.java)
 
-//                intent.putExtra("id", itemPoi.id)
-//                intent.putExtra("name", itemPoi.name)
-//                intent.putExtra("fullAddressRoad", itemAddress.fullAddressRoad)
-//                intent.putExtra("lat", itemPoi.noorLat)
-//                intent.putExtra("lon", itemPoi.noorLon)
+                intent.putExtra("title", recyclerViewItem.title)
+                intent.putExtra("time", recyclerViewItem.time)
+                intent.putExtra("member", recyclerViewItem.member)
+                intent.putExtra("place", recyclerViewItem.place)
+                intent.putExtra("poi", recyclerViewItem.poi)
 
                 ContextCompat.startActivity(itemView.context, intent, null)
             }

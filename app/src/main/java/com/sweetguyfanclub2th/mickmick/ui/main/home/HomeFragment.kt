@@ -91,7 +91,8 @@ class HomeFragment : Fragment() {
                                 recyclerItems[i][1],
                                 recyclerItems[i][2],
                                 recyclerItems[i][3],
-                                recyclerItems[i][4]
+                                recyclerItems[i][4],
+                                recyclerItems[i][5].toInt()
                             )
                         )
                     }
