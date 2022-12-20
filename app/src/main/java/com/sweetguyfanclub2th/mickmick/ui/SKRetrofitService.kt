@@ -1,6 +1,7 @@
 package com.sweetguyfanclub2th.mickmick.ui
 
 import com.sweetguyfanclub2th.mickmick.data.searchcongestion.CongestionResponse
+import com.sweetguyfanclub2th.mickmick.data.searchinfo.PoiInfo
 import com.sweetguyfanclub2th.mickmick.data.searchpois.PoisResponse
 import retrofit2.Call
 import retrofit2.http.GET
@@ -22,4 +23,13 @@ interface SKRetrofitService {
         @Header("appkey") authToken: String,
         @Path("poiId") poiId : String
     ): Call<CongestionResponse>
+
+    @GET("tmap/pois/{poiInfo}")
+    fun getPoiInfo(
+        @Path("poiInfo") poiInfo : String,
+        @Query("version", encoded = true) version: Int,
+        @Query("findOption", encoded = true) findOption : String,
+        @Query("resCoordType", encoded = true) resCoordType : String,
+        @Header("appkey") authToken: String
+    ): Call<PoiInfo>
 }
