@@ -18,7 +18,7 @@ class HomeAdapter(private val recyclerViewItems: ArrayList<TodoData>):
     }
 
     override fun onBindViewHolder(holder: HomeViewHolder, position: Int) {
-        holder.bind(recyclerViewItems[position], position)
+        holder.bind(recyclerViewItems[position])
     }
 
     override fun getItemCount(): Int {
@@ -32,11 +32,13 @@ class HomeAdapter(private val recyclerViewItems: ArrayList<TodoData>):
         private var place: TextView = itemView.findViewById(R.id.todo_place)
 
         @SuppressLint("SetTextI18n")
-        fun bind(recyclerViewItem: TodoData, i: Int) {
+        fun bind(recyclerViewItem: TodoData) {
             dateTime.text = recyclerViewItem.title
             title.text = recyclerViewItem.time
             member.text = recyclerViewItem.member
             place.text = recyclerViewItem.place
+
+
         }
     }
 }

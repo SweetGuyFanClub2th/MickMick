@@ -41,16 +41,6 @@ class HomeFragment : Fragment() {
         findTodoId()
         binding.nowDate.text = "$showingTime, "
 
-        // Focus Element Click
-        binding.emp.setOnClickListener {
-
-        }
-
-        // Default Element Click
-        binding.todoRecycler.setOnClickListener{
-
-        }
-
         return binding.root
     }
 
