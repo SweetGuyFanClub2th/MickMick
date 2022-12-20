@@ -2,6 +2,7 @@ package com.sweetguyfanclub2th.mickmick.ui.main.todo
 
 import android.app.DatePickerDialog
 import android.app.TimePickerDialog
+import android.content.Intent
 import android.os.Bundle
 import android.text.Editable
 import android.util.Log
@@ -17,6 +18,7 @@ import com.google.firebase.firestore.FieldValue
 import com.google.firebase.firestore.FirebaseFirestore
 import com.sweetguyfanclub2th.mickmick.R
 import com.sweetguyfanclub2th.mickmick.databinding.FragmentScheduleBinding
+import com.sweetguyfanclub2th.mickmick.ui.main.friend.FriendListActivity
 import com.sweetguyfanclub2th.mickmick.ui.main.home.HomeFragment
 import java.util.*
 
@@ -56,8 +58,22 @@ class ScheduleFragment : Fragment() {
             openTimeDialog()
         }
         binding.editFriend.setOnClickListener {
+            activity?.let{
+                val intent = Intent(context, FriendListActivity::class.java)
+                startActivity(intent)
+            }
+            //val friendName = arguments?.getInt("친구이름").toString()
+            //Log.e("확인",friendName)
+
             // TODO
         }
+
+        //val intent = Intent(activity, FriendListActivity::class.java)
+
+        //val value1 = intent.getStringExtra("친구이름")
+        //Log.e("확인",value1.toString())
+
+
         binding.editPlace.setOnClickListener {
             // TODO
         }
@@ -76,6 +92,8 @@ class ScheduleFragment : Fragment() {
 
         return binding.root
     }
+
+
 
     private fun scheduleNullCheck(
         todoName: EditText?, editDate: EditText?,
@@ -159,4 +177,6 @@ class ScheduleFragment : Fragment() {
 
         dialog.show()
     }
+
+
 }

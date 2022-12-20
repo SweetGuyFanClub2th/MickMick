@@ -1,5 +1,6 @@
 package com.sweetguyfanclub2th.mickmick.ui.main.friend
 
+import android.app.AlertDialog
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
@@ -53,6 +54,12 @@ class FriendRequestAdapter(val itemList: ArrayList<FriendRequest> = arrayListOf(
     override fun onBindViewHolder(holder: FriendRequestViewHolder, position: Int) {
         holder.bind(itemList[position])
         binding.friendPlus1.setOnClickListener {
+
+            val builder = AlertDialog.Builder(this.binding.friendPlus1.context)
+            builder.setTitle("친구요청").setMessage("친구요청을 수락하셨습니다.")
+            val alertDialog = builder.create()
+            alertDialog.show()
+
             val myEmail = Firebase.auth.currentUser?.email.toString()
             val userInfo = db.collection(myEmail).document("userinfo")
             userInfo.get().addOnSuccessListener {
@@ -72,6 +79,12 @@ class FriendRequestAdapter(val itemList: ArrayList<FriendRequest> = arrayListOf(
         }
 
         binding.friendDelete1.setOnClickListener {
+
+            val builder = AlertDialog.Builder(this.binding.friendPlus1.context)
+            builder.setTitle("친구요청").setMessage("친구요청을 거절하셨습니다.")
+            val alertDialog = builder.create()
+            alertDialog.show()
+
             val myEmail = Firebase.auth.currentUser?.email.toString()
             val userInfo = db.collection(myEmail).document("userinfo")
             userInfo.get().addOnSuccessListener {
