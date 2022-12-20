@@ -83,20 +83,28 @@ class HomeFragment : Fragment() {
             Log.d("time2", recyclerItems.toString())
 
             val recyclerViewItems = ArrayList<TodoData>()
-
-            for (i in 0 until recyclerItems.size) {
-                Log.d("ee1", recyclerItems[i][1])
-                Log.d("ee2", todayTime)
-                if (checkToday(recyclerItems[i][1])) {
-                    recyclerViewItems.add(
-                        TodoData(
-                            recyclerItems[i][0],
-                            recyclerItems[i][1],
-                            recyclerItems[i][2],
-                            recyclerItems[i][3],
-                            recyclerItems[i][4]
+            if (recyclerItems.size >= 1) {
+                binding.emp.visibility = View.VISIBLE
+                binding.todoTitle.text = recyclerItems[0][2]
+                binding.todoDate.text = recyclerItems[0][0]
+                binding.todoPlace.text = recyclerItems[0][3]
+                binding.todoMember.text = recyclerItems[0][4]
+            }
+            if (recyclerItems.size >= 2) {
+                for (i in 1 until recyclerItems.size) {
+                    Log.d("ee1", recyclerItems[i][1])
+                    Log.d("ee2", todayTime)
+                    if (checkToday(recyclerItems[i][1])) {
+                        recyclerViewItems.add(
+                            TodoData(
+                                recyclerItems[i][0],
+                                recyclerItems[i][1],
+                                recyclerItems[i][2],
+                                recyclerItems[i][3],
+                                recyclerItems[i][4]
+                            )
                         )
-                    )
+                    }
                 }
             }
 
