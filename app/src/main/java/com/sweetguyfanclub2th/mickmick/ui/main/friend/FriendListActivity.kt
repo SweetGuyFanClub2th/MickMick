@@ -26,7 +26,7 @@ class FriendListActivity : AppCompatActivity() {
     val db = FirebaseFirestore.getInstance()    // Firestore 인스턴스 선언
     val itemList = arrayListOf<FriendList>()    // 리스트 아이템 배열
     var plusfriend = String()
-    val adapter = FriendListAdapter(itemList,plusfriend)         // 리사이클러 뷰 어댑터
+    val adapter = FriendListAdapter(itemList)         // 리사이클러 뷰 어댑터
 
     @SuppressLint("SetTextI18n", "NotifyDataSetChanged")
     override fun onCreate(savedInstanceState: Bundle?) {
