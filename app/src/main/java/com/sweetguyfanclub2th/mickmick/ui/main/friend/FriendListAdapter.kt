@@ -81,6 +81,7 @@ class FriendListAdapter(val itemList: ArrayList<FriendList> = arrayListOf()) :
         }
 
 
+
         binding.friendAdd.setOnClickListener {
             val friendEmail = itemList[position].email2.toString()
 
@@ -98,6 +99,11 @@ class FriendListAdapter(val itemList: ArrayList<FriendList> = arrayListOf()) :
                 alertDialog.show()
 
                 friends = "$friends $friendEmail/"
+
+
+                db.collection(myEmail).document("userinfo")
+                    .update("todoFriend", FieldValue.arrayUnion(friendEmail))
+
 
                 val myEmail = Firebase.auth.currentUser?.email.toString()
                 val userInfo = db.collection(myEmail).document("userinfo")

@@ -11,8 +11,10 @@ import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.FirebaseUser
+import com.google.firebase.auth.ktx.auth
 import com.google.firebase.firestore.FieldValue
 import com.google.firebase.firestore.FirebaseFirestore
+import com.google.firebase.ktx.Firebase
 import com.sweetguyfanclub2th.mickmick.data.FriendSearch
 import com.sweetguyfanclub2th.mickmick.data.Nickname
 import com.sweetguyfanclub2th.mickmick.data.Todo
@@ -259,6 +261,8 @@ class RegisterActivity : AppCompatActivity() {
         name: String,
         email: String
     ) {
+        val myEmail = Firebase.auth.currentUser?.email.toString()
+
         val userDataSet = UserInfo(
             nickname,
             name,
@@ -266,7 +270,9 @@ class RegisterActivity : AppCompatActivity() {
             arrayListOf(),
             arrayListOf("209912312359"),
             "default",
-            null
+            null,
+            null,
+            arrayListOf(myEmail)
         )
 
         db.collection(email)

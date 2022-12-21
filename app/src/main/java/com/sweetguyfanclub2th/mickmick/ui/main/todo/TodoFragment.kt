@@ -14,8 +14,10 @@ import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentTransaction
 import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.auth.ktx.auth
 import com.google.firebase.firestore.FieldValue
 import com.google.firebase.firestore.FirebaseFirestore
+import com.google.firebase.ktx.Firebase
 import com.sweetguyfanclub2th.mickmick.R
 import com.sweetguyfanclub2th.mickmick.databinding.FragmentTodoBinding
 import com.sweetguyfanclub2th.mickmick.ui.main.MainActivity
@@ -129,6 +131,7 @@ class TodoFragment : Fragment() {
             )
             mainActivity.changeToSearchFragment()
         }
+        val myEmail = Firebase.auth.currentUser?.email.toString()
 
         binding.addTodoBtn.setOnClickListener {
             when (scheduleNullCheck(
@@ -138,7 +141,8 @@ class TodoFragment : Fragment() {
                 binding.editFriend,
                 binding.editPlace
             )) {
-                true -> {uploadData();editUser1.update("cacheFriend",null)}
+                true -> {uploadData();editUser1.update("cacheFriend",null);editUser1.update("todoFriend",
+                    arrayListOf(myEmail))}
                 else -> Toast.makeText(activity, "입력하지 않은 칸이 존재합니다", Toast.LENGTH_SHORT).show()
             }
         }
@@ -153,47 +157,6 @@ class TodoFragment : Fragment() {
         return !(todoName?.text.isNullOrEmpty() || editDate?.text.isNullOrEmpty()
                 || editTime?.text.isNullOrEmpty() || editFriend?.text.isNullOrEmpty()
                 || editPlace?.text.isNullOrEmpty())
-    }
-
-    private fun uploadData() {
-        val info = db.collection(email).document("todo")
-        val tododata = db.collection(email).document("userinfo")
-        val poi = arguments?.getString("poi")
-
-        info.update(
-            (binding.editDate.text.toString() + timeValue),
-            FieldValue.arrayUnion(
-                binding.todoName.text.toString(),
-                binding.editDate.text.toString(),
-                binding.editTime.text.toString(),
-                binding.editFriend.text.toString(),
-                binding.editPlace.text.toString(),
-                poi.toString()
-            )
-        )
-
-        val emptyList = ArrayList<String>()
-
-        tododata.update(
-            "todoId", FieldValue.arrayUnion(
-                binding.editDate.text.toString() + timeValue
-            )
-        )
-        tododata.get().addOnSuccessListener {
-            val nickname: List<String> = it.get("todoId") as List<String>
-            for (i in nickname.indices) {
-                emptyList.add(nickname[i])
-            }
-            Log.d("apple1", emptyList.toString())
-            emptyList.sort()
-            Log.d("apple2", emptyList.toString())
-            tododata.update("todoId", emptyList)
-        }
-
-        val transaction: FragmentTransaction =
-            requireActivity().supportFragmentManager.beginTransaction()
-        transaction.replace(R.id.fragment, HomeFragment())
-        transaction.commit()
     }
 
     private fun openDateDialog() {
@@ -232,5 +195,60 @@ class TodoFragment : Fragment() {
         }, hour, minute, true)
 
         dialog.show()
+    }
+
+    private fun uploadData() {
+        val tododata1 = db.collection(email).document("userinfo")
+
+        tododata1.get().addOnSuccessListener {
+            val requestedEmail: List<String> = it.get("todoFriend") as List<String>
+            var count = requestedEmail.size
+
+            while (count != 0) {
+
+                val info = db.collection(requestedEmail[count-1]).document("todo")
+                val tododata = db.collection(requestedEmail[count-1]).document("userinfo")
+                val poi = arguments?.getString("poi")
+                --count
+
+                info.update(
+                    (binding.editDate.text.toString() + timeValue),
+                    FieldValue.arrayUnion(
+                        binding.todoName.text.toString(),
+                        binding.editDate.text.toString(),
+                        binding.editTime.text.toString(),
+                        binding.editFriend.text.toString(),
+                        binding.editPlace.text.toString(),
+                        poi.toString()
+                    )
+                )
+
+                val emptyList = ArrayList<String>()
+
+                tododata.update(
+                    "todoId", FieldValue.arrayUnion(
+                        binding.editDate.text.toString() + timeValue
+                    )
+                )
+                tododata.get().addOnSuccessListener {
+                    val nickname: List<String> = it.get("todoId") as List<String>
+                    for (i in nickname.indices) {
+                        emptyList.add(nickname[i])
+                    }
+                    Log.d("apple1", emptyList.toString())
+                    emptyList.sort()
+                    Log.d("apple2", emptyList.toString())
+                    tododata.update("todoId", emptyList)
+                }
+
+                val transaction: FragmentTransaction =
+                    requireActivity().supportFragmentManager.beginTransaction()
+                transaction.replace(R.id.fragment, HomeFragment())
+                transaction.commit()
+
+            }
+        }
+
+
     }
 }

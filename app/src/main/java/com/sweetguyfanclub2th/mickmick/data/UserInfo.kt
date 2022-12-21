@@ -8,5 +8,6 @@ data class UserInfo(
     val todoId : ArrayList<String>? = null,
     val iconType : String = "Default",
     val favoritePlace : ArrayList<String>? = null,
-    val cacheFriend : String? = null
+    val cacheFriend : String? = null,
+    val todoFriend : ArrayList<String>? = null
 )
