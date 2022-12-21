@@ -25,7 +25,7 @@
         android:id="@+id/title"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="친구들과 약속을"
+        android:text="친구들과 약속 "
         app:layout_constraintTop_toBottomOf="@+id/subtitle"
         app:layout_constraintStart_toStartOf="parent"
         android:layout_marginTop="8dp"
