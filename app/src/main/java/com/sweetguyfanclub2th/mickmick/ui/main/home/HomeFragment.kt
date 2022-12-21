@@ -1,7 +1,11 @@
 package com.sweetguyfanclub2th.mickmick.ui.main.home
 
 import android.annotation.SuppressLint
+<<<<<<< Updated upstream
 import android.content.Intent
+=======
+import android.graphics.Color
+>>>>>>> Stashed changes
 import android.os.Bundle
 import android.util.Log
 import androidx.fragment.app.Fragment
@@ -13,8 +17,18 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
 import com.sweetguyfanclub2th.mickmick.data.TodoData
+import com.sweetguyfanclub2th.mickmick.data.searchcongestion.CongestionResponse
 import com.sweetguyfanclub2th.mickmick.databinding.FragmentHomeBinding
+<<<<<<< Updated upstream
 import com.sweetguyfanclub2th.mickmick.ui.main.home.detail.HomeDetailActivity
+=======
+import com.sweetguyfanclub2th.mickmick.ui.SKRetrofitService
+import retrofit2.Call
+import retrofit2.Callback
+import retrofit2.Response
+import retrofit2.Retrofit
+import retrofit2.converter.gson.GsonConverterFactory
+>>>>>>> Stashed changes
 import java.time.LocalDateTime
 import java.time.format.DateTimeFormatter
 
@@ -77,7 +91,6 @@ class HomeFragment : Fragment() {
         return date == todayTime
     }
 
-
     private fun findRecyclerItem() {
         val todo = db.collection(email).document("todo")
 
@@ -93,12 +106,70 @@ class HomeFragment : Fragment() {
             for (i in 1 until recyclerItems.size) {
                 if (checkToday(recyclerItems[i][1])) {
                     if (isFirst) {
+                        var confusion: String = ""
+
+                        val retrofit = Retrofit.Builder()
+                            .baseUrl("https://apis.openapi.sk.com/")
+                            .addConverterFactory(GsonConverterFactory.create())
+                            .build()
+
+                        val api = retrofit.create(SKRetrofitService::class.java)
+                        val callConfusion = api.getCongestion(
+                            "application/json",
+                            "l7xx7de642979fac440f8fad597ef2584f9e",
+                            recyclerItems[i][5].toString()
+                        )
+
+                        callConfusion.enqueue(object : Callback<CongestionResponse> {
+                            @SuppressLint("SetTextI18n")
+                            override fun onResponse(
+                                call: Call<CongestionResponse>,
+                                response: Response<CongestionResponse>
+                            ) {
+                                Log.d("todoP", "성공 : ${response.raw()}")
+                                try {
+                                    Log.d("todoP", response.body().toString().split("code=")[1].split(",")[0])
+                                    val confusionScore = response.body().toString().split("congestionLevel=")[1].split(",")[0]
+                                    Log.d("todoP", "성공 : $confusionScore")
+
+                                    when(confusionScore.toInt()) {
+                                        1, 2 -> {
+                                            confusion = "여유로운 "
+                                        }
+                                        3, 4, 5, 6 -> {
+                                            confusion = "보통인"
+                                        }
+                                        7, 8 -> {
+                                            confusion = "혼잡한"
+                                        }
+                                        9, 10 -> {
+                                            confusion = "매우 혼잡한"
+                                        }
+                                    }
+                                }
+                                catch (e: Exception) {
+                                    confusion = "혼잡도 자료가 없습니다."
+                                }
+                                if (confusion != "자료 없음") {
+                                    confusion = "현재 $confusion 상황입니다."
+                                }
+                            }
+
+                            override fun onFailure(call: Call<CongestionResponse>, t: Throwable) {
+                                Log.d("todoP", "실패 : $t")
+                            }
+                        })
+
                         binding.emp.visibility = View.VISIBLE
                         binding.todoTitle.text = recyclerItems[i][2]
                         binding.todoDate.text = recyclerItems[i][0]
                         binding.todoMember.text = recyclerItems[i][3]
                         binding.todoPlace.text = recyclerItems[i][4]
+<<<<<<< Updated upstream
                         idx = i
+=======
+                        binding.todoConfusion.text = confusion
+>>>>>>> Stashed changes
                     } else {
                         recyclerViewItems.add(
                             TodoData(
@@ -107,7 +178,7 @@ class HomeFragment : Fragment() {
                                 recyclerItems[i][2],
                                 recyclerItems[i][3],
                                 recyclerItems[i][4],
-                                recyclerItems[i][5]
+                                recyclerItems[i][5],
                             )
                         )
                     }

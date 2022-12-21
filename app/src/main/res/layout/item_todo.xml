@@ -69,6 +69,16 @@
         android:src="@drawable/place_icon"/>
 
     <TextView
+        android:id="@+id/todo_confusion"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="현재 매우 혼잡한 상황입니다."
+        android:layout_marginStart="36dp"
+        android:layout_marginTop="4dp"
+        app:layout_constraintStart_toStartOf="@id/place_icon"
+        app:layout_constraintTop_toBottomOf="@id/todo_place" />
+
+    <TextView
         android:id="@+id/todo_place"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -80,10 +90,11 @@
         app:layout_constraintTop_toBottomOf="@id/constraint"
         app:layout_constraintStart_toEndOf="@+id/place_icon"/>
 
+
     <ImageView
         android:layout_marginStart="36dp"
         android:id="@+id/friend_icon"
-        android:layout_marginTop="12dp"
+        android:layout_marginTop="30dp"
         android:layout_width="24dp"
         android:layout_height="24dp"
         app:layout_constraintTop_toBottomOf="@+id/place_icon"
@@ -97,7 +108,7 @@
         android:text="최재혁, 김서하, 김강민, 문태서"
         android:textColor="@color/graygreen"
         android:layout_marginStart="12dp"
-        android:layout_marginTop="12dp"
+        android:layout_marginTop="30dp"
         android:textSize="16sp"
         app:layout_constraintTop_toBottomOf="@id/place_icon"
         app:layout_constraintStart_toEndOf="@+id/place_icon"/>
