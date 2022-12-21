@@ -44,12 +44,42 @@ class ScheduleFragment : Fragment() {
         _binding = FragmentScheduleBinding.inflate(inflater, container, false)
 
         val num1 = arguments?.getString("message")
+
+        val editUser = db.collection(email).document("userinfo")
+            .get().addOnSuccessListener {
+                val cacheFriend = it.get("cacheFriend")
+                Log.d("cacheFriend", cacheFriend.toString())
+
+                if (cacheFriend != null) {
+                    binding.editFriend.setText(cacheFriend.toString())
+                    binding.editFriend.isEnabled = false
+                }
+            }
+
+
         Log.d("투두 프래그먼트", num1.toString())
 
         if (num1 != null) {
             binding.editPlace.setText(num1)
             binding.editPlace.isEnabled = false
         }
+
+        val number = arguments?.getString("fuck")
+        Log.d("친구 프래그먼트", number.toString())
+        binding.editFriend.setText(number)
+
+        //val num2 = arguments?.getString("num3")
+
+        /*if (num2 != null) {
+            binding.editFriend.setText(num2)
+            binding.editFriend.isEnabled = false
+        }*/
+        //val num = arguments?.getString("num")
+        //if (num != null) {
+         //   binding.editFriend.setText(num)
+         //   binding.editFriend.isEnabled = false
+        //}
+        //Log.d("친구이름", num.toString())
 
         binding.editDate.setOnClickListener {
             openDateDialog()
@@ -62,7 +92,7 @@ class ScheduleFragment : Fragment() {
                 val intent = Intent(context, FriendListActivity::class.java)
                 startActivity(intent)
             }
-            //val friendName = arguments?.getInt("친구이름").toString()
+            //  val friendName = arguments?.getInt("친구이름").toString()
             //Log.e("확인",friendName)
 
             // TODO
@@ -73,6 +103,7 @@ class ScheduleFragment : Fragment() {
         //val value1 = intent.getStringExtra("친구이름")
         //Log.e("확인",value1.toString())
 
+        val editUser1 = db.collection(email).document("userinfo")
 
         binding.editPlace.setOnClickListener {
             // TODO
@@ -85,7 +116,7 @@ class ScheduleFragment : Fragment() {
                 binding.editFriend,
                 binding.editPlace
             )) {
-                true -> uploadData()
+                true -> {uploadData();editUser1.update("cacheFriend",null)}
                 else -> Toast.makeText(activity, "입력하지 않은 칸이 존재합니다", Toast.LENGTH_SHORT).show()
             }
         }

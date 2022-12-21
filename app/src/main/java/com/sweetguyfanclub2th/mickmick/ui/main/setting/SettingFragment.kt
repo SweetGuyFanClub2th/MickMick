@@ -4,6 +4,7 @@ import android.content.Intent
 import android.graphics.drawable.Drawable
 import android.os.Bundle
 import android.text.Editable
+import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -14,6 +15,7 @@ import com.google.firebase.firestore.FirebaseFirestore
 import com.sweetguyfanclub2th.mickmick.R
 
 import com.sweetguyfanclub2th.mickmick.databinding.FragmentSettingBinding
+import com.sweetguyfanclub2th.mickmick.ui.main.friend.FriendListActivity
 
 class SettingFragment : Fragment() {
     private var _binding: FragmentSettingBinding? = null
@@ -32,6 +34,19 @@ class SettingFragment : Fragment() {
         var db: FirebaseFirestore = FirebaseFirestore.getInstance()
         val userInfo = db.collection(email).document("userinfo")
 
+
+        userInfo.get().addOnSuccessListener {
+            db.collection("friendSearch")   // 작업할 컬렉션
+                .get()      // 문서 가져오기
+                .addOnSuccessListener { result ->
+
+                    val friendListEmail: List<String> = it.get("friend") as List<String>
+                    val count3 = friendListEmail.size
+                    binding.mainProfileText.text = "친구 $count3 명 >"
+                }
+        }
+
+
         userInfo.get().addOnSuccessListener {
             val nickname = it.get("nickname").toString()
             val name = it.get("name").toString()
@@ -41,6 +56,14 @@ class SettingFragment : Fragment() {
             binding.mainProfileName2.text = name
 
             returnColor(iconType)
+        }
+
+
+        binding.mainProfileText.setOnClickListener {
+            activity?.let{
+                val intent = Intent(context, FriendListActivity::class.java)
+                startActivity(intent)
+            }
         }
 
 
