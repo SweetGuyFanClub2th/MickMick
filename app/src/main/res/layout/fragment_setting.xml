@@ -127,7 +127,7 @@
                 android:textColor="@color/gray"
                 android:textSize="12sp"
                 android:layout_marginTop="5dp"
-                android:text="억울한 라람, 이하람"
+                android:text="이름과 닉네임을 변경할 수 있어요."
                 app:layout_constraintTop_toBottomOf="@+id/setting_item_text"
                 app:layout_constraintStart_toStartOf="@+id/setting_item_text"
                 tools:ignore="HardcodedText" />
