@@ -72,19 +72,17 @@ class HomeFragment : Fragment() {
             }
             Log.d("time2", recyclerItems.toString())
 
+            val isFirst = true
             val recyclerViewItems = ArrayList<TodoData>()
-            if (recyclerItems.size >= 1) {
-                binding.emp.visibility = View.VISIBLE
-                binding.todoTitle.text = recyclerItems[0][2]
-                binding.todoDate.text = recyclerItems[0][0]
-                binding.todoPlace.text = recyclerItems[0][3]
-                binding.todoMember.text = recyclerItems[0][4]
-            }
-            if (recyclerItems.size >= 2) {
-                for (i in 1 until recyclerItems.size) {
-                    Log.d("ee1", recyclerItems[i][1])
-                    Log.d("ee2", todayTime)
-                    if (checkToday(recyclerItems[i][1])) {
+            for (i in 1 until recyclerItems.size) {
+                if (checkToday(recyclerItems[i][1])) {
+                    if (isFirst) {
+                        binding.emp.visibility = View.VISIBLE
+                        binding.todoTitle.text = recyclerItems[i][2]
+                        binding.todoDate.text = recyclerItems[i][0]
+                        binding.todoMember.text = recyclerItems[i][3]
+                        binding.todoPlace.text = recyclerItems[i][4]
+                    } else {
                         recyclerViewItems.add(
                             TodoData(
                                 recyclerItems[i][0],
@@ -92,15 +90,14 @@ class HomeFragment : Fragment() {
                                 recyclerItems[i][2],
                                 recyclerItems[i][3],
                                 recyclerItems[i][4],
-                                recyclerItems[i][5].toInt()
+                                recyclerItems[i][5]
                             )
                         )
                     }
+                    binding.todoRecycler.layoutManager = LinearLayoutManager(this.context)
+                    binding.todoRecycler.adapter = HomeAdapter(recyclerViewItems)
                 }
             }
-
-            binding.todoRecycler.layoutManager = LinearLayoutManager(this.context)
-            binding.todoRecycler.adapter = HomeAdapter(recyclerViewItems)
         }
     }
 }
