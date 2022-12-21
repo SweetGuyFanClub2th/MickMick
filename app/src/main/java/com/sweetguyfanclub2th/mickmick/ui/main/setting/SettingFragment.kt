@@ -57,6 +57,10 @@ class SettingFragment : Fragment() {
                 val intent = Intent(activity, ChangePasswordActivity::class.java)
                 startActivity(intent)
             }
+            list4.setOnClickListener {
+                val intent = Intent(activity, LogoutActivity::class.java)
+                startActivity(intent)
+            }
         }
 
         return binding.root
