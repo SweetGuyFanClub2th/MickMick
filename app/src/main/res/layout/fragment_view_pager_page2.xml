@@ -4,27 +4,29 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    tools:context=".ui.splash.intro.ViewPagerPage2">
+    tools:context=".ui.splash.intro.ViewPagerPage1">
 
     <ImageView
-        android:id="@+id/splash2_1"
+        android:id="@+id/splash1_1"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         android:src="@drawable/img_splash_2_1"
-        android:layout_marginTop="100dp"
+        android:layout_marginTop="200dp"
         tools:ignore="ContentDescription">
     </ImageView>
 
-
     <ImageView
-        android:layout_width="400dp"
-        android:layout_height="400dp"
-        app:layout_constraintTop_toBottomOf="@+id/splash2_1"
+        android:layout_width="550dp"
+        android:layout_height="550dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        android:layout_marginTop="160dp"
+        app:layout_constraintTop_toBottomOf="@+id/splash1_1"
+        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        android:src="@drawable/img_splash_1_2"
+        android:src="@drawable/img_splash_2_2"
         tools:ignore="ContentDescription">
     </ImageView>
 

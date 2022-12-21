@@ -17,10 +17,8 @@ import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.ktx.Firebase
 import com.sweetguyfanclub2th.mickmick.R
 import com.sweetguyfanclub2th.mickmick.data.FriendList
-import com.sweetguyfanclub2th.mickmick.databinding.FragmentScheduleBinding
 import com.sweetguyfanclub2th.mickmick.databinding.FriendListLayoutBinding
 import com.sweetguyfanclub2th.mickmick.ui.main.MainActivity
-import com.sweetguyfanclub2th.mickmick.ui.main.todo.ScheduleFragment
 import kotlin.coroutines.coroutineContext
 
 class FriendListAdapter(val itemList: ArrayList<FriendList> = arrayListOf()) :
@@ -32,14 +30,14 @@ class FriendListAdapter(val itemList: ArrayList<FriendList> = arrayListOf()) :
 
     val myEmail1 = Firebase.auth.currentUser?.email.toString()
     var friends = "멤버 : $myEmail1/"
+
     init {
         firestore = FirebaseFirestore.getInstance()
         db = FirebaseFirestore.getInstance()
     }
 
 
-
-        override fun onCreateViewHolder(
+    override fun onCreateViewHolder(
         parent: ViewGroup,
         viewType: Int,
     ): FriendListViewHolder {
@@ -62,7 +60,6 @@ class FriendListAdapter(val itemList: ArrayList<FriendList> = arrayListOf()) :
         binding.friendDelete2.setOnClickListener {
 
 
-
             val builder = AlertDialog.Builder(this.binding.friendDelete2.context)
             builder.setTitle("친구").setMessage("친구목록에서 삭제되었습니다.")
             val alertDialog = builder.create()
@@ -74,8 +71,10 @@ class FriendListAdapter(val itemList: ArrayList<FriendList> = arrayListOf()) :
                 val friendEmail = itemList[position].email2.toString()
                 itemList[position].email2
 
-                db.collection(myEmail).document("userinfo").update("friend", FieldValue.arrayRemove(friendEmail))
-                db.collection(friendEmail).document("userinfo").update("friend", FieldValue.arrayRemove(myEmail))
+                db.collection(myEmail).document("userinfo")
+                    .update("friend", FieldValue.arrayRemove(friendEmail))
+                db.collection(friendEmail).document("userinfo")
+                    .update("friend", FieldValue.arrayRemove(myEmail))
 
             }
 
@@ -105,12 +104,16 @@ class FriendListAdapter(val itemList: ArrayList<FriendList> = arrayListOf()) :
                 userInfo.update("cacheFriend", friends)
 
 
-}
+            }
 
-}
-}
+        }
+    }
 
-}
+
+
+
+    }
+
 
 
 

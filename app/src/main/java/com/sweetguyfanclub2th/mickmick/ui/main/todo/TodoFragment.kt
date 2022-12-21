@@ -17,14 +17,16 @@ import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FieldValue
 import com.google.firebase.firestore.FirebaseFirestore
 import com.sweetguyfanclub2th.mickmick.R
-import com.sweetguyfanclub2th.mickmick.databinding.FragmentScheduleBinding
+import com.sweetguyfanclub2th.mickmick.databinding.FragmentTodoBinding
+import com.sweetguyfanclub2th.mickmick.ui.main.MainActivity
 import com.sweetguyfanclub2th.mickmick.ui.main.friend.FriendListActivity
 import com.sweetguyfanclub2th.mickmick.ui.main.home.HomeFragment
+import com.sweetguyfanclub2th.mickmick.ui.main.search.SearchPlaceFragment
 import java.util.*
 
 
-class ScheduleFragment : Fragment() {
-    private var _binding: FragmentScheduleBinding? = null
+class TodoFragment : Fragment() {
+    private var _binding: FragmentTodoBinding? = null
     private val binding get() = _binding!!
 
     private val db: FirebaseFirestore = FirebaseFirestore.getInstance()  // Firestore 인스턴스 선언
@@ -33,15 +35,13 @@ class ScheduleFragment : Fragment() {
     private lateinit var dateValue: String
     private lateinit var timeValue: String
 
-    private lateinit var selectDate: String
-    private lateinit var selectHour: String
-    private lateinit var selectMinute: String
+    private lateinit var selectTime: String
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        _binding = FragmentScheduleBinding.inflate(inflater, container, false)
+        _binding = FragmentTodoBinding.inflate(inflater, container, false)
 
         val num1 = arguments?.getString("message")
 
@@ -60,6 +60,14 @@ class ScheduleFragment : Fragment() {
         Log.d("투두 프래그먼트", num1.toString())
 
         if (num1 != null) {
+            val mainActivity = activity as MainActivity
+            timeValue = mainActivity.savingTextShow(
+                binding.todoName,
+                binding.editDate,
+                binding.editTime,
+                binding.editFriend,
+                binding.editPlace
+            ).toString()
             binding.editPlace.setText(num1)
             binding.editPlace.isEnabled = false
         }
@@ -84,11 +92,13 @@ class ScheduleFragment : Fragment() {
         binding.editDate.setOnClickListener {
             openDateDialog()
         }
+
         binding.editTime.setOnClickListener {
             openTimeDialog()
         }
+
         binding.editFriend.setOnClickListener {
-            activity?.let{
+            activity?.let {
                 val intent = Intent(context, FriendListActivity::class.java)
                 startActivity(intent)
             }
@@ -105,9 +115,21 @@ class ScheduleFragment : Fragment() {
 
         val editUser1 = db.collection(email).document("userinfo")
 
+
+
         binding.editPlace.setOnClickListener {
-            // TODO
+            val mainActivity = activity as MainActivity
+            mainActivity.editTextSaving(
+                binding.todoName,
+                binding.editDate,
+                binding.editTime,
+                binding.editFriend,
+                binding.editPlace,
+                selectTime
+            )
+            mainActivity.changeToSearchFragment()
         }
+
         binding.addTodoBtn.setOnClickListener {
             when (scheduleNullCheck(
                 binding.todoName,
@@ -124,8 +146,6 @@ class ScheduleFragment : Fragment() {
         return binding.root
     }
 
-
-
     private fun scheduleNullCheck(
         todoName: EditText?, editDate: EditText?,
         editTime: EditText?, editFriend: EditText?, editPlace: EditText?
@@ -138,24 +158,29 @@ class ScheduleFragment : Fragment() {
     private fun uploadData() {
         val info = db.collection(email).document("todo")
         val tododata = db.collection(email).document("userinfo")
+        val poi = arguments?.getString("poi")
 
         info.update(
-            (dateValue + timeValue), FieldValue.arrayUnion(
+            (binding.editDate.text.toString() + timeValue),
+            FieldValue.arrayUnion(
                 binding.todoName.text.toString(),
-                selectDate,
-                "$selectHour:$selectMinute",
+                binding.editDate.text.toString(),
+                binding.editTime.text.toString(),
                 binding.editFriend.text.toString(),
                 binding.editPlace.text.toString(),
+                poi.toString()
             )
         )
 
-        var emptyList = ArrayList<String>()
+        val emptyList = ArrayList<String>()
 
-        tododata.update("todoId", FieldValue.arrayUnion(
-            dateValue + timeValue
-        ))
+        tododata.update(
+            "todoId", FieldValue.arrayUnion(
+                binding.editDate.text.toString() + timeValue
+            )
+        )
         tododata.get().addOnSuccessListener {
-            var nickname: List<String> = it.get("todoId") as List<String>
+            val nickname: List<String> = it.get("todoId") as List<String>
             for (i in nickname.indices) {
                 emptyList.add(nickname[i])
             }
@@ -169,8 +194,6 @@ class ScheduleFragment : Fragment() {
             requireActivity().supportFragmentManager.beginTransaction()
         transaction.replace(R.id.fragment, HomeFragment())
         transaction.commit()
-
-        // TODO
     }
 
     private fun openDateDialog() {
@@ -183,9 +206,7 @@ class ScheduleFragment : Fragment() {
         // show dialog
         val dialog = DatePickerDialog(requireContext(), { _, year, month, date ->
             binding.editDate.text =
-                Editable.Factory.getInstance().newEditable("${year}년 ${month + 1}월 ${date}일")
-            dateValue = "${year}${month + 1}${date}"
-            selectDate = year.toString() + (month + 1).toString() + date.toString()
+                Editable.Factory.getInstance().newEditable("${year}${month + 1}${date}")
         }, year, month, date)
 
         dialog.show()
@@ -199,15 +220,17 @@ class ScheduleFragment : Fragment() {
 
         // show dialog
         val dialog = TimePickerDialog(requireContext(), { _, hour, minute ->
-            binding.editTime.text =
-                Editable.Factory.getInstance().newEditable("${hour}시 ${minute}분")
-            timeValue = "${hour}${minute}"
-            selectHour = hour.toString()
-            selectMinute = minute.toString()
+            if (minute < 10) {
+                binding.editTime.text =
+                    Editable.Factory.getInstance().newEditable("${hour}:0${minute}")
+                selectTime = "${hour}0${minute}"
+            } else {
+                binding.editTime.text =
+                    Editable.Factory.getInstance().newEditable("${hour}:${minute}")
+                selectTime = "${hour}${minute}"
+            }
         }, hour, minute, true)
 
         dialog.show()
     }
-
-
 }
