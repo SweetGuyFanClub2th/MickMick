@@ -62,7 +62,9 @@ class HomeFragment : Fragment() {
             intent.putExtra("place", binding.todoPlace.text)
             intent.putExtra("poi", recyclerItems[idx][5])
 
-            context?.let { it1 -> ContextCompat.startActivity(it1, intent, null) }
+            context?.let { it1 ->
+                ContextCompat.startActivity(it1, intent, null)
+            }
         }
 
         return binding.root
@@ -96,66 +98,68 @@ class HomeFragment : Fragment() {
             }
             Log.d("time2", recyclerItems.toString() + recyclerItems.toString() + recyclerItems.size.toString())
 
-            val isFirst = true
             val recyclerViewItems = ArrayList<TodoData>()
             for (i in 0 until recyclerItems.size) {
-                if (checkToday(recyclerItems[i][1])) {
-                    if (isFirst) {
-                        var confusion: String = ""
-                        Log.d("Happy", todoList.toString() + recyclerItems[i].toString())
+                if (recyclerItems[i][1] == todayTime) {
+                    var confusion: String = ""
+                    Log.d("Happy", todoList.toString() + recyclerItems[i].toString())
 
-                        val retrofit = Retrofit.Builder()
-                            .baseUrl("https://apis.openapi.sk.com/")
-                            .addConverterFactory(GsonConverterFactory.create())
-                            .build()
+                    val retrofit = Retrofit.Builder()
+                        .baseUrl("https://apis.openapi.sk.com/")
+                        .addConverterFactory(GsonConverterFactory.create())
+                        .build()
 
-                        val api = retrofit.create(SKRetrofitService::class.java)
-                        val callConfusion = api.getCongestion(
-                            "application/json",
-                            "l7xx7de642979fac440f8fad597ef2584f9e",
-                            recyclerItems[i][5].toString()
-                        )
+                    val api = retrofit.create(SKRetrofitService::class.java)
+                    val callConfusion = api.getCongestion(
+                        "application/json",
+                        "l7xx7de642979fac440f8fad597ef2584f9e",
+                        recyclerItems[i][5].toString()
+                    )
 
-                        callConfusion.enqueue(object : Callback<CongestionResponse> {
-                            @SuppressLint("SetTextI18n")
-                            override fun onResponse(
-                                call: Call<CongestionResponse>,
-                                response: Response<CongestionResponse>
-                            ) {
-                                Log.d("todoP", "성공 : ${response.raw()}")
-                                try {
-                                    Log.d("todoP", response.body().toString().split("code=")[1].split(",")[0])
-                                    val confusionScore = response.body().toString().split("congestionLevel=")[1].split(",")[0]
-                                    Log.d("todoP", "성공 : $confusionScore")
+                    callConfusion.enqueue(object : Callback<CongestionResponse> {
+                        @SuppressLint("SetTextI18n")
+                        override fun onResponse(
+                            call: Call<CongestionResponse>,
+                            response: Response<CongestionResponse>
+                        ) {
+                            Log.d("todoP", "성공 : ${response.raw()}")
+                            try {
+                                Log.d("todoP", response.body().toString().split("code=")[1].split(",")[0])
+                                val confusionScore = response.body().toString().split("congestionLevel=")[1].split(",")[0]
+                                Log.d("todoP", "성공 : $confusionScore")
 
-                                    when(confusionScore.toInt()) {
-                                        1, 2 -> {
-                                            confusion = "여유로운 "
-                                        }
-                                        3, 4, 5, 6 -> {
-                                            confusion = "보통인"
-                                        }
-                                        7, 8 -> {
-                                            confusion = "혼잡한"
-                                        }
-                                        9, 10 -> {
-                                            confusion = "매우 혼잡한"
-                                        }
+                                when(confusionScore.toInt()) {
+                                    1, 2 -> {
+                                        confusion = "여유로운 "
+                                    }
+                                    3, 4, 5, 6 -> {
+                                        confusion = "보통인"
+                                    }
+                                    7, 8 -> {
+                                        confusion = "혼잡한"
+                                    }
+                                    9, 10 -> {
+                                        confusion = "매우 혼잡한"
                                     }
                                 }
-                                catch (e: Exception) {
-                                    confusion = "혼잡도 자료가 없습니다."
-                                }
-                                if (confusion != "자료 없음") {
-                                    confusion = "현재 $confusion 상황입니다."
-                                }
                             }
-
-                            override fun onFailure(call: Call<CongestionResponse>, t: Throwable) {
-                                Log.d("todoP", "실패 : $t")
+                            catch (e: Exception) {
+                                confusion = "혼잡도 자료가 없습니다."
                             }
-                        })
+                            if (confusion != "자료 없음") {
+                                confusion = "현재 $confusion 상황입니다."
+                            }
+                            else {
+                                confusion = "혼잡도 자료가 없습니다."
+                            }
+                        }
 
+                        override fun onFailure(call: Call<CongestionResponse>, t: Throwable) {
+                            Log.d("todoP", "실패 : $t")
+                        }
+                    })
+
+                    if (i == 0) {
                         binding.emp.visibility = View.VISIBLE
                         binding.todoTitle.text = recyclerItems[i][2]
                         binding.todoDate.text = recyclerItems[i][0]
@@ -163,7 +167,10 @@ class HomeFragment : Fragment() {
                         binding.todoPlace.text = recyclerItems[i][4]
                         binding.todoConfusion.text = confusion
                         idx = i
-                    } else {
+                    }
+
+                    else {
+                        Log.d("adede", recyclerViewItems.toString())
                         recyclerViewItems.add(
                             TodoData(
                                 recyclerItems[i][0],
@@ -174,10 +181,11 @@ class HomeFragment : Fragment() {
                                 recyclerItems[i][5],
                             )
                         )
+                        idx = i
                     }
-                    binding.todoRecycler.layoutManager = LinearLayoutManager(this.context)
-                    binding.todoRecycler.adapter = HomeAdapter(recyclerViewItems)
                 }
+                binding.todoRecycler.layoutManager = LinearLayoutManager(this.context)
+                binding.todoRecycler.adapter = HomeAdapter(recyclerViewItems)
             }
         }
     }

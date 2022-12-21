@@ -73,6 +73,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="현재 매우 혼잡한 상황입니다."
+        android:textColor="@color/graygreen"
         android:layout_marginStart="36dp"
         android:layout_marginTop="4dp"
         app:layout_constraintStart_toStartOf="@id/place_icon"
