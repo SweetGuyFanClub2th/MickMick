@@ -1,11 +1,8 @@
 package com.sweetguyfanclub2th.mickmick.ui.main.home
 
 import android.annotation.SuppressLint
-<<<<<<< Updated upstream
 import android.content.Intent
-=======
 import android.graphics.Color
->>>>>>> Stashed changes
 import android.os.Bundle
 import android.util.Log
 import androidx.fragment.app.Fragment
@@ -19,16 +16,13 @@ import com.google.firebase.firestore.FirebaseFirestore
 import com.sweetguyfanclub2th.mickmick.data.TodoData
 import com.sweetguyfanclub2th.mickmick.data.searchcongestion.CongestionResponse
 import com.sweetguyfanclub2th.mickmick.databinding.FragmentHomeBinding
-<<<<<<< Updated upstream
 import com.sweetguyfanclub2th.mickmick.ui.main.home.detail.HomeDetailActivity
-=======
 import com.sweetguyfanclub2th.mickmick.ui.SKRetrofitService
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
->>>>>>> Stashed changes
 import java.time.LocalDateTime
 import java.time.format.DateTimeFormatter
 
@@ -165,11 +159,8 @@ class HomeFragment : Fragment() {
                         binding.todoDate.text = recyclerItems[i][0]
                         binding.todoMember.text = recyclerItems[i][3]
                         binding.todoPlace.text = recyclerItems[i][4]
-<<<<<<< Updated upstream
-                        idx = i
-=======
                         binding.todoConfusion.text = confusion
->>>>>>> Stashed changes
+                        idx = i
                     } else {
                         recyclerViewItems.add(
                             TodoData(
