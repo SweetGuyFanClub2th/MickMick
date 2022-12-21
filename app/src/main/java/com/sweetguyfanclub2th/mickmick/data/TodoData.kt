@@ -6,5 +6,5 @@ data class TodoData (
     val time: String,
     val member: String,
     val place: String,
-    val poi : Int
+    val poi : String
 )

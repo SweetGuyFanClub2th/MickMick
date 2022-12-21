@@ -35,9 +35,7 @@ class TodoFragment : Fragment() {
     private lateinit var dateValue: String
     private lateinit var timeValue: String
 
-    private lateinit var selectDate: String
-    private lateinit var selectHour: String
-    private lateinit var selectMinute: String
+    private lateinit var selectTime: String
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -50,11 +48,13 @@ class TodoFragment : Fragment() {
 
         if (num1 != null) {
             val mainActivity = activity as MainActivity
-            mainActivity.savingTextShow(binding.todoName,
+            timeValue = mainActivity.savingTextShow(
+                binding.todoName,
                 binding.editDate,
                 binding.editTime,
                 binding.editFriend,
-                binding.editPlace)
+                binding.editPlace
+            ).toString()
             binding.editPlace.setText(num1)
             binding.editPlace.isEnabled = false
         }
@@ -68,7 +68,7 @@ class TodoFragment : Fragment() {
         }
 
         binding.editFriend.setOnClickListener {
-            activity?.let{
+            activity?.let {
                 val intent = Intent(context, FriendListActivity::class.java)
                 startActivity(intent)
             }
@@ -81,7 +81,9 @@ class TodoFragment : Fragment() {
                 binding.editDate,
                 binding.editTime,
                 binding.editFriend,
-                binding.editPlace)
+                binding.editPlace,
+                selectTime
+            )
             mainActivity.changeToSearchFragment()
         }
 
@@ -113,24 +115,27 @@ class TodoFragment : Fragment() {
     private fun uploadData() {
         val info = db.collection(email).document("todo")
         val tododata = db.collection(email).document("userinfo")
-        val poi = arguments?.getInt("poi")
+        val poi = arguments?.getString("poi")
 
         info.update(
-            (dateValue + timeValue), FieldValue.arrayUnion(
+            (binding.editDate.text.toString() + timeValue),
+            FieldValue.arrayUnion(
                 binding.todoName.text.toString(),
-                selectDate,
-                "$selectHour:$selectMinute",
+                binding.editDate.text.toString(),
+                binding.editTime.text.toString(),
                 binding.editFriend.text.toString(),
                 binding.editPlace.text.toString(),
-                poi
+                poi.toString()
             )
         )
 
         val emptyList = ArrayList<String>()
 
-        tododata.update("todoId", FieldValue.arrayUnion(
-            dateValue + timeValue
-        ))
+        tododata.update(
+            "todoId", FieldValue.arrayUnion(
+                binding.editDate.text.toString() + timeValue
+            )
+        )
         tododata.get().addOnSuccessListener {
             val nickname: List<String> = it.get("todoId") as List<String>
             for (i in nickname.indices) {
@@ -158,9 +163,7 @@ class TodoFragment : Fragment() {
         // show dialog
         val dialog = DatePickerDialog(requireContext(), { _, year, month, date ->
             binding.editDate.text =
-                Editable.Factory.getInstance().newEditable("${year}년 ${month + 1}월 ${date}일")
-            dateValue = "${year}${month + 1}${date}"
-            selectDate = year.toString() + (month + 1).toString() + date.toString()
+                Editable.Factory.getInstance().newEditable("${year}${month + 1}${date}")
         }, year, month, date)
 
         dialog.show()
@@ -174,15 +177,17 @@ class TodoFragment : Fragment() {
 
         // show dialog
         val dialog = TimePickerDialog(requireContext(), { _, hour, minute ->
-            binding.editTime.text =
-                Editable.Factory.getInstance().newEditable("${hour}시 ${minute}분")
-            timeValue = "${hour}${minute}"
-            selectHour = hour.toString()
-            selectMinute = minute.toString()
+            if (minute < 10) {
+                binding.editTime.text =
+                    Editable.Factory.getInstance().newEditable("${hour}:0${minute}")
+                selectTime = "${hour}0${minute}"
+            } else {
+                binding.editTime.text =
+                    Editable.Factory.getInstance().newEditable("${hour}:${minute}")
+                selectTime = "${hour}${minute}"
+            }
         }, hour, minute, true)
 
         dialog.show()
     }
-
-
 }

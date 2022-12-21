@@ -32,7 +32,7 @@ class MainActivity : AppCompatActivity() {
             val fragment = TodoFragment()
             val bundle = Bundle()
             bundle.putString("message", number.toString())
-            bundle.putInt("poi", poi.toInt())
+            bundle.putString("poi", poi.toString())
             fragment.arguments = bundle
 
             supportFragmentManager.beginTransaction().add(R.id.fragment, fragment).commit()
@@ -87,7 +87,7 @@ class MainActivity : AppCompatActivity() {
     @SuppressLint("CommitPrefEdits")
     fun editTextSaving(
         todoName: EditText?, editDate: EditText?,
-        editTime: EditText?, editFriend: EditText?, editPlace: EditText?
+        editTime: EditText?, editFriend: EditText?, editPlace: EditText?, selectTime : String
     ){
         val pref: SharedPreferences = getSharedPreferences("pref",0)
         val editor: SharedPreferences.Editor = pref.edit()
@@ -97,15 +97,17 @@ class MainActivity : AppCompatActivity() {
         if(!editTime?.text.isNullOrEmpty()) editor.putString("editTime", editTime?.text.toString()).apply()
         if(!editFriend?.text.isNullOrEmpty()) editor.putString("editFriend", editFriend?.text.toString()).apply()
         if(!editPlace?.text.isNullOrEmpty()) editor.putString("editPlace", editPlace?.text.toString()).apply()
+        if(selectTime.isNotEmpty()) editor.putString("selectTime", selectTime).apply()
     }
 
     @SuppressLint("CommitPrefEdits")
     fun savingTextShow(
         todoName: EditText?, editDate: EditText?,
         editTime: EditText?, editFriend: EditText?, editPlace: EditText?
-    ){
+    ): String? {
         val pref: SharedPreferences = getSharedPreferences("pref",0)
         val editor: SharedPreferences.Editor = pref.edit()
+        val time = pref.getString("selectTime", null)
 
         todoName?.setText(pref.getString("todoName", null))
         editDate?.setText(pref.getString("editDate", null))
@@ -114,5 +116,6 @@ class MainActivity : AppCompatActivity() {
         editPlace?.setText(pref.getString("editPlace", null))
 
         editor.clear().apply()
+        return time
     }
 }

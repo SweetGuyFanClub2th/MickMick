@@ -35,11 +35,6 @@ class FriendListActivity : AppCompatActivity() {
         binding1 = FriendListLayoutBinding.inflate(layoutInflater)
 
         binding.backpress1.setOnClickListener {
-            //binding3.editFriend.text to
-            //var scFragment = ScheduleFragment()
-            //var bundle = Bundle()
-            //bundle.putInt("친구이름",19)
-            //scFragment.arguments = bundle
             finish()
         }
 
@@ -56,10 +51,6 @@ class FriendListActivity : AppCompatActivity() {
         var tv1: TextView? = null
 
         userInfo.get().addOnSuccessListener {
-            //val intent = Intent(this, FriendRequestActivity::class.java)
-            //intent.putExtra("친구이름","문자열 전달쓰")
-            //startActivity(intent)
-
             db.collection("friendSearch")   // 작업할 컬렉션
                 .get()      // 문서 가져오기
                 .addOnSuccessListener { result ->
@@ -70,7 +61,6 @@ class FriendListActivity : AppCompatActivity() {
                         val friendListEmail : List<String> = it.get("friend") as List<String>
                         val count3 = friendListEmail.size
                         Log.e("count3", count3.toString())
-                        //binding.friendNumber.setText(count3)
                         tv1 = findViewById(R.id.friend_number)
                        tv1?.text = count3.toString()+"명"
 
@@ -91,14 +81,7 @@ class FriendListActivity : AppCompatActivity() {
                     }
                     adapter.notifyDataSetChanged()  // 리사이클러 뷰 갱신
                 }
-
-            /*fun friendRequest(requestEmail : String, myEmail : String){
-                db.collection(myEmail).document("userinfo").update("friend", requestEmail)
-                db.collection(requestEmail).document("userinfo").update("friend", myEmail)
-            }*/
-
         }
-
     }
 
 }
