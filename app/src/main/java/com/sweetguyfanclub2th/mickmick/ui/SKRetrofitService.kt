@@ -19,9 +19,9 @@ interface SKRetrofitService {
 
     @GET("puzzle/congestion/rltm/pois/{poiId}")
     fun getCongestion(
-        @Header("accept") acceptType: String,
-        @Header("appkey") authToken: String,
-        @Path("poiId") poiId : String
+        @Header("accept") acceptType: String?,
+        @Header("appKey") authToken: String?,
+        @Path("poiId") poiId : String?
     ): Call<CongestionResponse>
 
     @GET("tmap/pois/{poiInfo}")
