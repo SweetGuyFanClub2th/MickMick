@@ -32,7 +32,7 @@ class ChangeIconActivity : AppCompatActivity() {
 
         for (i in imgList.indices) {
             recyclerViewItems.add(
-                IconData(imgList[i], nameList[i], "여기에 설명을 써주시면 베리 나이스한 것이에요.")
+                IconData(imgList[i], nameList[i], "아이콘을 누르면 프로필이 변경됩니다.")
             )
         }
 

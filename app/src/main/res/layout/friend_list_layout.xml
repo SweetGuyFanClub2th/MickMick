@@ -45,6 +45,18 @@
                 app:layout_constraintTop_toBottomOf="@+id/nickname2" />
 
             <Button
+                android:id="@+id/friendAdd"
+                android:layout_width="85dp"
+                android:background="@drawable/btn_roundbtn"
+                android:textColor="@color/white"
+                android:layout_height="45dp"
+                android:text="추가"
+                app:layout_constraintEnd_toStartOf="@id/friendDelete2"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                android:layout_marginTop="2dp"
+                android:layout_marginRight="5dp"/>
+            <Button
                 android:id="@+id/friendDelete2"
                 android:layout_width="85dp"
                 android:background="@drawable/btn_roundbtn1"

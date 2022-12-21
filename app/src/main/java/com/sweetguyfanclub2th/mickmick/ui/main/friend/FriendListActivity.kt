@@ -2,32 +2,33 @@ package com.sweetguyfanclub2th.mickmick.ui.main.friend
 
 import android.annotation.SuppressLint
 import android.content.Intent
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
-import android.view.LayoutInflater
-import android.widget.Button
 import android.widget.TextView
+import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.ktx.Firebase
 import com.sweetguyfanclub2th.mickmick.R
 import com.sweetguyfanclub2th.mickmick.data.FriendList
-import com.sweetguyfanclub2th.mickmick.data.UserInfo
 import com.sweetguyfanclub2th.mickmick.databinding.ActivityFriendlistBinding
 import com.sweetguyfanclub2th.mickmick.databinding.FriendListLayoutBinding
+
 
 class FriendListActivity : AppCompatActivity() {
     private lateinit var binding: ActivityFriendlistBinding    // 뷰 바인딩
     private lateinit var binding1: FriendListLayoutBinding    // 뷰 바인딩
 
+    //private var _binding: FragmentScheduleBinding? = null
+    //private val binding3 get() = _binding!!
+
     val db = FirebaseFirestore.getInstance()    // Firestore 인스턴스 선언
     val itemList = arrayListOf<FriendList>()    // 리스트 아이템 배열
-    val adapter = FriendListAdapter(itemList)         // 리사이클러 뷰 어댑터
+    var plusfriend = String()
+    val adapter = FriendListAdapter(itemList,plusfriend)         // 리사이클러 뷰 어댑터
 
-
-    @SuppressLint("SetTextI18n")
+    @SuppressLint("SetTextI18n", "NotifyDataSetChanged")
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityFriendlistBinding.inflate(layoutInflater)
@@ -50,9 +51,6 @@ class FriendListActivity : AppCompatActivity() {
         var tv1: TextView? = null
 
         userInfo.get().addOnSuccessListener {
-
-            Log.e("MyEmail", myEmail)
-
             db.collection("friendSearch")   // 작업할 컬렉션
                 .get()      // 문서 가져오기
                 .addOnSuccessListener { result ->
@@ -63,10 +61,8 @@ class FriendListActivity : AppCompatActivity() {
                         val friendListEmail : List<String> = it.get("friend") as List<String>
                         val count3 = friendListEmail.size
                         Log.e("count3", count3.toString())
-                        //binding.friendNumber.setText(count3)
                         tv1 = findViewById(R.id.friend_number)
                        tv1?.text = count3.toString()+"명"
-
 
                         var count = friendListEmail.size
                         val item = FriendList(
@@ -85,13 +81,8 @@ class FriendListActivity : AppCompatActivity() {
                     }
                     adapter.notifyDataSetChanged()  // 리사이클러 뷰 갱신
                 }
-
-
-            /*fun friendRequest(requestEmail : String, myEmail : String){
-                db.collection(myEmail).document("userinfo").update("friend", requestEmail)
-                db.collection(requestEmail).document("userinfo").update("friend", myEmail)
-            }*/
         }
     }
+
 }
 

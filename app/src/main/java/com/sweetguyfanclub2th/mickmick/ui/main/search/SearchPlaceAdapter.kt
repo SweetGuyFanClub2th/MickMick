@@ -9,7 +9,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.sweetguyfanclub2th.mickmick.data.searchpois.NewAddres
 import com.sweetguyfanclub2th.mickmick.data.searchpois.Poi
 import com.sweetguyfanclub2th.mickmick.databinding.ItemSearchBinding
-import com.sweetguyfanclub2th.mickmick.ui.main.search.detail.SearchDetailInfoActivity
+import com.sweetguyfanclub2th.mickmick.ui.main.search.detail.ShowDetailInfoActivity
 
 class SearchPlaceAdapter(val context: Context, private val postList: ArrayList<Poi>) : RecyclerView.Adapter<SearchPlaceAdapter.NameViewHolder>() {
     private lateinit var binding: ItemSearchBinding
@@ -21,7 +21,7 @@ class SearchPlaceAdapter(val context: Context, private val postList: ArrayList<P
 
     override fun onBindViewHolder(holder: NameViewHolder, position: Int) {
         val addressResult = postList[position].newAddressList.newAddress
-        holder.bind(postList[position], addressResult[0], context)
+        holder.bind(postList[position], addressResult[0])
     }
 
     override fun getItemCount(): Int = postList.size
@@ -29,13 +29,13 @@ class SearchPlaceAdapter(val context: Context, private val postList: ArrayList<P
     inner class NameViewHolder(private val binding: ItemSearchBinding) :
         RecyclerView.ViewHolder(binding.root) {
 
-        fun bind(itemPoi: Poi, itemAddress: NewAddres, context: Context){
+        fun bind(itemPoi: Poi, itemAddress: NewAddres){
             binding.itemName.text = itemPoi.name
             binding.itemMiddleBizName.text = itemPoi.middleBizName
             binding.itemFullAddressRoad.text = itemAddress.fullAddressRoad
 
             itemView.setOnClickListener {
-                val intent = Intent(itemView.context, SearchDetailInfoActivity::class.java)
+                val intent = Intent(itemView.context, ShowDetailInfoActivity::class.java)
 
                 intent.putExtra("id", itemPoi.id)
                 intent.putExtra("name", itemPoi.name)

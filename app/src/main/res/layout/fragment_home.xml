@@ -5,6 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:layout_marginTop="20dp"
+    android:descendantFocusability="blocksDescendants"
     android:background="@color/whitegreen"
     android:paddingHorizontal="18dp"
     tools:context=".ui.main.home.HomeFragment">
@@ -79,7 +80,7 @@
         <ImageView
             android:layout_width="24dp"
             android:layout_height="24dp"
-            android:layout_marginTop="28dp"
+            android:layout_marginTop="5dp"
             android:src="@drawable/roundtime"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />

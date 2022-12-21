@@ -41,10 +41,10 @@ class LoginActivity : AppCompatActivity() {
         }
     }
 
-    override fun onStart(){
-        super.onStart()
-        moveMainPage(auth?.currentUser)
-    }
+//    override fun onStart(){
+//        super.onStart()
+//        moveMainPage(auth?.currentUser)
+//    }
 
     private fun loginCompleteCheck(emailText: EditText?, passwdText: EditText?): Boolean {
         return !(emailText?.text.toString() == "" || passwdText?.text.toString() == ""
