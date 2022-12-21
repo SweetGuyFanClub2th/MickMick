@@ -1,6 +1,105 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <ImageView
+        android:id="@+id/backpress"
+        android:layout_width="22dp"
+        android:layout_height="22dp"
+        android:src="@drawable/backbtn"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        android:layout_marginTop="40dp"
+        android:layout_marginStart="18dp"
+        />
+
+    <TextView
+        android:id="@+id/time"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="시간"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintStart_toEndOf="@id/backpress"
+        android:textColor="@color/green"
+        android:fontFamily="@font/pretendard_bold"
+        android:textSize="20sp"
+        android:layout_marginTop="18dp"
+        android:layout_marginStart="18dp"/>
+
+    <TextView
+        android:id="@+id/item_name"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="TODO"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintStart_toEndOf="@id/time"
+        android:textColor="@color/green"
+        android:fontFamily="@font/pretendard_bold"
+        android:textSize="20sp"
+        android:layout_marginTop="18dp"
+        android:layout_marginStart="18dp"/>
+
+    <TextView
+        android:id="@+id/place"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="장소"
+        app:layout_constraintTop_toBottomOf="@id/time"
+        app:layout_constraintStart_toStartOf="@id/time"
+        android:layout_marginTop="4dp"
+        android:textColor="@color/green"
+        android:fontFamily="@font/pretendard_medium"
+        android:textSize="16sp" />
+
+    <TextView
+        android:id="@+id/player"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="참여자"
+        app:layout_constraintTop_toBottomOf="@id/place"
+        app:layout_constraintStart_toStartOf="@id/time"
+        android:layout_marginTop="4dp"
+        android:textColor="@color/green"
+        android:fontFamily="@font/pretendard_medium"
+        android:textSize="16sp" />
+
+    <TextView
+        android:id="@+id/congestion"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="혼잡도"
+        app:layout_constraintTop_toBottomOf="@id/player"
+        app:layout_constraintStart_toStartOf="@id/time"
+        android:layout_marginTop="2dp"
+        android:textColor="@color/green"
+        android:fontFamily="@font/pretendard_medium"
+        android:textSize="16sp" />
+
+    <androidx.fragment.app.FragmentContainerView
+        android:id="@+id/map_view"
+        android:name="com.google.android.gms.maps.SupportMapFragment"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_marginTop="8dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/congestion"
+        app:layout_constraintVertical_bias="0.0"
+        tools:layout_editor_absoluteX="0dp" />
+
+    <Button
+        android:id="@+id/todo_set"
+        android:background="@drawable/btn_signature"
+        android:textColor="@color/white"
+        android:layout_width="match_parent"
+        android:layout_height="60dp"
+        android:textSize="18sp"
+        android:text="TODO 관리하기"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        android:layout_marginHorizontal="10dp"
+        android:layout_marginBottom="16dp"/>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

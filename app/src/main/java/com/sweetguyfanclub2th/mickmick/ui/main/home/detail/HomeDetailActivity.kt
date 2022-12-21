@@ -17,8 +17,6 @@ import com.google.android.gms.maps.model.MarkerOptions
 import com.sweetguyfanclub2th.mickmick.R
 import com.sweetguyfanclub2th.mickmick.data.searchinfo.PoiDetailInfo
 import com.sweetguyfanclub2th.mickmick.data.searchinfo.PoiInfo
-import com.sweetguyfanclub2th.mickmick.data.searchpois.Poi
-import com.sweetguyfanclub2th.mickmick.data.searchpois.PoisResponse
 import com.sweetguyfanclub2th.mickmick.databinding.ActivityDetailHomeBinding
 import com.sweetguyfanclub2th.mickmick.ui.SKRetrofitClient
 import retrofit2.Call
@@ -35,6 +33,7 @@ class HomeDetailActivity : AppCompatActivity(), OnMapReadyCallback {
     private var lon: Double = 127.10845476
 
     private val appKey = "l7xx7de642979fac440f8fad597ef2584f9e"
+
     companion object {
         private val retrofitClient: HomeDetailActivity = HomeDetailActivity()
 
@@ -65,7 +64,7 @@ class HomeDetailActivity : AppCompatActivity(), OnMapReadyCallback {
         }
     }
 
-    private fun getPoiDataToRetrofit(poi : String) {
+    private fun getPoiDataToRetrofit(poi: String) {
         val poiRetrofit = SKRetrofitClient.getApiService().getPoiInfo(
             poi, 1, "id", "WGS84GEO", appKey
         )
