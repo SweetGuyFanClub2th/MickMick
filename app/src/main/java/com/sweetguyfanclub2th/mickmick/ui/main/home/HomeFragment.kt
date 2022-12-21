@@ -1,17 +1,20 @@
 package com.sweetguyfanclub2th.mickmick.ui.main.home
 
 import android.annotation.SuppressLint
+import android.content.Intent
 import android.os.Bundle
 import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
 import com.sweetguyfanclub2th.mickmick.data.TodoData
 import com.sweetguyfanclub2th.mickmick.databinding.FragmentHomeBinding
+import com.sweetguyfanclub2th.mickmick.ui.main.home.detail.HomeDetailActivity
 import java.time.LocalDateTime
 import java.time.format.DateTimeFormatter
 
@@ -23,6 +26,7 @@ class HomeFragment : Fragment() {
     private var email = FirebaseAuth.getInstance().currentUser?.email.toString()
     private var todoList: MutableList<String> = mutableListOf()
     private var recyclerItems: MutableList<List<String>> = mutableListOf()
+    private var idx : Int = 0
 
     private lateinit var todayTime: String
 
@@ -40,6 +44,18 @@ class HomeFragment : Fragment() {
         todayTime = time
         findTodoId()
         binding.nowDate.text = "$showingTime, "
+
+        binding.emp.setOnClickListener {
+            val intent = Intent(context, HomeDetailActivity::class.java)
+
+            intent.putExtra("title", binding.todoTitle.text)
+            intent.putExtra("time", binding.todoDate.text)
+            intent.putExtra("member", binding.todoMember.text)
+            intent.putExtra("place", binding.todoPlace.text)
+            intent.putExtra("poi", recyclerItems[idx][5])
+
+            context?.let { it1 -> ContextCompat.startActivity(it1, intent, null) }
+        }
 
         return binding.root
     }
@@ -82,6 +98,7 @@ class HomeFragment : Fragment() {
                         binding.todoDate.text = recyclerItems[i][0]
                         binding.todoMember.text = recyclerItems[i][3]
                         binding.todoPlace.text = recyclerItems[i][4]
+                        idx = i
                     } else {
                         recyclerViewItems.add(
                             TodoData(
