@@ -81,7 +81,7 @@ class HomeFragment : Fragment() {
         }
     }
 
-    fun checkToday(date: String): Boolean {
+    private fun checkToday(date: String): Boolean {
         return date == todayTime
     }
 
@@ -92,15 +92,17 @@ class HomeFragment : Fragment() {
             for (i in 0 until todoList.size) {
                 val todoTitle: List<String> = it.get(todoList[i]) as List<String>
                 recyclerItems.add(todoTitle)
+                Log.d("time0", todoTitle.toString())
             }
-            Log.d("time2", recyclerItems.toString())
+            Log.d("time2", recyclerItems.toString() + recyclerItems.toString() + recyclerItems.size.toString())
 
             val isFirst = true
             val recyclerViewItems = ArrayList<TodoData>()
-            for (i in 1 until recyclerItems.size) {
+            for (i in 0 until recyclerItems.size) {
                 if (checkToday(recyclerItems[i][1])) {
                     if (isFirst) {
                         var confusion: String = ""
+                        Log.d("Happy", todoList.toString() + recyclerItems[i].toString())
 
                         val retrofit = Retrofit.Builder()
                             .baseUrl("https://apis.openapi.sk.com/")
