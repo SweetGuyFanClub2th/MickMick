@@ -51,9 +51,7 @@ class WelcomeActivity : AppCompatActivity() {
         viewPager2Adatper = WelcomeAdapter(this)
         val useFragment = listOf(
             ViewPagerPage1(),
-            ViewPagerPage2(),
-//            ViewPagerPage3(),
-//            ViewPagerPage4()
+            ViewPagerPage2()
         )
 
         useFragment.forEach {
